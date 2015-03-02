@@ -1,0 +1,11 @@
+.white #tablaReg tr td {
+	color: #000;
+	border: 20;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	line-height: inherit;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: uppercase;
+}
