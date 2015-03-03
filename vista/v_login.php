@@ -3,7 +3,7 @@
 		<link href="../estilo/style2.css" rel="stylesheet" type="text/css"/>
 		<title>Login</title>
 	</head>
-		<form>
+		<form action="../control/c_acceso.php" method="POST">
 			<table width="881" align="center" cellpadding="0" cellspacing="0" class="white">
 				<table width="881" align="center" cellpadding="0" cellspacing="0" class="white">
 					<tr>	
@@ -17,17 +17,17 @@
 					</tr>
 					<tr>
 						<td>Usuario:</td>
-						<td><input type="text" name="f_nombres" value=""></td>
+						<td><input type="text" name="usuario" value=""></td>
 					</tr>		
 					<tr>
 						<td>Contrase&ntilde;a:</td>
-						<td><input type="password" name="f_apellidos" value=""></td>
+						<td><input type="password" name="clave" value=""></td>
 					</tr>
 				
 					<tr>
 						<td colspan="2"><center>
-						<input type="button"  name="b_Guardar" value="Entrar" onClick="Guardar()">
-						<input type="button"  name="b_Cancelar" value="Cancelar" onClick="Cancelar()"></center></td>
+						<input type="submit"  name="entrar" value="Entrar">
+						<input type="button"  name="b_Cancelar" value="Cancelar"></center></td>
 					</tr>
 				</table>
 			</table>

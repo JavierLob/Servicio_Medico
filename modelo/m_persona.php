@@ -7,6 +7,8 @@ class tpersona extends bd_my{
 	private $seap;
 	private $cepe;
 	private $dipe;
+	private $usu;
+	private $cla;
 	function tpersona(){
 		$this->bd_my();
 		$this->prno="";
@@ -15,6 +17,8 @@ class tpersona extends bd_my{
 		$this->seap="";
 		$this->cepe="";
 		$this->dipe="";
+		$this->usu="";
+		$this->cla="";
 	}
 	function setData($prn,$sen,$pra,$sea,$cep,$dip){
 		$this->prno=$prn;
@@ -24,6 +28,12 @@ class tpersona extends bd_my{
 		$this->cepe=$cep;
 		$this->dipe=$dip;
 	}
+	function setData_Login($usu,$cla){
+		$this->usu=$usu;
+		$this->cla=$cla;
+		
+	}
+
 	function setCedula($cep){
 		$this->cepe=$cep;
 	}
