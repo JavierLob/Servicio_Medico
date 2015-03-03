@@ -8,7 +8,6 @@
 		private $lnRol;
 		private $lbEstatus;
 
-
 		function set_Usuario($pcUsuario)
 		{
 			$this->lcUsuario=$pcUsuario;

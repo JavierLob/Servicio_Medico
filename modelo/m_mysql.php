@@ -1,7 +1,7 @@
 <?php
 class bd_my
 {
-	private $servidor = 'Localhost';
+	private $servidor = 'localhost';
 	private $usuario = 'root';
 	private $clave = '';
 	private $bd = 'bdsm';
