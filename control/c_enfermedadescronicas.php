@@ -34,7 +34,7 @@
 			$hecho=$lobjEnfermedad->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
@@ -53,9 +53,9 @@
 			}
 		break;
 		default:
-			header('location: ../vista/intranet.php?vista=enfermedadescronicas');
+			header('location: ../vista/intranet.php?vista=configuracion/enfermedadescronicas');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=enfermedadescronicas');
+	header('location: ../vista/intranet.php?vista=configuracion/enfermedadescronicas');
 ?>

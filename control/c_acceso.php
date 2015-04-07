@@ -28,7 +28,10 @@
 			$_SESSION['nombrerol']=$datosUsuario[1];//Se guarda el nombre del rol que tiene asignado ese usuario.
 			$_SESSION['idrol']=$datosUsuario[2];//Se guarda el ID del rol.
 			$_SESSION['usuario']=$datosUsuario[3];//Se guarda la cedula del usuario.
-			$_SESSION['msj']='Bienvedido al sistema '.$datosUsuario[3].'.';//Se guarda un mensaje, que posterior mente será borrado.
+			$_SESSION['clave']=$clave;//Se guarda la clave del usuario.
+			$_SESSION['nombreusuario']=$datosUsuario[5];//Se guarda el nombre del usuario.
+			$_SESSION['idpersonal']=$datosUsuario[6];//Se guarda el id de personal del usuario.
+			$_SESSION['msj']='Bienvedido al sistema '.$_SESSION['nombreusuario'].'.';//Se guarda un mensaje, que posterior mente será borrado.
 			header('location: ../vista/intranet.php');//Y se redirecciona al archivo intranet.php
 		}
 		else//Si el usuario no existe o es incorrecto el usuario y/o clave este es sacado del sistema

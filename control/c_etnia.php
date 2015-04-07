@@ -34,7 +34,7 @@
 			$hecho=$lobjEtnia->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
@@ -53,9 +53,9 @@
 			}
 		break;
 		default:
-			header('location: ../vista/intranet.php?vista=etnia');
+			header('location: ../vista/intranet.php?vista=configuracion/etnia');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=etnia');
+	header('location: ../vista/intranet.php?vista=configuracion/etnia');
 ?>

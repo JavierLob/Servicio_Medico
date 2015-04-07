@@ -74,7 +74,6 @@
 			$respuesta = false;
 			$SQL = "UPDATE tetnia SET estatusetnia = '$this->estatusetnia' WHERE idtetnia='$this->idtetnia';";
 			$this->conectar();
-			echo $SQL;
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();
 			return $respuesta;

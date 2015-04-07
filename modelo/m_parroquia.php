@@ -85,5 +85,21 @@
 			$this->desconectar();
 			return $respuesta;
 		}
+
+		public function listar_municipio()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT idparroquia,parroquia,estatusparroquia,municipio,estado FROM tparroquia,tmunicipio,testado WHERE tmunicipio.idtmunicipio='$this->idtmunicipio' AND tparroquia.idtmunicipio=tmunicipio.idtmunicipio AND tmunicipio.idestado=testado.idestado;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
 	}
 ?>

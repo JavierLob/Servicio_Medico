@@ -85,5 +85,21 @@
 			$this->desconectar();
 			return $respuesta;
 		}
+
+		public function listar_estado()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT idtmunicipio,municipio,statusmunicipio,estado,tmunicipio.idestado as idestado FROM tmunicipio,testado WHERE testado.idestado='$this->idestado' AND tmunicipio.idestado=testado.idestado;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
 	}
 ?>

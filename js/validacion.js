@@ -15,6 +15,8 @@ email = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 //passwords que tienen que contener tanto números como letras
 password = /^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i;
 
+password_completa = /(?=^.{8,20}$)(?=.*\d)(?=.+[!@#\$%\^&\*\?_~\.\/])(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+
 //Para urls 
 url = /^(ht|f)tps?:\/\/\w+([\.\-\w]+)?\.([a-z]{2,6})?([\.\-\w\/_]+)$/i;
 
@@ -109,7 +111,7 @@ jsTagsRegex = /<script.+?src=\"(.+?\.js(?:\?v=\d)*).+?script>/ig;
 cssTagsRegex = /<link.+?href=\"(.+?\.css(?:\?v=\d)*).+?>/ig;
 
 $(document).ready(function() {
-	$(".solo-letras").keyup(function(){
+	$(".solo-letras").change(function(){
 		if(!$(this).val().match(letras))
 		{
 			var valor = (this.value + '').replace(letras, '');
@@ -122,7 +124,7 @@ $(document).ready(function() {
 			$(".btn-success").attr('disabled', false);
 		}
 	});
-	$(".letras_latinas").keyup(function(){
+	$(".letras_latinas").change(function(){
 		if(!$(this).val().match(letras_latinas))
 		{
 			var valor = (this.value + '').replace(letras_latinas, '');
@@ -135,12 +137,12 @@ $(document).ready(function() {
 			$(".btn-success").attr('disabled', false);
 		}
 	});
-	$(".solo-numeros").keyup(function(){
+	$(".solo-numeros").change(function(){
 		if(!$(this).val().match(numeros))
 		{
 			var valor = (this.value + '').replace(numeros, '');
 			$(this).val(valor);
-			alert('Debe ingresar solo letras');
+			alert('Debe ingresar solo númeris');
 			$(".btn-success").attr('disabled', true);
 		}
 		else
@@ -148,4 +150,41 @@ $(document).ready(function() {
 			$(".btn-success").attr('disabled', false);
 		}
 	});
+	$(".letras_numeros").change(function(){
+		if(!$(this).val().match(letras_latinas_numeros))
+		{
+			var valor = (this.value + '').replace(letras_latinas_numeros, '');
+			$(this).val(valor);
+			alert('Debe ingresar solo letras o números');
+			$(".btn-success").attr('disabled', true);
+		}
+		else
+		{
+			$(".btn-success").attr('disabled', false);
+		}
+	});
+	
+	$(".password_completa").change(function(){
+		if(!$(this).val().match(password_completa))
+		{
+			var valor = (this.value + '').replace(password_completa, '');
+			$(this).val(valor);
+			alert('Debe introducir una contraseña que contenga entre 8 a 20 caracteres y debe contener al menos 1 letra mayúscula, 1 letra minúscula, 1 número y 1 símbolo.');
+			$(".btn-success").attr('disabled', true);
+		}
+		else
+		{
+			$(".btn-success").attr('disabled', false);
+		}
+	});
+
+	$(".btn-success").click(function(){
+		require = $("input").attr('require');
+		if(require){
+			alert('Por favor debe ingresar los campos obligatorios');
+			return false;
+		}else{
+			return true;
+		}
+	})
 });

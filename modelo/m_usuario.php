@@ -14,6 +14,7 @@
 	{
 		private $lcUsuario;
 		private $lcClave;
+		private $lcClaveNueva;
 		private $lnIdRol;
 		private $lnIdPersona;
 
@@ -26,6 +27,11 @@
 		function set_Clave($pcClave)
 		{
 			$this->lcClave=$pcClave;
+		}
+
+		function set_ClaveNueva($pcClaveNueva)
+		{
+			$this->lcClaveNueva=$pcClaveNueva;
 		}
 
 		function set_Rol($pcIdRol)
@@ -58,7 +64,7 @@
 		{
 			$this->conectar();
 			$Fila[0]=0;
-			$sql="SELECT idtusuario,nombrerol,rol,usuario FROM tusuario,trol WHERE usuario='$this->lcUsuario'AND clave=md5('$this->lcClave') AND rol=idtrol ";
+			$sql="SELECT idtusuario,nombrerol,rol,usuario,primernombre,primerapellido,idpersonal FROM tusuario,trol,tpersonal WHERE usuario='$this->lcUsuario'AND clave=md5('$this->lcClave') AND rol=idtrol AND cedulaopasaporte=usuario ";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
@@ -67,9 +73,20 @@
 				$Fila[2]=$laRow['rol'];
 				$Fila[3]=$laRow['usuario'];
 				$Fila[4]=$laRow['estatus'];
+				$Fila[5]=$laRow['primernombre'].' '.$laRow['primerapellido'];
+				$Fila[6]=$laRow['idpersonal'];
 			}
 			$this->desconectar();
 			return $Fila;
+		}
+
+		function cambiar_clave()
+		{
+			$this->conectar();
+			$sql="UPDATE tusuario SET clave=md5('$this->lcClaveNueva') WHERE usuario='$this->lcUsuario' AND clave=md5('$this->lcClave')";
+			$resultado=$this->ejecutar($sql);
+			$this->desconectar();
+			return $resultado;
 		}
 	}
 ?>

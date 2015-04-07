@@ -18,6 +18,22 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/laboratorio');
+		break;
+		case 'consultar_laboratorio':
+			if($lalaboratorios=$laboratorio->listar())
+			{
+				$option='<option value=""></option>';
+				for($i=0;$i<count($lalaboratorios);$i++)
+				{
+					$option.='<option value="'.$lalaboratorios[$i]['idtlaboratorio'].'">'.$lalaboratorios[$i]['laboratorio'].'</option>';
+				}	
+			}
+			else
+			{
+				$option='<option>No se han encontrado registros</option>';
+			}
+			echo $option;
 		break;
 		case 'editar_laboratorio':
 			$hecho=$laboratorio->modificar();
@@ -29,17 +45,19 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/laboratorio');
 		break;
 		case 'eliminar_laboratorio':
 			$hecho=$laboratorio->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/laboratorio');
 		break;
 		case 'activar_laboratorio':
 			$hecho=$laboratorio->cambiar_estatus();
@@ -51,11 +69,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/laboratorio');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=laboratorio');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=laboratorio');
 ?>

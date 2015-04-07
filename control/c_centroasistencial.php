@@ -18,6 +18,22 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
+		break;
+		case 'consultar_centroasistencial':
+			if($lacentroasistenciales=$lobjCentroasistencial->listar())
+			{
+				$option='<option value=""></option>';
+				for($i=0;$i<count($lacentroasistenciales);$i++)
+				{
+					$option.='<option value="'.$lacentroasistenciales[$i]['idtcentroasistencial'].'">'.$lacentroasistenciales[$i]['nombrecentroasistencial'].'</option>';
+				}	
+			}
+			else
+			{
+				$option='<option>No se han encontrado registros</option>';
+			}
+			echo $option;
 		break;
 		case 'editar_centroasistencial':
 			$hecho=$lobjCentroasistencial->modificar();
@@ -29,17 +45,19 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
 		break;
 		case 'eliminar_centroasistencial':
 			$hecho=$lobjCentroasistencial->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
 		break;
 		case 'activar_centroasistencial':
 			$hecho=$lobjCentroasistencial->cambiar_estatus();
@@ -51,11 +69,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
 		break;
 		default:
-			header('location: ../vista/intranet.php?vista=centroasistencial');
+			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=centroasistencial');
 ?>

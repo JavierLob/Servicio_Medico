@@ -19,6 +19,7 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/municipio');
 		break;
 		case 'editar_municipio':
 			$hecho=$lobjMunicipio->modificar();
@@ -30,17 +31,19 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/municipio');
 		break;
 		case 'eliminar_municipio':
 			$hecho=$lobjMunicipio->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/municipio');
 		break;
 		case 'activar_municipio':
 			$hecho=$lobjMunicipio->cambiar_estatus();
@@ -52,11 +55,19 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/municipio');
+		break;
+		case 'consultar_municipios':
+			$row_municipio=$lobjMunicipio->listar_estado();
+				echo '<option value=""> - </option>';
+	          for ($i=0; $i <count($row_municipio); $i++) 
+	          {
+	              echo '<option value="'.$row_municipio[$i]['idtmunicipio'].'">'.$row_municipio[$i]['municipio'].'</option>';
+	          }
 		break;
 		default:
-			header('location: ../vista/intranet.php?vista=municipio');
+			header('location: ../vista/intranet.php?vista=configuracion/municipio');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=municipio');
 ?>

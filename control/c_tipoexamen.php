@@ -18,6 +18,22 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipoexamen');
+		break;
+		case 'consultar_tipoexamen':
+			if($laexamenes=$lobjTipoexamen->listar())
+			{
+				$option='<option value=""></option>';
+				for($i=0;$i<count($laexamenes);$i++)
+				{
+					$option.='<option value="'.$laexamenes[$i]['idttipoexamen'].'">'.$laexamenes[$i]['tipoexamen'].'</option>';
+				}	
+			}
+			else
+			{
+				$option='<option>No se han encontrado registros</option>';
+			}
+			echo $option;
 		break;
 		case 'editar_tipoexamen':
 			$hecho=$lobjTipoexamen->modificar();
@@ -29,17 +45,19 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipoexamen');
 		break;
 		case 'eliminar_tipoexamen':
 			$hecho=$lobjTipoexamen->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipoexamen');
 		break;
 		case 'activar_tipoexamen':
 			$hecho=$lobjTipoexamen->cambiar_estatus();
@@ -51,11 +69,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipoexamen');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=tipoexamen');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=tipoexamen');
 ?>

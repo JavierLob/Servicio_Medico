@@ -47,7 +47,7 @@
 			$hecho=$lobjServicio->eliminar_servicio();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	

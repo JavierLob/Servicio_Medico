@@ -44,7 +44,7 @@
 			$hecho=$lobjModulo->eliminar_modulo();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	

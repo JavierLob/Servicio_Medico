@@ -73,8 +73,10 @@
 		<title>Intranet - Servicio Medico</title>
 	    <link href="../estilo/bootstrap-3/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="../estilo/bootstrap-3/css/style-intranet.css" rel="stylesheet">
-	    <link href="../estilo/bootstrap-3/DataTables-1.10.2/media/css/jquery.dataTables.css" rel="stylesheet">
-	    <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>
+        <link href="../estilo/bootstrap-3/DataTables-1.10.2/media/css/jquery.dataTables.css" rel="stylesheet">
+	    <link href="../estilo/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	    <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>        
+        <script src="../js/jquery.maskedinput.min.js"></script>
 
 		<script type="text/javascript" src="../js/validaciones.js"></script>
 		<script type="text/javascript" src="../js/validacion.js"></script>

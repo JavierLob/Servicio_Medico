@@ -19,6 +19,7 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
 		break;
 		case 'editar_parroquia':
 			$hecho=$lobjParroquia->modificar();
@@ -30,17 +31,19 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
 		break;
 		case 'eliminar_parroquia':
 			$hecho=$lobjParroquia->cambiar_estatus();
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha eliminardo exitosamente';
+				$_SESSION['msj']='Se ha desactivado exitosamente';
 			}
 			else
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
 		break;
 		case 'activar_parroquia':
 			$hecho=$lobjParroquia->cambiar_estatus();
@@ -52,11 +55,18 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
+		break;
+		case 'consultar_parroquias':
+			echo '<option value=""> - </option>';
+			$laParroquias=$lobjParroquia->listar_municipio();
+            for ($i=0; $i <count($laParroquias) ; $i++) { 
+              echo '<option value="'.$laParroquias[$i]['idparroquia'].'">'.$laParroquias[$i]['parroquia'].'</option>';                    
+            }
 		break;
 		default:
-			header('location: ../vista/intranet.php?vista=parroquia');
+			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=parroquia');
 ?>
