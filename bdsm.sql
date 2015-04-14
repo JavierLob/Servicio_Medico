@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-04-2015 a las 03:23:18
+-- Tiempo de generación: 14-04-2015 a las 03:41:01
 -- Versión del servidor: 5.6.12-log
 -- Versión de PHP: 5.4.16
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `tbitacora` (
   `accesobit` tinyint(1) NOT NULL,
   PRIMARY KEY (`idtbitacora`),
   KEY `fk_tbitacora_tusuario1_idx` (`tusuario_idtusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1492 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1516 ;
 
 --
 -- Volcado de datos para la tabla `tbitacora`
@@ -581,7 +581,31 @@ INSERT INTO `tbitacora` (`idtbitacora`, `direccionbit`, `fechabit`, `ipbit`, `op
 (1488, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1489, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1490, '/Servicio_Medico/vista/intranet.php', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
-(1491, '/Servicio_Medico/vista/intranet.php', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1);
+(1491, '/Servicio_Medico/vista/intranet.php', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1492, '/Servicio_Medico/vista/intranet.php?vista=seguridad/modulo', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1493, '/Servicio_Medico/vista/intranet.php?vista=seguridad/registrar_modulo', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1494, '/Servicio_Medico/vista/intranet.php?vista=seguridad/modulo', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1495, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1496, '/Servicio_Medico/vista/intranet.php?vista=seguridad/registrar_servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1497, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1498, '/Servicio_Medico/vista/intranet.php?vista=seguridad/registrar_servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1499, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1500, '/Servicio_Medico/vista/intranet.php?vista=seguridad/consultar_servicio&id=62', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1501, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1502, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1503, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignacion', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1504, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_modulo', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1505, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_modulo&id=1', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1506, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1507, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1508, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1509, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1510, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1511, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1512, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1513, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1514, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1515, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -826,7 +850,7 @@ CREATE TABLE IF NOT EXISTS `tmodulo` (
   `idtmodulo` int(11) NOT NULL AUTO_INCREMENT,
   `nombremod` varchar(45) NOT NULL,
   PRIMARY KEY (`idtmodulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `tmodulo`
@@ -838,7 +862,8 @@ INSERT INTO `tmodulo` (`idtmodulo`, `nombremod`) VALUES
 (8, 'Consulta'),
 (9, 'Paciente'),
 (10, 'Personal'),
-(11, 'Perfil');
+(11, 'Perfil'),
+(12, 'Reportes');
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1082,8 @@ INSERT INTO `trol_has_tmodulo` (`trol_idtrol`, `tmodulo_idtmodulo`) VALUES
 (1, 8),
 (1, 9),
 (1, 10),
-(1, 11);
+(1, 11),
+(1, 12);
 
 -- --------------------------------------------------------
 
@@ -1121,7 +1147,9 @@ INSERT INTO `trol_has_tservicio` (`trol_idtrol`, `tservicio_idtservicio`) VALUES
 (1, 58),
 (1, 59),
 (1, 60),
-(1, 61);
+(1, 61),
+(1, 62),
+(1, 63);
 
 -- --------------------------------------------------------
 
@@ -1159,7 +1187,7 @@ CREATE TABLE IF NOT EXISTS `tservicio` (
   `tmodulo_idtmodulo` int(11) NOT NULL,
   PRIMARY KEY (`idtservicio`),
   KEY `fk_tservicio_tmodulo1_idx` (`tmodulo_idtmodulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- Volcado de datos para la tabla `tservicio`
@@ -1209,7 +1237,9 @@ INSERT INTO `tservicio` (`idtservicio`, `nombreser`, `enlaceser`, `visibleser`, 
 (58, 'Registrar Personal', 'personal/registrar_personal', '0', 10),
 (59, 'Tipo Personal', 'configuracion/tipo_personal', '1', 7),
 (60, 'Mi Perfil', 'perfil/perfil', '1', 11),
-(61, 'Cambiar clave', 'perfil/cambiar_clave', '1', 11);
+(61, 'Cambiar clave', 'perfil/cambiar_clave', '1', 11),
+(62, 'Consultas', 'reporte/consultas_diaria', '1', 12),
+(63, 'Referencia', 'reporte/referencia', '1', 12);
 
 -- --------------------------------------------------------
 
