@@ -228,10 +228,48 @@
               </select>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_modalidadpac">Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
+              <select name="modalidadpac" class="form-control" id="cam_modalidadpac" required>
+                  <option value="">-</option>
+                  <option value="TRIMESTRE">Trimestre</option>
+                  <option value="SEMESTRE">SEMESTRE</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_numeromodalidadpac">Nro. Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
+              <select name="numeromodalidadpac" class="form-control" id="cam_numeromodalidadpac" required>
+                  <option value="">-</option>
+                  <option  value="1" data-padre="TRIMESTRE">1</option>
+                  <option  value="2" data-padre="TRIMESTRE">2</option>
+                  <option  value="3" data-padre="TRIMESTRE">3</option>
+                  <option  value="4" data-padre="TRIMESTRE">4</option>
+                  <option  value="5" data-padre="TRIMESTRE">5</option>
+                  <option  value="6" data-padre="TRIMESTRE">6</option>
+                  <option  value="7" data-padre="TRIMESTRE">7</option>
+                  <option  value="8" data-padre="TRIMESTRE">8</option>
+                  <option  value="9" data-padre="TRIMESTRE">9</option>
+                  <option  value="10" data-padre="TRIMESTRE">10</option>
+                  <option  value="11" data-padre="TRIMESTRE">11</option>
+                  <option  value="12" data-padre="TRIMESTRE">12</option>
+                  <option value="1" data-padre="SEMESTRE">1</option>
+                  <option value="2" data-padre="SEMESTRE">2</option>
+                  <option value="3" data-padre="SEMESTRE">3</option>
+                  <option value="4" data-padre="SEMESTRE">4</option>
+                  <option value="5" data-padre="SEMESTRE">5</option>
+                  <option value="6" data-padre="SEMESTRE">6</option>
+                  <option value="7" data-padre="SEMESTRE">7</option>
+                  <option value="8" data-padre="SEMESTRE">8</option>
+              </select>
+            </div>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/paciente';"><i class="fa fa-chevron-left"></i> Regresar</button>
+        <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=paciente/paciente';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
         <button type="submit" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
@@ -252,6 +290,17 @@ $("#cam_estado").change(function() {
         success: function(msg){
             $("#cam_municipio").html(msg);                       
         }
+    });
+});
+
+$("#cam_modalidadpac").change(function(){
+    var modalidad = $(this).val();
+    $("#cam_numeromodalidadpac").val('');
+    $("#cam_numeromodalidadpac option").each(function(indice, elemento){
+        if($(elemento).attr('data-padre') == modalidad)
+            $(elemento).show();
+        else
+            $(elemento).hide();
     });
 });
 
