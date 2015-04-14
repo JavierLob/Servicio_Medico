@@ -28,15 +28,18 @@
 <div class="alert alert-info" role="alert">
     <strong><i class="fa fa-info-circle"></i></strong> Aquí podras ver las consultas diarias realizadas, y generar un archivo pdf con dicha información.
 </div>
-<form role="form" class="form" action="../control/c_consulta.php" method="POST" name="form_consulta">
+<form role="form" class="form" action="../reporte/listado_consultas_diarias.php" method="GET" name="form_consulta">
     <input type="hidden" value="eliminar_consulta" name="operacion" id="cam_operacion"/>
     <input type="hidden"  name="idconsulta" id="cam_idconsulta"/>
     <div class="row">
         <div class="col-md-6">
           <div class="form-group">
               <label for="cam_consulta">Fecha <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de la consulta."></i></strong></label>
-              <input type="text" name="fecha_consulta" class="form-control" id="cam_fecha_consulta" value="<?php echo date('d-m-Y');?>" required>
+              <input type="date" name="fecha" class="form-control" id="cam_fecha" required>
             </div>
         </div>
+    </div>
+    <div class="botonera">
+    <button type="submit" class="btn btn-success"><i class="fa fa-file-text-o"></i>Generar</button>
     </div>
 </form>

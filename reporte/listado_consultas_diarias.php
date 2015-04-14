@@ -9,15 +9,13 @@
    * @version    v1.0
    */
    require_once("../libreria/fpdf17/clase_fpdf.php");
-   require_once("../clases/clase_consulta.php");
-   $lobjConsulta = new clsConsulta();
+   require_once("../modelo/m_consulta.php");
+   $lobjConsulta = new claseConsulta();
 
    $id=(isset($_GET['id']))?$_GET['id']:"";
 
-   $lobjCurso->set_Curso($id);
-   $lobjInscripcion->set_Curso($id);
-   $laDatosCurso=$lobjCurso->consultar_curso();
-   $laListadoClases = $lobjInscripcion->listado_clases();
+   $lobjConsulta->set_Consulta($id);
+   $laconsultas=$lobjConsulta->listar();
    ob_end_clean();
 
    $lobjPdf=new clsFpdf();
@@ -34,7 +32,7 @@
 
    //Parametros de la función CELL (ancho,alto,texto,borde,salto de linea,alineación)
    $lobjPdf->Cell(0,6,utf8_decode("DATOS DEL CURSO"),0,1,"C");
-   $lobjPdf->Ln(2);
+   /*$lobjPdf->Ln(2);
    $lobjPdf->Cell(15);
    $lobjPdf->Cell(40,6,utf8_decode("Nombre:"),0,0,"L");
    $lobjPdf->SetFont("arial","",12);
@@ -74,14 +72,14 @@
    $lobjPdf->Cell(60,6,utf8_decode("Nombres"),1,1,"C");
 
    $lobjPdf->SetFont("arial","",12);
-   for($i=0;$i<count($laListadoClases);$i++)
+   for($i=0;$i<count($laconsultas);$i++)
    {
       $lobjPdf->Cell(15);
       $lobjPdf->Cell(10,6,utf8_decode(($i+1)),1,0,"C");
-      $lobjPdf->Cell(35,6,utf8_decode(number_format($laListadoClases[$i]['cedulaest'],0,'','.')),1,0,"R");
-      $lobjPdf->Cell(60,6,utf8_decode($laListadoClases[$i]['apellido_unoest'].' '.$laListadoClases[$i]['apellido_dosest']),1,0,"L");
-      $lobjPdf->Cell(60,6,utf8_decode($laListadoClases[$i]['nombre_unoest'].' '.$laListadoClases[$i]['nombre_dosest']),1,1,"L");
-   }
+      $lobjPdf->Cell(35,6,utf8_decode(number_format($laconsultas[$i]['cedulaest'],0,'','.')),1,0,"R");
+      $lobjPdf->Cell(60,6,utf8_decode($laconsultas[$i]['apellido_unoest'].' '.$laListadoClases[$i]['apellido_dosest']),1,0,"L");
+      $lobjPdf->Cell(60,6,utf8_decode($laconsultas[$i]['nombre_unoest'].' '.$laListadoClases[$i]['nombre_dosest']),1,1,"L");
+   }*/
 
    $lobjPdf->Output();
 
