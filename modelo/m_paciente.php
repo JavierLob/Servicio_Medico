@@ -163,5 +163,33 @@
 			$this->desconectar();
 			return $respuesta;
 		}
+
+		public function listar_diario($fecha='')
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT `idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, 
+					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
+					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
+					`alergia`, `observacion`, `estatuspaciente`, `idtsede`, tpaciente.idparroquia, `idtetnia`, 
+					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado 
+					, numeromodalidadpac, modalidadpac, motivocon, carrera
+					FROM `tpaciente` , tparroquia, tmunicipio, testado, tconsulta, tcarrera
+					WHERE tparroquia.idparroquia = tpaciente.idparroquia
+					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio
+					AND testado.idestado = tmunicipio.idestado
+					AND tpaciente.idpaciente = tconsulta.tpaciente_idpaciente
+					AND tcarrera.idtcarrera = tpaciente.tcarrera_idtcarrera
+					AND fecha_consulta = '$fecha'";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
 	}
 ?>
