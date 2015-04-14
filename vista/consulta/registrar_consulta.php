@@ -127,7 +127,7 @@
       <div class="col-md-12">
             <div class="form-group">
               <label for="cam_consulta">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Observación de la consulta."></i></strong></label>
-              <textarea name="observacionconsulta" class="form-control" id="cam_observacionconsulta" value="" required></textarea>
+              <textarea name="observacionconsulta" class="form-control" id="cam_observacionconsulta" value=""></textarea>
             </div>
         </div>
     </div>
@@ -135,7 +135,7 @@
       <div class="col-md-12">
             <div class="form-group">
               <label for="cam_consulta">Motivo de la consulta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Motivo de la consulta."></i></strong></label>
-              <textarea name="motivocon" class="form-control" id="cam_motivocon" value="" required></textarea>
+              <textarea name="motivocon" class="form-control" id="cam_motivocon" value=""></textarea>
             </div>
         </div>
     </div>

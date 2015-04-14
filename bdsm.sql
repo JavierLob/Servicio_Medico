@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-04-2015 a las 03:41:01
+-- Tiempo de generación: 14-04-2015 a las 05:59:26
 -- Versión del servidor: 5.6.12-log
 -- Versión de PHP: 5.4.16
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `tbitacora` (
   `accesobit` tinyint(1) NOT NULL,
   PRIMARY KEY (`idtbitacora`),
   KEY `fk_tbitacora_tusuario1_idx` (`tusuario_idtusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1516 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1589 ;
 
 --
 -- Volcado de datos para la tabla `tbitacora`
@@ -605,7 +605,80 @@ INSERT INTO `tbitacora` (`idtbitacora`, `direccionbit`, `fechabit`, `ipbit`, `op
 (1512, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1513, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1514, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
-(1515, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1);
+(1515, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1516, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1517, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1518, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1519, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1520, '/Servicio_Medico/vista/intranet.php?vista=seguridad/registrar_servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1521, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1522, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignacion', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1523, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1524, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1525, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1526, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1527, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1528, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1529, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1530, '/Servicio_Medico/vista/intranet.php?vista=seguridad/consultar_servicio&id=62', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1531, '/Servicio_Medico/vista/intranet.php?vista=seguridad/servicio', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1532, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1533, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1534, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1535, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1536, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1537, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1538, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1539, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1540, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1541, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 04:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1542, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1543, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1544, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1545, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1546, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1547, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1548, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1549, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1550, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1551, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1552, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1553, '/Servicio_Medico/vista/intranet.php?vista=paciente/paciente', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1554, '/Servicio_Medico/vista/intranet.php?vista=paciente/consultar_paciente&id=2', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1555, '/Servicio_Medico/vista/intranet.php?vista=paciente/paciente', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1556, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1557, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1558, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1559, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1560, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1561, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1562, '/Servicio_Medico/vista/intranet.php?vista=perfil/cambiar_clave', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1563, '/Servicio_Medico/vista/intranet.php?vista=perfil/perfil', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1564, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1565, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1566, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1567, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1568, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1569, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1570, '/Servicio_Medico/vista/intranet.php?vista=consulta/consultar_consulta&id=6', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1571, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1572, '/Servicio_Medico/vista/intranet.php?vista=consulta/consultar_consulta&id=1', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1573, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1574, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1575, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1576, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1577, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1578, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1579, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1580, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1581, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas_diaria', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1582, '/Servicio_Medico/vista/intranet.php?vista=reporte/consultas', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1583, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignacion', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1584, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1585, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1586, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1587, '/Servicio_Medico/vista/intranet.php?vista=seguridad/asignar_servicio&id=1', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1588, '/Servicio_Medico/vista/intranet.php', '2015-04-14 05:04:00', '127.0.0.1', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -673,7 +746,15 @@ CREATE TABLE IF NOT EXISTS `tconsulta` (
   PRIMARY KEY (`idconsulta`),
   KEY `fk_tconsulta_tdoctor1_idx` (`idtdoctor`),
   KEY `fk_tconsulta_tpaciente1_idx` (`tpaciente_idpaciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `tconsulta`
+--
+
+INSERT INTO `tconsulta` (`idconsulta`, `estatusconsulta`, `fecha_consulta`, `pulso`, `peso`, `fc`, `fr`, `ta`, `talla`, `temperatura`, `altura`, `observacionconsulta`, `idtdoctor`, `tpaciente_idpaciente`, `motivocon`) VALUES
+(1, '1', '2015-04-14', '123', '123', '12', '1234', '132', '12', '1234', '234', 'asdfasf', 1, 2, 'Le dolÃ­a la cabeza'),
+(6, '1', '2015-04-14', '123', '123', '34', '34', '345', '12', '34', '156', '', 1, 2, 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -817,7 +898,14 @@ CREATE TABLE IF NOT EXISTS `texamen` (
   KEY `fk_texamen_tconsulta1_idx` (`idconsulta`),
   KEY `fk_texamen_ttipoexamen1_idx` (`idttipoexamen`),
   KEY `fk_texamen_tlaboratorio1_idx` (`idtlaboratorio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `texamen`
+--
+
+INSERT INTO `texamen` (`idtexamen`, `examen`, `estatusexamen`, `idconsulta`, `idttipoexamen`, `idtlaboratorio`) VALUES
+(1, 'VRL', '1', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -934,7 +1022,7 @@ CREATE TABLE IF NOT EXISTS `tpaciente` (
 --
 
 INSERT INTO `tpaciente` (`idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, `telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, `alergia`, `observacion`, `estatuspaciente`, `idtsede`, `idparroquia`, `idtetnia`, `idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, `modalidadpac`, `numeromodalidadpac`) VALUES
-(2, '80235983509', 'E', 'BARAK', 'HUSEIIN', 'OBAMA', 'SBRESRB', 'HAWAI', 'M', '02554582736', '02534576015', 0, 'DVASDV', 'ASDVASDV', 'ASDVASDV', 'ASDVASDV', '1', 1, 1, 1, 2, 1, 1, '', 0);
+(2, '80235983509', 'E', 'BARAK', 'HUSEIIN', 'OBAMA', 'SBRESRB', 'HAWAI', 'M', '02554582736', '02534576015', 0, 'DVASDV', 'ASDVASDV', 'ASDVASDV', 'ASDVASDV', '1', 1, 1, 1, 2, 1, 1, 'TRIMESTRE', 2);
 
 -- --------------------------------------------------------
 
@@ -1037,7 +1125,14 @@ CREATE TABLE IF NOT EXISTS `treferencia` (
   KEY `fk_treferencia_tconsulta1_idx` (`idconsulta`),
   KEY `fk_treferencia_tcentroasistencial1_idx` (`tcentroasistencial_idtcentroasistencial`),
   KEY `fk_treferencia_ttiporeferencia1_idx` (`ttiporeferencia_idtiporeferencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `treferencia`
+--
+
+INSERT INTO `treferencia` (`idreferencia`, `referidoa`, `estatusreferencia`, `idconsulta`, `tcentroasistencial_idtcentroasistencial`, `ttiporeferencia_idtiporeferencia`) VALUES
+(1, 'JOYMAR ESCALONA', '1', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1149,7 +1244,7 @@ INSERT INTO `trol_has_tservicio` (`trol_idtrol`, `tservicio_idtservicio`) VALUES
 (1, 60),
 (1, 61),
 (1, 62),
-(1, 63);
+(1, 64);
 
 -- --------------------------------------------------------
 
@@ -1187,7 +1282,7 @@ CREATE TABLE IF NOT EXISTS `tservicio` (
   `tmodulo_idtmodulo` int(11) NOT NULL,
   PRIMARY KEY (`idtservicio`),
   KEY `fk_tservicio_tmodulo1_idx` (`tmodulo_idtmodulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=65 ;
 
 --
 -- Volcado de datos para la tabla `tservicio`
@@ -1238,8 +1333,9 @@ INSERT INTO `tservicio` (`idtservicio`, `nombreser`, `enlaceser`, `visibleser`, 
 (59, 'Tipo Personal', 'configuracion/tipo_personal', '1', 7),
 (60, 'Mi Perfil', 'perfil/perfil', '1', 11),
 (61, 'Cambiar clave', 'perfil/cambiar_clave', '1', 11),
-(62, 'Consultas', 'reporte/consultas_diaria', '1', 12),
-(63, 'Referencia', 'reporte/referencia', '1', 12);
+(62, 'Consultas Diarias', 'reporte/consultas_diaria', '1', 12),
+(63, 'Referencia', 'reporte/referencia', '1', 12),
+(64, 'Consultas', 'reporte/consultas', '1', 12);
 
 -- --------------------------------------------------------
 

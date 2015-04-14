@@ -77,11 +77,12 @@
 				if($laRow=$this->proximo($pcsql))
 				{
 					$idconsulta=$laRow['idconsulta'];
-					if($this->examen)
+					if($this->examen[0]!='')
 					{
 						for ($i=0; $i <count($this->examen) ; $i++) 
 						{ 
 							$sql="INSERT INTO texamen (`examen`, `idconsulta`, `idttipoexamen`, `idtlaboratorio`, `estatusexamen`)VALUES(UPPER('".$this->examen[$i]."'),'$idconsulta','".$this->idtipoexamen[$i]."','".$this->idlaboratorio[$i]."','1');";
+							echo $sql;
 							if(!$respuesta = $this->ejecutar($sql))
 							{
 								$this->rollback();
@@ -90,7 +91,7 @@
 						}
 					}
 
-					if($this->referira)
+					if($this->referira[0]!='')
 					{
 						for ($i=0; $i <count($this->referira) ; $i++) 
 						{ 
@@ -143,7 +144,7 @@
 		{
 			$Fila = array();
 			$this->conectar();
-			$sql="SELECT * FROM tconsulta,tpaciente,tdoctor WHERE idconsulta='$this->idconsulta' AND tpaciente_idpaciente=idpaciente AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
+			$sql="SELECT *,idconsulta as id,(SELECT COUNT(idtexamen) FROM texamen WHERE texamen.idconsulta=id)as examen,(SELECT COUNT(idreferencia) FROM treferencia WHERE treferencia.idconsulta=id)as referir FROM tconsulta,tpaciente,tdoctor WHERE idconsulta='$this->idconsulta' AND tpaciente_idpaciente=idpaciente AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
@@ -152,6 +153,7 @@
 			$this->desconectar();
 			return $Fila;
 		}
+
 
 		public function consultar_examen()
 		{
@@ -190,7 +192,7 @@
 			$Filas = array();
 			$cont = 0;
 			$this->conectar();
-			$sql="SELECT * FROM tconsulta;";
+			$sql="SELECT * FROM tconsulta,tpaciente WHERE tpaciente_idpaciente=idpaciente;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{

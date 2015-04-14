@@ -34,6 +34,12 @@
    $lobjPdf->Ln(2);
    $lobjPdf->SetFont("arial","B",10);
    $lobjPdf->Cell(15);
+   $lobjPdf->Cell(20,6,utf8_decode("Fecha"),1,0,"L");
+   $lobjPdf->SetFont("arial","",10);
+   $lobjPdf->Cell(30,6,utf8_decode($_GET['fecha']),1,1,"L");
+   $lobjPdf->Cell(15);
+   $lobjPdf->SetFont("arial","B",10);
+   
    $lobjPdf->Cell(100,6,utf8_decode("Apellido y Nombre"),1,0,"L");
    $lobjPdf->Cell(40,6,utf8_decode("C.I. Nro"),1,0,"L");
    $lobjPdf->Cell(60,6,utf8_decode("Carrera"),1,0,"L");
@@ -44,12 +50,10 @@
    //$lobjPdf->Cell(40,6,utf8_decode("Motivo Consulta"),1,1,"L");
    //Parametros de la función CELL (ancho,alto,texto,borde,salto de linea,alineación)
 
-   $lobjPdf->SetFont("arial","",12);
-      $lobjPdf->SetFont("arial","",10);
+   $lobjPdf->Cell(15);
    for($i=0;$i<count($laPaciente);$i++)
    {
       $lobjPdf->SetFont("arial","",10);
-      $lobjPdf->Cell(15);
       $lobjPdf->Cell(100,6,utf8_decode($laPaciente[$i]['primerapellido'].' '.$laPaciente[$i]['segundonombre'].' '.$laPaciente[$i]['primernombre'].' '.$laPaciente[$i]['segundonombre']),1,0,"L");
       $lobjPdf->Cell(40,6,number_format($laPaciente[$i]['cedulaopasaporte'], 0, '.', ','),1,0,"R");
       $lobjPdf->Cell(60,6,utf8_decode($laPaciente[$i]['carrera']),1,0,"L");
@@ -65,6 +69,11 @@
       $lobjPdf->Cell(30,6,utf8_decode('Motivo:'),1,0,"L");
       $lobjPdf->SetFont("arial","",10);
       $lobjPdf->MultiCell(284,6, utf8_decode($laPaciente[$i]['motivocon']), 1);
+   }
+   if($i==0)
+   {
+      $lobjPdf->SetFont("arial","",10);
+      $lobjPdf->Cell(314,6,utf8_decode('No exiten consultas registradas para esta fecha'),1,0,"C");
    }
 
    $lobjPdf->Output();

@@ -26,9 +26,9 @@
 </script>    
 <h1 class="page-header">Reporte Consultas</h1>
 <div class="alert alert-info" role="alert">
-    <strong><i class="fa fa-info-circle"></i></strong> Aquí podras ver las consultas diarias realizadas, y generar un archivo pdf con dicha información.
+    <strong><i class="fa fa-info-circle"></i></strong> Aquí podras generar un archivo pdf con el listado de consultas realizadas en una fecha específica.
 </div>
-<form role="form" class="form" action="../reporte/listado_consultas_diarias.php" method="GET" name="form_consulta">
+<form role="form" class="form" target="_blank" action="../reporte/listado_consultas_diarias.php" method="GET" name="form_consulta">
     <input type="hidden" value="eliminar_consulta" name="operacion" id="cam_operacion"/>
     <input type="hidden"  name="idconsulta" id="cam_idconsulta"/>
     <div class="row">
@@ -39,7 +39,9 @@
             </div>
         </div>
     </div>
-    <div class="botonera">
-    <button type="submit" class="btn btn-success"><i class="fa fa-file-text-o"></i>Generar</button>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-success"><i class="fa fa-file-text-o"></i>Generar</button>
+        </div>
     </div>
 </form>

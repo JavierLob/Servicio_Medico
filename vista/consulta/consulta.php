@@ -36,7 +36,7 @@
     <input type="hidden"  name="estatusconsulta" id="cam_estatusconsulta"/>
     <table class="cell-border compact hover stripe" id="filtro">
         <thead>
-            <th>Id</th><th>consulta</th><th>Estatus</th><th>Operación</th>
+            <th>Id</th><th>Paciente</th><th>C.I. / P</th><th>Fecha</th><th>Estatus</th><th>Operación</th>
         </thead>
         <tbody>
         <?php
@@ -48,6 +48,8 @@
                     $estatus=($laconsulta[$i]['estatusconsulta']==1)?'Activo':'Inactivo';
                     echo '<tr>';
                     echo '<td>'.$laconsulta[$i]['idconsulta'].'</td>';
+                    echo '<td>'.$laconsulta[$i]['primerapellido'].' '.$laconsulta[$i]['primernombre'].'</td>';
+                    echo '<td>'.$laconsulta[$i]['nacionalidad'].' '.$laconsulta[$i]['cedulaopasaporte'].'</td>';
                     echo '<td>'.$laconsulta[$i]['fecha_consulta'].'</td>';
                     echo '<td>'.$estatus.'</td>';
                     echo '<td>';
