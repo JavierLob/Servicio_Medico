@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-04-2015 a las 07:18:20
+-- Tiempo de generación: 14-04-2015 a las 03:23:18
 -- Versión del servidor: 5.6.12-log
 -- Versión de PHP: 5.4.16
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `tbitacora` (
   `accesobit` tinyint(1) NOT NULL,
   PRIMARY KEY (`idtbitacora`),
   KEY `fk_tbitacora_tusuario1_idx` (`tusuario_idtusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1490 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1492 ;
 
 --
 -- Volcado de datos para la tabla `tbitacora`
@@ -579,7 +579,9 @@ INSERT INTO `tbitacora` (`idtbitacora`, `direccionbit`, `fechabit`, `ipbit`, `op
 (1486, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1487, '/Servicio_Medico/vista/intranet.php?vista=paciente/paciente', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
 (1488, '/Servicio_Medico/vista/intranet.php?vista=consulta/consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
-(1489, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1);
+(1489, '/Servicio_Medico/vista/intranet.php?vista=consulta/registrar_consulta', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1490, '/Servicio_Medico/vista/intranet.php', '2015-04-07 07:04:00', '127.0.0.1', '', '', '', '1', 1),
+(1491, '/Servicio_Medico/vista/intranet.php', '2015-04-14 03:04:00', '127.0.0.1', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -643,10 +645,11 @@ CREATE TABLE IF NOT EXISTS `tconsulta` (
   `observacionconsulta` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `idtdoctor` int(11) NOT NULL,
   `tpaciente_idpaciente` int(11) NOT NULL,
+  `motivocon` text COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idconsulta`),
   KEY `fk_tconsulta_tdoctor1_idx` (`idtdoctor`),
   KEY `fk_tconsulta_tpaciente1_idx` (`tpaciente_idpaciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -790,7 +793,7 @@ CREATE TABLE IF NOT EXISTS `texamen` (
   KEY `fk_texamen_tconsulta1_idx` (`idconsulta`),
   KEY `fk_texamen_ttipoexamen1_idx` (`idttipoexamen`),
   KEY `fk_texamen_tlaboratorio1_idx` (`idtlaboratorio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -890,6 +893,8 @@ CREATE TABLE IF NOT EXISTS `tpaciente` (
   `idttipopaciente` int(11) NOT NULL,
   `tcarrera_idtcarrera` int(11) NOT NULL,
   `tdepartamento_iddepartamento` int(11) NOT NULL,
+  `modalidadpac` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Trimestre,Semestre',
+  `numeromodalidadpac` int(11) NOT NULL COMMENT '1,2,3 semestre,trimestre',
   PRIMARY KEY (`idpaciente`),
   KEY `fk_tpaciente_tsede1_idx` (`idtsede`),
   KEY `fk_tpaciente_tparroquia1_idx` (`idparroquia`),
@@ -903,8 +908,8 @@ CREATE TABLE IF NOT EXISTS `tpaciente` (
 -- Volcado de datos para la tabla `tpaciente`
 --
 
-INSERT INTO `tpaciente` (`idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, `telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, `alergia`, `observacion`, `estatuspaciente`, `idtsede`, `idparroquia`, `idtetnia`, `idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`) VALUES
-(2, '80235983509', 'E', 'BARAK', 'HUSEIIN', 'OBAMA', 'SBRESRB', 'HAWAI', 'M', '02554582736', '02534576015', 0, 'DVASDV', 'ASDVASDV', 'ASDVASDV', 'ASDVASDV', '1', 1, 1, 1, 2, 1, 1);
+INSERT INTO `tpaciente` (`idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, `telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, `alergia`, `observacion`, `estatuspaciente`, `idtsede`, `idparroquia`, `idtetnia`, `idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, `modalidadpac`, `numeromodalidadpac`) VALUES
+(2, '80235983509', 'E', 'BARAK', 'HUSEIIN', 'OBAMA', 'SBRESRB', 'HAWAI', 'M', '02554582736', '02534576015', 0, 'DVASDV', 'ASDVASDV', 'ASDVASDV', 'ASDVASDV', '1', 1, 1, 1, 2, 1, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1007,7 +1012,7 @@ CREATE TABLE IF NOT EXISTS `treferencia` (
   KEY `fk_treferencia_tconsulta1_idx` (`idconsulta`),
   KEY `fk_treferencia_tcentroasistencial1_idx` (`tcentroasistencial_idtcentroasistencial`),
   KEY `fk_treferencia_ttiporeferencia1_idx` (`ttiporeferencia_idtiporeferencia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1303,7 +1308,7 @@ CREATE TABLE IF NOT EXISTS `tusuario` (
   `estatus` char(1) COLLATE utf8_spanish_ci NOT NULL DEFAULT '1',
   `tpersonal_idpersonal` int(11) NOT NULL,
   PRIMARY KEY (`idtusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `tusuario`
@@ -1320,8 +1325,8 @@ INSERT INTO `tusuario` (`idtusuario`, `usuario`, `clave`, `rol`, `estatus`, `tpe
 -- Filtros para la tabla `tconsulta`
 --
 ALTER TABLE `tconsulta`
-  ADD CONSTRAINT `fk_tconsulta_tpaciente1` FOREIGN KEY (`tpaciente_idpaciente`) REFERENCES `tpaciente` (`idpaciente`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tconsulta_tdoctor1` FOREIGN KEY (`idtdoctor`) REFERENCES `tdoctor` (`idtdoctor`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tconsulta_tdoctor1` FOREIGN KEY (`idtdoctor`) REFERENCES `tdoctor` (`idtdoctor`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tconsulta_tpaciente1` FOREIGN KEY (`tpaciente_idpaciente`) REFERENCES `tpaciente` (`idpaciente`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tdoctor`
@@ -1385,8 +1390,8 @@ ALTER TABLE `tpersonal`
 -- Filtros para la tabla `treferencia`
 --
 ALTER TABLE `treferencia`
-  ADD CONSTRAINT `fk_treferencia_tconsulta1` FOREIGN KEY (`idconsulta`) REFERENCES `tconsulta` (`idconsulta`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_treferencia_tcentroasistencial1` FOREIGN KEY (`tcentroasistencial_idtcentroasistencial`) REFERENCES `tcentroasistencial` (`idtcentroasistencial`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_treferencia_tconsulta1` FOREIGN KEY (`idconsulta`) REFERENCES `tconsulta` (`idconsulta`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_treferencia_ttiporeferencia1` FOREIGN KEY (`ttiporeferencia_idtiporeferencia`) REFERENCES `ttiporeferencia` (`idtiporeferencia`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
