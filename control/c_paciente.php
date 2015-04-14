@@ -3,7 +3,7 @@
 	require_once("../modelo/m_paciente.php");
 	$lobjPaciente=new clasePaciente;
 
-	$lobjPaciente->set_datos($_POST['idpaciente'], $_POST['cedulaopasaporte'], $_POST['nacionalidad'], $_POST['primernombre'], $_POST['segundonombre'], $_POST['primerapellido'], $_POST['segundoapellido'], $_POST['direccion'], $_POST['sexo'], $_POST['telefono'], $_POST['celular'], $_POST['numerohistoria'], $_POST['antecedentepersonal'], $_POST['antecedentefamiliar'], $_POST['alergia'], $_POST['observacion'], $_POST['estatuspaciente'], $_POST['idtsede'], $_POST['idparroquia'], $_POST['idtetnia'], $_POST['idttipopaciente'], $_POST['tcarrera_idtcarrera'], $_POST['tdepartamento_iddepartamento']);
+	$lobjPaciente->set_datos($_POST['idpaciente'], $_POST['cedulaopasaporte'], $_POST['nacionalidad'], $_POST['primernombre'], $_POST['segundonombre'], $_POST['primerapellido'], $_POST['segundoapellido'], $_POST['direccion'], $_POST['sexo'], $_POST['telefono'], $_POST['celular'], $_POST['numerohistoria'], $_POST['antecedentepersonal'], $_POST['antecedentefamiliar'], $_POST['alergia'], $_POST['observacion'], $_POST['estatuspaciente'], $_POST['idtsede'], $_POST['idparroquia'], $_POST['idtetnia'], $_POST['idttipopaciente'], $_POST['tcarrera_idtcarrera'], $_POST['tdepartamento_iddepartamento'], $_POST['modalidadpac'], $_POST['numeromodalidadpac']);
 
 	$operacion=$_POST['operacion'];
 
