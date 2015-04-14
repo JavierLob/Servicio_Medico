@@ -15,8 +15,7 @@
 	        $this->Cell(0, 4, $lcFechaActual, 0, 1, "R");
 
 	      	//Logo
-	        $this->Image('../bootstrap-3/img/logo_af.png',15,15,40);
-	        $this->Image('../bootstrap-3/img/logo_af.png',165,15,40);
+	        $this->Image('../imagenes/uptp.jpg',15,15,40);
 	        $this->Ln(15);
 	        //Membrete
 	        $this->SetFont('Arial', '', 12);
