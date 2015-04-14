@@ -52,6 +52,8 @@
                     echo '<td>'.$estatus.'</td>';
                     echo '<td>';
                         echo '<a class="btn-sm btn-info" href="#" onclick="buscar('.$laconsulta[$i]['idconsulta'].')"><i class="fa fa-search icon-white"></i></a>';
+                        echo ' <a class="btn-sm btn-success" target="_blank" href="../reporte/consulta.php?id='.$laconsulta[$i]['idconsulta'].'"  ><i class="fa fa-file-text-o"></i></a>';
+                        
                         if($laconsulta[$i]['estatusconsulta']=='1')
                         {
                             echo ' <a class="btn-sm btn-danger" href="#" onclick="desactivar('.$laconsulta[$i]['idconsulta'].')" ><i class="fa fa-remove icon-white"></i></a>';

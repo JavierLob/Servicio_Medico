@@ -15,11 +15,9 @@
 	        $this->Cell(0, 4, $lcFechaActual, 0, 1, "R");
 
 	      	//Logo
-	        $this->Image('../imagenes/uptp.jpg',15,15,40);
-	        $this->Ln(15);
+	        $this->Image('../imagenes/uptp.jpg',15,15,50);
+	        $this->Ln(45);
 	        //Membrete
-	        $this->SetFont('Arial', '', 12);
-	        $this->Cell(0, 6,utf8_decode('REPÚBLICA BOLIVARIANA DE VENEZUELA'), 0, 1, 'C');
 	        //colocar las demas lineas dependiendo de tu organización
 		}
 

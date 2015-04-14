@@ -60,7 +60,7 @@
     <div class="row">
       <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Fc <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Fc <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fc del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-stethoscope  "></i></span>
               <input type="text" name="fc" class="form-control" id="cam_fc" value="" required>
@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Fr <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Fr <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fr del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
 
                 <input type="text" name="fr" class="form-control" id="cam_fr" value="" required>
@@ -82,7 +82,7 @@
     <div class="row">
       <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Ta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Ta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="TA del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
               <input type="text" name="ta" class="form-control" id="cam_ta" value="" required>
@@ -91,7 +91,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Temperatura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Temperatura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Temperatura del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
               <input type="text" name="temperatura" class="form-control" id="cam_temperatura" value="" required>
@@ -102,7 +102,7 @@
     <div class="row">        
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Talla <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Talla <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Talla del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
 
               <span class="input-group-addon"><i class="fa fa-arrows-h"></i></span>
@@ -113,7 +113,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_consulta">Altura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Altura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Altura del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-arrows-v"></i></span>
@@ -126,8 +126,16 @@
     <div class="row">
       <div class="col-md-12">
             <div class="form-group">
-              <label for="cam_consulta">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
+              <label for="cam_consulta">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Observación de la consulta."></i></strong></label>
               <textarea name="observacionconsulta" class="form-control" id="cam_observacionconsulta" value="" required></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+            <div class="form-group">
+              <label for="cam_consulta">Motivo de la consulta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Motivo de la consulta."></i></strong></label>
+              <textarea name="motivocon" class="form-control" id="cam_motivocon" value="" required></textarea>
             </div>
         </div>
     </div>

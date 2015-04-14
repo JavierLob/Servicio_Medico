@@ -3,7 +3,7 @@
 	require_once("../modelo/m_consulta.php");
 	$lobjConsulta=new claseConsulta;
 
-	$lobjConsulta->set_datos($_POST['estatusconsulta'], $_POST['fecha_consulta'], $_POST['pulso'], $_POST['peso'], $_POST['fc'], $_POST['fr'], $_POST['ta'], $_POST['talla'], $_POST['temperatura'], $_POST['altura'], $_POST['observacionconsulta'], $_POST['idtdoctor'], $_POST['tpaciente_idpaciente']);
+	$lobjConsulta->set_datos($_POST['estatusconsulta'], $_POST['fecha_consulta'], $_POST['pulso'], $_POST['peso'], $_POST['fc'], $_POST['fr'], $_POST['ta'], $_POST['talla'], $_POST['temperatura'], $_POST['altura'], $_POST['observacionconsulta'], $_POST['idtdoctor'], $_POST['tpaciente_idpaciente'], $_POST['motivocon']);
 	$lobjConsulta->set_Consulta($_POST['idconsulta']);
 	$lobjConsulta->set_Examen($_POST['examen'],$_POST['idttipoexamen'],$_POST['idtlaboratorio']);
 	$lobjConsulta->set_Referir($_POST['referira'],$_POST['idtiporeferencia'],$_POST['idtcentroasistencial']);

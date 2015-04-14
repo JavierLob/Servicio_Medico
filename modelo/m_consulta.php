@@ -3,7 +3,7 @@
 
 	class claseConsulta extends bd_my
 	{
-		public $idconsulta, $estatusconsulta, $fecha_consulta, $pulso, $peso, $fc, $fr, $ta, $talla, $temperatura, $altura, $observacionconsulta, $idtdoctor, $tpaciente_idpaciente,$examen,$idtipoexamen,$idlaboratorio,$referira,$idtiporeferencia,$idcentroasistencial;
+		public $idconsulta, $estatusconsulta, $fecha_consulta, $pulso, $peso, $fc, $fr, $ta, $talla, $temperatura, $altura, $observacionconsulta, $idtdoctor, $tpaciente_idpaciente,$examen,$idtipoexamen,$idlaboratorio,$referira,$idtiporeferencia,$idcentroasistencial,$motivocon;
 
 		function __CONSTRUCT()
 		{
@@ -21,9 +21,10 @@
 			$this->observacionconsulta = '';
 			$this->idtdoctor = '';
 			$this->tpaciente_idpaciente = '';
+			$this->motivocon = '';
 		}
 
-		public function set_datos($estatusconsulta= '', $fecha_consulta= '', $pulso= '', $peso= '', $fc= '', $fr= '', $ta= '', $talla= '', $temperatura= '', $altura= '', $observacionconsulta= '', $idtdoctor= '', $tpaciente_idpaciente= '')
+		public function set_datos($estatusconsulta= '', $fecha_consulta= '', $pulso= '', $peso= '', $fc= '', $fr= '', $ta= '', $talla= '', $temperatura= '', $altura= '', $observacionconsulta= '', $idtdoctor= '', $tpaciente_idpaciente= '', $motivocon= '')
 		{
 			$this->estatusconsulta = $estatusconsulta;
 			$this->fecha_consulta = $this->formato_fecha($fecha_consulta);
@@ -38,6 +39,7 @@
 			$this->observacionconsulta = $observacionconsulta;
 			$this->idtdoctor = $idtdoctor;
 			$this->tpaciente_idpaciente = $tpaciente_idpaciente;
+			$this->motivocon = $motivocon;
 		}
 
 		public function set_Consulta($idconsulta)
@@ -67,7 +69,7 @@
 			$respuesta = false;
 			$this->conectar();
 			$this->begin();
-			$SQL = "INSERT INTO tconsulta (`fecha_consulta`, `pulso`, `peso`, `fc`, `fr`, `ta`, `talla`, `temperatura`, `altura`, `observacionconsulta`, `idtdoctor`, `tpaciente_idpaciente`,`estatusconsulta`) VALUES ('$this->fecha_consulta','$this->pulso','$this->peso','$this->fc','$this->fr','$this->ta','$this->talla','$this->temperatura','$this->altura','$this->observacionconsulta','$this->idtdoctor','$this->tpaciente_idpaciente','1');";
+			$SQL = "INSERT INTO tconsulta (`fecha_consulta`, `pulso`, `peso`, `fc`, `fr`, `ta`, `talla`, `temperatura`, `altura`, `observacionconsulta`, `idtdoctor`, `tpaciente_idpaciente`,`estatusconsulta`,`motivocon`) VALUES ('$this->fecha_consulta','$this->pulso','$this->peso','$this->fc','$this->fr','$this->ta','$this->talla','$this->temperatura','$this->altura','$this->observacionconsulta','$this->idtdoctor','$this->tpaciente_idpaciente','1','$this->motivocon');";
 			if($respuesta=$this->ejecutar($SQL))
 			{
 				$sql="SELECT MAX(idconsulta)as idconsulta FROM tconsulta LIMIT 1";
@@ -116,7 +118,7 @@
 		public function modificar()
 		{
 			$respuesta = false;
-			$SQL = "UPDATE tconsulta SET fecha_consulta = '$this->fecha_consulta',pulso = '$this->pulso',peso = '$this->peso',fc = '$this->fc',fr = '$this->fr',ta = '$this->ta',talla = '$this->talla',temperatura = '$this->temperatura',altura = '$this->altura',observacionconsulta = '$this->observacionconsulta',idtdoctor = '$this->idtdoctor',tpaciente_idpaciente='$this->tpaciente_idpaciente' WHERE idconsulta='$this->idconsulta';";
+			$SQL = "UPDATE tconsulta SET fecha_consulta = '$this->fecha_consulta',pulso = '$this->pulso',peso = '$this->peso',fc = '$this->fc',fr = '$this->fr',ta = '$this->ta',talla = '$this->talla',temperatura = '$this->temperatura',altura = '$this->altura',observacionconsulta = '$this->observacionconsulta',idtdoctor = '$this->idtdoctor',tpaciente_idpaciente='$this->tpaciente_idpaciente',motivocon='$this->motivocon' WHERE idconsulta='$this->idconsulta';";
 			$this->conectar();
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();
@@ -128,6 +130,20 @@
 			$Fila = array();
 			$this->conectar();
 			$sql="SELECT * FROM tconsulta WHERE idconsulta='$this->idconsulta';";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$Fila=$laRow;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
+		public function consultar_reporte()
+		{
+			$Fila = array();
+			$this->conectar();
+			$sql="SELECT * FROM tconsulta,tpaciente,tdoctor WHERE idconsulta='$this->idconsulta' AND tpaciente_idpaciente=idpaciente AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
