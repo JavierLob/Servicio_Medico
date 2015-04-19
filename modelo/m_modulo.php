@@ -41,6 +41,20 @@
 			return $Fila;
 		}
 
+		public function validar()
+		{
+			$repetido = false;
+			$this->conectar();
+			$sql="SELECT * FROM tmodulo WHERE nombremod='$this->lcNombre';";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$repetido = true;
+			}
+			$this->desconectar();
+			return $repetido;
+		}
+
 		function consultar_modulo()
 		{
 			$this->conectar();

@@ -18,6 +18,7 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
 		break;
 		case 'editar_tipo_paciente':
 			$hecho=$lobjTipoPaciente->modificar();
@@ -29,6 +30,14 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
+		break;
+		case 'validar':
+			if($lobjTipoPaciente->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'eliminar_tipo_paciente':
 			$hecho=$lobjTipoPaciente->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
 		break;
 		case 'activar_tipo_paciente':
 			$hecho=$lobjTipoPaciente->cambiar_estatus();
@@ -51,11 +61,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/tipo_paciente');
 ?>

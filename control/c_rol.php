@@ -32,6 +32,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=seguridad/rol');
 		break;
+		case 'validar':
+			if($lobjRol->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'editar_rol':
 			$hecho=$lobjRol->editar_rol();
 			if($hecho)

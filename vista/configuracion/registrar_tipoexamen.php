@@ -18,7 +18,31 @@
         <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/tipoexamen';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
+        <button type="button" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar" onclick="return validar();"><i class="fa fa-check" ></i> Aceptar</button>
       </div>
     </div>
 </form>
+<script>
+  function validar()
+  {
+    var valor = $("#cam_tipoexamen").val();
+   
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_tipoexamen.php",  
+            data: {tipoexamen:valor,operacion:"validar"},  
+            success: function(msg){
+                    if(msg=='1')
+                    {
+                        $("#cam_tipoexamen").val('');
+                        alert('Ya existe una tipo examen con ese nombre.');                              
+                    }
+                    else
+                    {
+                      document.form_tipoexamen.submit();
+                    }
+               
+            }
+        });
+   }
+</script>

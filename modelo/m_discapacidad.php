@@ -29,6 +29,21 @@
 			return $respuesta;
 		}
 
+		public function validar()
+		{
+			$repetido = false;
+			$this->conectar();
+			$sql="SELECT * FROM tdiscapacidad WHERE discapacidad='$this->discapacidad';";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$repetido = true;
+			}
+			$this->desconectar();
+			return $repetido;
+		}
+
+
 		public function modificar()
 		{
 			$respuesta = false;

@@ -21,6 +21,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/parroquia');
 		break;
+		case 'validar':
+			if($lobjParroquia->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'editar_parroquia':
 			$hecho=$lobjParroquia->modificar();
 			if($hecho)

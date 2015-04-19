@@ -28,6 +28,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/modulo');
+		break;
+		case 'validar':
+			if($lobjModulo->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_modulo':
 			$hecho=$lobjModulo->editar_modulo();
@@ -39,6 +47,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/modulo');
 		break;
 		case 'eliminar_modulo':
 			$hecho=$lobjModulo->eliminar_modulo();
@@ -50,11 +59,11 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/modulo');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=seguridad/modulo');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=seguridad/modulo');
 ?>

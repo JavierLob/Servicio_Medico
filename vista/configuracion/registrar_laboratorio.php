@@ -18,7 +18,31 @@
         <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/laboratorio';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
+        <button type="button" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar" onclick="return validar();"><i class="fa fa-check" ></i> Aceptar</button>
       </div>
     </div>
 </form>
+<script>
+  function validar()
+  {
+    var valor = $("#cam_laboratorio").val();
+   
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_laboratorio.php",  
+            data: {laboratorio:valor,operacion:"validar"},  
+            success: function(msg){
+                    if(msg=='1')
+                    {
+                        $("#cam_laboratorio").val('');
+                        alert('Ya existe una laboratorio con ese nombre.');                              
+                    }
+                    else
+                    {
+                      document.form_laboratorio.submit();
+                    }
+               
+            }
+        });
+   }
+</script>

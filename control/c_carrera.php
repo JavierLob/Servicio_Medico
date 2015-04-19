@@ -18,6 +18,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/carrera');
+		break;
+		case 'validar':
+			if($lobjCarrera->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_carrera':
 			$hecho=$lobjCarrera->modificar();
@@ -29,6 +37,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/carrera');
 		break;
 		case 'eliminar_carrera':
 			$hecho=$lobjCarrera->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/carrera');
 		break;
 		case 'activar_carrera':
 			$hecho=$lobjCarrera->cambiar_estatus();
@@ -51,11 +61,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/carrera');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/carrera');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/carrera');
 ?>

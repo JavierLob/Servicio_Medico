@@ -6,6 +6,13 @@
 
     $lobjPaciente->set_datos($id);
     $laPaciente=$lobjPaciente->consultar();
+    $laPacienteAlergia=$lobjPaciente->listar_alergia();
+    $laPacienteDiscapacidad=$lobjPaciente->listar_discapacidad();
+    $laPacienteEnfermedad=$lobjPaciente->listar_enfermedad();
+
+    $alergico = ($laPacienteAlergia) ? 'SI' : 'NO';
+    $discapacidad = ($laPacienteDiscapacidad) ? 'SI' : 'NO';
+    $enfermedad = ($laPacienteEnfermedad) ? 'SI' : 'NO';
 ?>
 <h1 class="page-header">Consultar paciente</h1>
   <div class="alert alert-info" role="alert">
@@ -15,13 +22,13 @@
     <input type="hidden" value="editar_paciente" name="operacion" />
     <input type="hidden"  name="idpaciente" id="cam_idpaciente" value="<?php print($laPaciente['idpaciente']); ?>"/>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-6">
             <div class="form-group">
               <label for="cam_numerohistoria">Nro. Historia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
               <input readOnly value="00-000<?php print($laPaciente['idpaciente']); ?>" type="text" name="numerohistoria" maxlength="11" class="form-control solo-numeros" id="cam_numerohistoria" required>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
               <label for="cam_nacionalidad">Nacionalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
               <select name="nacionalidad" id="cam_nacionalidad" class="form-control">
@@ -32,7 +39,16 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_cedulaopasaporte">Cédula <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_documento">Documento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Documento presentado."></i></strong></label>
+              <select name="documento" id="cam_documento" class="form-control">
+                <option <?php $documento = ($laPaciente['documento']=='CEDULA') ? 'SELECTED' :""; print($documento); ?> value="CEDULA">Cédula</option>
+                <option <?php $documento = ($laPaciente['documento']=='PASAPORTE') ? 'SELECTED' :""; print($documento); ?> value="PASAPORTE">Pasaporte</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_cedulaopasaporte">Cédula / Pasaporte <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
               <input type="text" name="cedulaopasaporte" maxlength="11" value="<?php print($laPaciente['cedulaopasaporte']); ?>" class="form-control solo-numeros" id="cam_cedulaopasaporte" required>
             </div>
         </div>
@@ -294,6 +310,152 @@
         </div>
     </div>
     <div class="row">
+      <div class="col-md-4">
+         <label for="cam_alergico">¿Alergico? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione si es alergico o no."></i></strong></label>
+
+            <select class="form-control" id="cam_alergico">
+              <option value=""></option>
+              <option <?php $selected = ($alergico=='NO') ? 'selected': ''; print($selected); ?> value="0">No</option>
+              <option <?php $selected = ($alergico=='SI') ? 'selected': ''; print($selected); ?> value="1">Si</option>
+            </select>
+
+      </div>
+      <div class="col-md-4">
+         <label for="cam_consulta">¿Discapacidades? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione si padece de alguna discapacidad."></i></strong></label>
+
+            <select class="form-control" id="cam_discapacidades">
+              <option value=""></option>
+              <option <?php $selected = ($discapacidad=='NO') ? 'selected': ''; print($selected); ?> value="0">No</option>
+              <option <?php $selected = ($discapacidad=='SI') ? 'selected': ''; print($selected); ?> value="1">Si</option>
+            </select>
+
+      </div>
+      <div class="col-md-4">
+         <label for="cam_consulta">¿Enfermedad Crónica? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione si padece de alguna enfermedad cronica."></i></strong></label>
+
+            <select class="form-control" id="cam_cronico">
+              <option value=""></option>
+              <option <?php $selected = ($enfermedad=='NO') ? 'selected': ''; print($selected); ?> value="0">No</option>
+              <option <?php $selected = ($enfermedad=='SI') ? 'selected': ''; print($selected); ?> value="1">Si</option>
+            </select>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Alergias</h3>
+        <table class="table table-striped" id="alergia">
+          <thead>
+            <th>Seleccione</th>
+            <th><button class="btn btn-success" type="button" onclick="agregar_alergia()"><i class="fa fa-plus"></i></button></th>
+          </thead>
+          <tbody id="filas_alergia">
+          <?php
+          require_once('../modelo/m_alergia.php');
+          $lobAlergia=new claseAlergia;
+          for($j=0;$j < count($laPacienteAlergia); $j++){
+          ?>
+            <tr>
+              <td>
+                <select class="form-control" name="idalergia[]" onchange="validar_repetido_alergia(this)" id="cam_idalergia<?php print($j);?>">
+                  <option value=""></option>
+                  <?php
+                    $laalergias=$lobAlergia->listar();
+                    for ($i=0;$i<count($laalergias);$i++) 
+                    { 
+                      $selected = ($laalergias[$i]['idalergia'] == $laPacienteAlergia[$j]['talergia_idalergia']) ? 'selected' : '';
+                      echo '<option '.$selected.' value="'.$laalergias[$i]['idalergia'].'">'.$laalergias[$i]['nombreale'].'</option>';
+                    }
+                  ?>
+                </select>
+              </td>
+              <td>
+                <button class="btn btn-danger" type="button" onclick="quitar_alergia(this)"><i class="fa fa-minus"></i></button>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+        <input type="hidden" id="cam_contador_alergia" value="<?php print(count($laPacienteAlergia));?>">
+      </div>
+      <div class="col-md-4">
+        <h3>Discapacidades</h3>
+        <table class="table table-striped" id="discapacidad">
+          <thead>
+            <th>Seleccione</th>
+            <th><button class="btn btn-success" type="button" onclick="agregar_discapacidad()"><i class="fa fa-plus"></i></button></th>
+          </thead>
+          <tbody id="filas_discapacidad">
+           <?php
+            require_once('../modelo/m_discapacidad.php');
+            $lobjDiscapacidad=new claseDiscapacidad;
+            for($j=0;$j < count($laPacienteDiscapacidad); $j++){
+            ?>
+              <tr>
+              <td>
+                <select class="form-control" name="idtdiscapacidad[]" onchange="validar_repetido_discapacidad(this)" id="cam_discapacidad<?php print($j);?>">
+                  <option value=""></option>
+                  <?php
+                    
+                    $ladiscapacidad=$lobjDiscapacidad->listar();
+                    for ($i=0;$i<count($ladiscapacidad);$i++) 
+                    { 
+                      $selected = ($ladiscapacidad[$i]['idtdiscapacidad'] == $laPacienteDiscapacidad[$j]['tdiscapacidad_idtdiscapacidad']) ? 'selected' : '';
+                      echo '<option '.$selected.' value="'.$ladiscapacidad[$i]['idtdiscapacidad'].'">'.$ladiscapacidad[$i]['discapacidad'].'</option>';
+                    }
+                  ?>
+                </select>
+              </td>
+              <td>
+                <button class="btn btn-danger" type="button" onclick="quitar_discapacidad(this)"><i class="fa fa-minus"></i></button>
+              </td>
+            </tr>
+          <?php } ?>
+            
+          </tbody>
+        </table>
+        <input type="hidden" id="cam_contador_discapacidad" value="<?php print(count($laPacienteDiscapacidad));?>">
+      </div>
+      <div class="col-md-4">
+        <h3>Enfermedades Cronicas</h3>
+        <table class="table table-striped" id="enfermedad">
+          <thead>
+            <th>Seleccione</th>
+            <th><button class="btn btn-success" type="button" onclick="agregar_enfermedad()"><i class="fa fa-plus"></i></button></th>
+          </thead>
+          <tbody id="filas_enfermedad">
+          <?php
+            require_once('../modelo/m_enfermedadescronicas.php');
+            $lobjEnfermedad=new claseEnfermedadCronicas;
+            for($j=0;$j < count($laPacienteEnfermedad); $j++){
+            ?>
+              <tr>
+              <td>
+                <select class="form-control" name="idtenfermedadescronicas[]" onchange="validar_repetido_enfermedad(this)" id="cam_enfermedad<?php print($j);?>">
+                  <option value=""></option>
+                  <?php
+                    
+                    $laenfermedadcronica=$lobjEnfermedad->listar();
+                    for ($i=0;$i<count($laenfermedadcronica);$i++) 
+                    { 
+                      $selected = ($laenfermedadcronica[$i]['idtenfermedadescronicas'] == $laPacienteEnfermedad[$j]['tenfermedadescronicas_idtenfermedadescronicas']) ? 'selected' : '';
+                      echo '<option '.$selected.' value="'.$laenfermedadcronica[$i]['idtenfermedadescronicas'].'">'.$laenfermedadcronica[$i]['enfermedadcronica'].'</option>';
+                    }
+                  ?>
+                </select>
+              </td>
+              <td>
+                <button class="btn btn-danger" type="button" onclick="quitar_enfermedad(this)"><i class="fa fa-minus"></i></button>
+              </td>
+            </tr>
+          <?php } ?>
+            
+          </tbody>
+        </table>
+        <input type="hidden" id="cam_contador_enfermedad" value="<?php print(count($laPacienteEnfermedad));?>">
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6">
         <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=paciente/paciente';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
@@ -305,6 +467,27 @@
 
 <script>
     
+$("#cam_alergico").change(function(){
+    valor=$("#cam_alergico").val();
+    if(valor=='1')
+      $("#alergia").animate({ height: 'show', opacity: 'show' }, 'slow');
+    if(valor=='0')
+      $("#alergia").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+});
+$("#cam_discapacidades").change(function(){
+    valor=$("#cam_discapacidades").val();
+    if(valor=='1')
+      $("#discapacidad").animate({ height: 'show', opacity: 'show' }, 'slow');
+    if(valor=='0')
+      $("#discapacidad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+});
+$("#cam_cronico").change(function(){
+    valor=$("#cam_cronico").val();
+    if(valor=='1')
+      $("#enfermedad").animate({ height: 'show', opacity: 'show' }, 'slow');
+    if(valor=='0')
+      $("#enfermedad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+});
 $("#cam_estado").change(function() { 
 
     var valor = $("#cam_estado").val();
@@ -359,4 +542,197 @@ seleccionar = function()
 }
 
 seleccionar();
+
+
+function agregar_alergia()
+{
+    cam_contador=document.getElementById("cam_contador_alergia");
+    filas_alergia=document.getElementById("filas_alergia");
+    contador=cam_contador.value;
+    contador++;
+
+    tr=document.createElement('tr');
+    col1=document.createElement('td');
+    col2=document.createElement('td');
+    var select= document.createElement('select');
+     var select2= document.createElement('select');
+    select.setAttribute('class','form-control');
+    select.setAttribute('onchange','validar_repetido_alergia(this)');
+    select.setAttribute('name','idalergia[]');
+    select.setAttribute('id','cam_idalergia'+contador);
+      var url="../control/c_alergia.php";
+     $.ajax({   
+          type: "POST",
+          url:url,
+          data:{operacion:'consultar_alergia'},
+          success: function(datos){
+              select.innerHTML=datos;   
+           }
+      });
+    col2.innerHTML='<button class="btn btn-danger" onclick="quitar_alergia(this)"><i class="fa fa-minus"></i></button>';
+
+      col1.appendChild(select);
+      tr.appendChild(col1);
+      tr.appendChild(col2);
+      filas_alergia.appendChild(tr);
+      cam_contador.value=contador;
+
+}
+function quitar_alergia(e)
+{
+
+    var filas = document.getElementById("filas_alergia");          
+    var td = e.parentNode;
+    var tr = td.parentNode;
+    filas.removeChild(tr);
+}
+
+
+function agregar_discapacidad()
+{
+    cam_contador=document.getElementById("cam_contador_discapacidad");
+    filas_discapacidad=document.getElementById("filas_discapacidad");
+    contador=cam_contador.value;
+    contador++;
+
+    tr=document.createElement('tr');
+    col1=document.createElement('td');
+    col2=document.createElement('td');
+    var select= document.createElement('select');
+     var select2= document.createElement('select');
+    select.setAttribute('class','form-control');
+    select.setAttribute('onchange','validar_repetido_discapacidad(this)');
+    select.setAttribute('name','idtdiscapacidad[]');
+    select.setAttribute('id','cam_discapacidad'+contador);
+      var url="../control/c_discapacidad.php";
+     $.ajax({   
+          type: "POST",
+          url:url,
+          data:{operacion:'consultar_discapacidad'},
+          success: function(datos){
+              select.innerHTML=datos;   
+           }
+      });
+    col2.innerHTML='<button class="btn btn-danger" onclick="quitar_discapacidad(this)"><i class="fa fa-minus"></i></button>';
+
+      col1.appendChild(select);
+      tr.appendChild(col1);
+      tr.appendChild(col2);
+      filas_discapacidad.appendChild(tr);
+      cam_contador.value=contador;
+
+}
+function quitar_discapacidad(e)
+{
+
+    var filas = document.getElementById("filas_discapacidad");          
+    var td = e.parentNode;
+    var tr = td.parentNode;
+    filas.removeChild(tr);
+}
+
+
+function agregar_enfermedad()
+{
+    cam_contador=document.getElementById("cam_contador_enfermedad");
+    filas_enfermedad=document.getElementById("filas_enfermedad");
+    contador=cam_contador.value;
+    contador++;
+
+    tr=document.createElement('tr');
+    col1=document.createElement('td');
+    col2=document.createElement('td');
+    var select= document.createElement('select');
+     var select2= document.createElement('select');
+    select.setAttribute('class','form-control');
+    select.setAttribute('onchange','validar_repetido_enfermedad(this)');
+    select.setAttribute('name','idtenfermedadescronicas[]');
+    select.setAttribute('id','cam_idtenfermedadescronicas'+contador);
+      var url="../control/c_enfermedadescronicas.php";
+     $.ajax({   
+          type: "POST",
+          url:url,
+          data:{operacion:'consultar_enfermedadescronicas'},
+          success: function(datos){
+              select.innerHTML=datos;   
+           }
+      });
+    col2.innerHTML='<button class="btn btn-danger" onclick="quitar_enfermedad(this)"><i class="fa fa-minus"></i></button>';
+
+      col1.appendChild(select);
+      tr.appendChild(col1);
+      tr.appendChild(col2);
+      filas_enfermedad.appendChild(tr);
+      cam_contador.value=contador;
+
+}
+function quitar_enfermedad(e)
+{
+
+    var filas = document.getElementById("filas_enfermedad");          
+    var td = e.parentNode;
+    var tr = td.parentNode;
+    filas.removeChild(tr);
+}
+
+
+function validar_repetido_alergia(e)
+{
+  alergia=document.getElementsByName('idalergia[]');
+  repetido=0;
+  for(i=0;i<alergia.length;i++)
+  {
+    if(e.value==alergia[i].value)
+      repetido++
+
+    if(repetido==2)
+    {
+      alert("Ya ha sido seleccionada esta alergia, por favor seleccione otra");
+      e.value='';
+      e.focus();
+      break;
+    }
+
+  }
+}
+
+function validar_repetido_discapacidad(e)
+{
+  discapacidad=document.getElementsByName('idtdiscapacidad[]');
+  repetido=0;
+  for(i=0;i<discapacidad.length;i++)
+  {
+    if(e.value==discapacidad[i].value)
+      repetido++
+
+    if(repetido==2)
+    {
+      alert("Ya ha sido seleccionado esta discapacidad, por favor seleccione otra");
+      e.value='';
+      e.focus();
+      break;
+    }
+
+  }
+}
+
+function validar_repetido_enfermedad(e)
+{
+  enfermedad=document.getElementsByName('idtenfermedadescronicas[]');
+  repetido=0;
+  for(i=0;i<enfermedad.length;i++)
+  {
+    if(e.value==enfermedad[i].value)
+      repetido++
+
+    if(repetido==2)
+    {
+      alert("Ya ha sido seleccionado esta enfermedad cronica, por favor seleccione otra");
+      e.value='';
+      e.focus();
+      break;
+    }
+
+  }
+}
 </script>

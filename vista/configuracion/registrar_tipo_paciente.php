@@ -18,8 +18,32 @@
         <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/sede';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
+        <button type="button" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar" onclick="return validar();"><i class="fa fa-check" ></i> Aceptar</button>
       </div>
     </div>
 </form>
 <script type="text/javascript"  src="../js/validacion.js"></script>
+<script>
+  function validar()
+  {
+    var valor = $("#cam_tipopaciente").val();
+   
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_tipo_paciente.php",  
+            data: {nombreale:valor,operacion:"validar"},  
+            success: function(msg){
+                    if(msg=='1')
+                    {
+                        $("#cam_tipopaciente").val('');
+                        alert('Ya existe una tipo paciente con ese nombre.');                              
+                    }
+                    else
+                    {
+                      document.form_tipo_paciente.submit();
+                    }
+               
+            }
+        });
+   }
+</script>

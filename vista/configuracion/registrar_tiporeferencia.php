@@ -22,3 +22,27 @@
       </div>
     </div>
 </form>
+<script>
+  function validar()
+  {
+    var valor = $("#cam_tiporeferencia").val();
+   
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_tiporeferencia.php",  
+            data: {tiporeferencia:valor,operacion:"validar"},  
+            success: function(msg){
+                    if(msg=='1')
+                    {
+                        $("#cam_tiporeferencia").val('');
+                        alert('Ya existe una tipo referencia con ese nombre.');                              
+                    }
+                    else
+                    {
+                      document.form_tiporeferencia.submit();
+                    }
+               
+            }
+        });
+   }
+</script>

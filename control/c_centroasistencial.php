@@ -20,6 +20,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/centroasistencial');
 		break;
+		case 'validar':
+			if($lobjCentroasistencial->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'consultar_centroasistencial':
 			if($lacentroasistenciales=$lobjCentroasistencial->listar())
 			{

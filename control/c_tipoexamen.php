@@ -20,6 +20,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/tipoexamen');
 		break;
+		case 'validar':
+			if($lobjTipoexamen->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'consultar_tipoexamen':
 			if($laexamenes=$lobjTipoexamen->listar())
 			{

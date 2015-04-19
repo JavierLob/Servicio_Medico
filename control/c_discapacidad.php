@@ -18,6 +18,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
+		break;
+		case 'validar':
+			if($lobjDiscapacidad->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_discapacidad':
 			$hecho=$lobjDiscapacidad->modificar();
@@ -29,6 +37,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
 		break;
 		case 'eliminar_discapacidad':
 			$hecho=$lobjDiscapacidad->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
 		break;
 		case 'activar_discapacidad':
 			$hecho=$lobjDiscapacidad->cambiar_estatus();
@@ -51,11 +61,27 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
+		break;
+		case 'consultar_discapacidad':
+			if($ladiscapacidades=$lobjDiscapacidad->listar())
+			{
+				$option='<option value=""></option>';
+				for($i=0;$i<count($ladiscapacidades);$i++)
+				{
+					$option.='<option value="'.$ladiscapacidades[$i]['idtdiscapacidad'].'">'.$ladiscapacidades[$i]['discapacidad'].'</option>';
+				}	
+			}
+			else
+			{
+				$option='<option>No se han encontrado registros</option>';
+			}
+			echo $option;
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
+	//header('location: ../vista/intranet.php?vista=configuracion/discapacidad');
 ?>

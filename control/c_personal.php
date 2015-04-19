@@ -27,6 +27,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=personal/personal');
 		break;
+		case 'validar':
+			if($lobjpersonal->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'editar_personal':
 			$hecho=$lobjpersonal->modificar();
 			if($hecho)

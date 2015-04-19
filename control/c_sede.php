@@ -18,6 +18,7 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/sede');
 		break;
 		case 'editar_sede':
 			$hecho=$lobjSede->modificar();
@@ -29,6 +30,14 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/sede');
+		break;
+		case 'validar':
+			if($lobjSede->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'eliminar_sede':
 			$hecho=$lobjSede->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/sede');
 		break;
 		case 'activar_sede':
 			$hecho=$lobjSede->cambiar_estatus();
@@ -51,11 +61,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/sede');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/sede');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/sede');
 ?>

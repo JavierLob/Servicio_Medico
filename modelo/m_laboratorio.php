@@ -29,6 +29,20 @@
 			return $respuesta;
 		}
 
+		public function validar()
+		{
+			$repetido = false;
+			$this->conectar();
+			$sql="SELECT * FROM tlaboratorio WHERE laboratorio='$this->laboratorio';";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$repetido = true;
+			}
+			$this->desconectar();
+			return $repetido;
+		}
+
 		public function modificar()
 		{
 			$respuesta = false;

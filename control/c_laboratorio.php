@@ -20,6 +20,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/laboratorio');
 		break;
+		case 'validar':
+			if($laboratorio->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'consultar_laboratorio':
 			if($lalaboratorios=$laboratorio->listar())
 			{

@@ -37,7 +37,7 @@
     <input type="hidden"  name="estatuspaciente" id="cam_estatuspaciente"/>
     <table class="cell-border compact hover stripe" id="filtro">
         <thead>
-            <th>Nro. Historia</th><th>Cédula</th><th>Apellidos Nombres</th><th>Sexo</th><th>Estatus</th><th>Operación</th>
+            <th>Nro. Historia</th><th>Cédula / Pasaporte</th><th>Apellidos Nombres</th><th>Sexo</th><th>Estatus</th><th>Operación</th>
         </thead>
         <tbody>
         <?php

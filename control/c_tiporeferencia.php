@@ -20,6 +20,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/tiporeferencia');
 		break;
+		case 'validar':
+			if($lobjTiporeferencia->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'consultar_tiporeferencia':
 			if($lareferencias=$lobjTiporeferencia->listar())
 			{

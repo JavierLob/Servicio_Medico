@@ -35,6 +35,20 @@
 			return $respuesta;
 		}
 
+		public function validar()
+		{
+			$repetido = false;
+			$this->conectar();
+			$sql="SELECT * FROM tmunicipio,testado WHERE municipio='$this->municipio' AND tmunicipio.idestado=testado.idestado;";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$repetido = true;
+			}
+			$this->desconectar();
+			return $repetido;
+		}
+
 		public function modificar()
 		{
 			$respuesta = false;

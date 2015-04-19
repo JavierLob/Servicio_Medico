@@ -171,6 +171,43 @@
 			return $Fila;
 		}
 
+		public function consultar_examen_reporte($id)
+		{
+			$Fila = array();
+			$this->conectar();
+			$sql="SELECT examen,laboratorio,tipoexamen,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tpaciente,tconsulta,texamen,tlaboratorio,ttipoexamen,tcarrera,tdoctor WHERE idtexamen='$id' AND tconsulta.idconsulta=texamen.idconsulta AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Fila=$laRow;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
+		public function consultar_examenes($idpaciente,$fecha_consulta)
+		{
+			$Fila = array();
+			$this->conectar();
+			$cont=0;
+			$fecha_consulta=$this->formato_fecha($fecha_consulta);
+			$sql="SELECT idtexamen,examen,laboratorio,tipoexamen,texamen.idconsulta,primerapellido,primernombre,nacionalidad,cedulaopasaporte,fecha_consulta,date_format(fecha_consulta,'%d-%m-%Y')as fecha FROM tconsulta,tpaciente,texamen,tlaboratorio,ttipoexamen WHERE tpaciente_idpaciente='$idpaciente' AND tconsulta.idconsulta=texamen.idconsulta AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio AND tpaciente_idpaciente=idpaciente HAVING fecha_consulta='$fecha_consulta';";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Fila[$cont]=$laRow;				
+				$Fila[$cont]['fecha_consulta']=$laRow['fecha'];
+				$Fila[$cont]['col1']=$laRow['examen'];
+				$Fila[$cont]['col2']=$laRow['tipoexamen'];
+				$Fila[$cont]['col3']=$laRow['laboratorio'];
+				$Fila[$cont]['col4']=$laRow['idtexamen'];
+				$cont++;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
+
 		public function consultar_referir()
 		{
 			$Fila = array();
@@ -181,6 +218,42 @@
 			while($laRow=$this->proximo($pcsql))
 			{
 				$Fila[$cont]=$laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
+		public function consultar_referir_reporte($id)
+		{
+			$Fila = array();
+			$this->conectar();
+			$sql="SELECT nombrecentroasistencial,tiporeferencia,referidoa,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tconsulta,treferencia,ttiporeferencia,tcentroasistencial,tpaciente,tdoctor,tcarrera WHERE idreferencia='$id' AND treferencia.idconsulta=.tconsulta.idconsulta AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera;";
+			echo $sql;
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$Fila=$laRow;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
+		public function consultar_referencias($idpaciente,$fecha_consulta)
+		{
+			$Fila = array();
+			$this->conectar();
+			$cont=0;
+			$sql="SELECT idreferencia,nombrecentroasistencial,tiporeferencia,referidoa,treferencia.idconsulta,primerapellido,primernombre,nacionalidad,cedulaopasaporte,fecha_consulta,date_format(fecha_consulta,'%d-%m-%Y')as fecha FROM tconsulta,treferencia,ttiporeferencia,tpaciente,tcentroasistencial WHERE tpaciente_idpaciente='$idpaciente' AND tconsulta.idconsulta=treferencia.idconsulta AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia AND tpaciente_idpaciente=idpaciente HAVING fecha_consulta='$fecha_consulta';;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Fila[$cont]=$laRow;
+				$Fila[$cont]['fecha_consulta']=$laRow['fecha'];
+				$Fila[$cont]['col1']=$laRow['referidoa'];
+				$Fila[$cont]['col2']=$laRow['tiporeferencia'];
+				$Fila[$cont]['col3']=$laRow['nombrecentroasistencial'];
+				$Fila[$cont]['col4']=$laRow['idreferencia'];
 				$cont++;
 			}
 			$this->desconectar();

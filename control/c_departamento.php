@@ -18,6 +18,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/departamento');
+		break;
+		case 'validar':
+			if($lobjDepartamento->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_departamento':
 			$hecho=$lobjDepartamento->modificar();
@@ -29,6 +37,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/departamento');
 		break;
 		case 'eliminar_departamento':
 			$hecho=$lobjDepartamento->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/departamento');
 		break;
 		case 'activar_departamento':
 			$hecho=$lobjDepartamento->cambiar_estatus();
@@ -51,11 +61,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/departamento');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/departamento');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/departamento');
 ?>

@@ -31,6 +31,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/servicio');
+		break;
+		case 'validar':
+			if($lobjServicio->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_servicio':
 			$hecho=$lobjServicio->editar_servicio();
@@ -42,6 +50,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/servicio');
 		break;
 		case 'eliminar_servicio':
 			$hecho=$lobjServicio->eliminar_servicio();
@@ -53,11 +62,11 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=seguridad/servicio');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=seguridad/servicio');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=seguridad/servicio');
 ?>

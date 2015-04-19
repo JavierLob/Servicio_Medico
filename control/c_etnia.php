@@ -18,6 +18,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/etnia');
+		break;
+		case 'validar':
+			if($lobjEtnia->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_etnia':
 			$hecho=$lobjEtnia->modificar();
@@ -29,6 +37,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/etnia');
 		break;
 		case 'eliminar_etnia':
 			$hecho=$lobjEtnia->cambiar_estatus();
@@ -40,6 +49,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/etnia');
 		break;
 		case 'activar_etnia':
 			$hecho=$lobjEtnia->cambiar_estatus();
@@ -51,11 +61,11 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
+			header('location: ../vista/intranet.php?vista=configuracion/etnia');
 		break;
 		default:
 			header('location: ../vista/intranet.php?vista=configuracion/etnia');
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=configuracion/etnia');
 ?>

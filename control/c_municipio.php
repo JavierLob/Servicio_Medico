@@ -21,6 +21,13 @@
 			}
 			header('location: ../vista/intranet.php?vista=configuracion/municipio');
 		break;
+		case 'validar':
+			if($lobjMunicipio->validar())
+				echo '1';
+			else
+				echo '0';
+				
+		break;
 		case 'editar_municipio':
 			$hecho=$lobjMunicipio->modificar();
 			if($hecho)

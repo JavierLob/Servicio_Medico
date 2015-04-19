@@ -1,29 +1,3 @@
-<script>
-    function buscar(id)
-    {
-        window.location.href="?vista=consulta/consultar_consulta&id="+id;
-    }
-    function desactivar(id)
-    {
-        if(confirm("¿Está seguro que desea desactivar la consulta seleccionada?"))
-        {
-          document.getElementById("cam_idtconsulta").value=id;
-            document.getElementById("cam_estatusconsulta").value='0';
-          document.form_consulta.submit();
-        }
-    }
-
-    function activar(id)
-    {
-        if(confirm("¿Desea activar la consulta seleccionada?"))
-        {
-            document.getElementById("cam_idtconsulta").value=id;
-            document.getElementById("cam_estatusconsulta").value='1';
-            document.getElementById("cam_operacion").value='activar_consulta';
-            document.form_consulta.submit();
-        }
-    }
-</script>    
 <h1 class="page-header">Reporte Consultas</h1>
 <div class="alert alert-info" role="alert">
     <strong><i class="fa fa-info-circle"></i></strong> Aquí podras generar un archivo pdf con el listado de consultas realizadas en una fecha específica.
