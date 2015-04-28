@@ -82,8 +82,27 @@
 		<script type="text/javascript" src="../js/validacion.js"></script>
 	</head>
 	<body>
-		<header class="span12">
-			<img src="../imagenes/encabezado.png" width="100%" height="100" alt=""/>
+		<header class="col-lg-12">
+            <div class="row">
+			    <img src="../imagenes/encabezado.png" width="100%" height="70" alt=""/>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 pull-right">
+                <form name="form_intranet" style="margin:0;" action="../control/c_acceso.php" method="POST">
+                    <table class="table table-striped table-hover table-bordered bootstrap-datatable datatable dataTable" style="margin:0;">
+                        <tr>
+                            <th>Rol:</th>
+                            <td><?php echo $_SESSION['nombrerol'];?></td>
+                            <th>Usuario:</th>
+                            <td><?php echo $_SESSION['nombreusuario'];?></td>
+                            <th >
+                                <button type="submit" name="salir"  class="btn btn-danger" value="Salir"><i class="fa fa-sign-out"></i> Cerrar Sesión</button>
+                            </th>
+                        </tr>
+                    </table>
+                </form>
+                </div>
+            </div>
 		</header>
 		<section class="span12">
 			<aside style="margin-top:2px;" class="col-sm-3 col-md-2 sidebar">
@@ -91,9 +110,7 @@
 					<ul class="nav nav-sidebar">
 			            <?php echo $menu;?>
 			            <li> 
-			            	<form name="form_intranet" action="../control/c_acceso.php" method="POST">
-			            		<button type="submit" name="salir"  class="btn btn-danger form-control" value="Salir"><i class="fa fa-sign-out"></i> Cerrar Sesión</button>
-		                	</form>
+			            	
 		                </li>
 		          	</ul>
 				</nav>
@@ -111,7 +128,7 @@
             	?> 
 			</section>
 		</section>
-  		<footer>&copy Derechos reservados <?php print(date('Y')); ?></footer>
+  		<footer style="margin-top:0">&copy Derechos reservados <?php print(date('Y')); ?></footer>
 	</body>
     <script src="../estilo/bootstrap-3/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.dataTables.js"></script>
