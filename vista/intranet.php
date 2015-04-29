@@ -1,5 +1,5 @@
 <?php 
-	session_start(); //inicia la session, la cual permite trabajar con la variable $_SESSION
+    session_start(); //inicia la session, la cual permite trabajar con la variable $_SESSION
 
     $usuario=(isset($_SESSION['idusuario']))?$_SESSION['idusuario']:"";//toma el valor que se guarda en la variable vista que está en la variable $_SESSION
     $msj=(isset($_SESSION['msj']))?$_SESSION['msj']:"";//toma el valor que se guarda en la variable vista que está en la variable $_SESSION
@@ -34,15 +34,15 @@
         $modulo=strtolower($lobjUtil->quitar_acentos($laModulos[$i][1]));        
         $activo=($modulo==$carpeta[0])?'active':'';
 
-        $menu.='<li class="dropdown '.$activo.'" >'; 
-        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$laModulos[$i][1].'<span class="caret"></span></a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
-        $menu.='<ul class="dropdown-menu" role="menu">';
+        $menu.='<li class="menu-list '.$activo.'" >'; 
+        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="'.$laModulos[$i][2].'"></i> '.$laModulos[$i][1].'</a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
+        $menu.='<ul class="sub-menu-list">';
         $laServicios=$lobjRol->consultar_servicios($laModulos[$i][0]); // aquí se consultan y guardan en la variable $laServicios los servicios que tiene registrado este módulo.
         for ($j=0; $j <count($laServicios) ; $j++) //Se recorre un ciclo para poder extraer los datos de cada uno de los servicios que tiene asignado el modulo para poder constuir el menú
         { 
             if($laServicios[$j][3])//Sí el servicio es visible para el menú lo agrega, sino no
             {    
-                $menu.='<li><a href="?vista='.$laServicios[$j][2].'">'.$laServicios[$j][1].'</a></li>'; //aqui se van agregando cada uno de los servicios al menú.
+                $menu.='<li ><a href="?vista='.$laServicios[$j][2].'">'.$laServicios[$j][1].'</a></li>'; //aqui se van agregando cada uno de los servicios al menú.
             }
             if($vista=="" || $vista==$laServicios[$j][2])//aquí voy comparando los servicios del usuario con la direccion a la cual a entrado.
             {
@@ -68,71 +68,113 @@
     }*/
 ?>
 <html lang="es">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Intranet - Servicio Medico</title>
-	    <link href="../estilo/bootstrap-3/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="../estilo/bootstrap-3/css/style-intranet.css" rel="stylesheet">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Intranet - Servicio Medico</title>
+        <link href="../estilo/bootstrap-3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../estilo/bootstrap-3/css/style-intranet.css" rel="stylesheet">
+        <link href="../estilo/bootstrap-3/css/style-responsive.css" rel="stylesheet">
         <link href="../estilo/bootstrap-3/DataTables-1.10.2/media/css/jquery.dataTables.css" rel="stylesheet">
-	    <link href="../estilo/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
-	    <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>        
+        <link href="../estilo/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>        
         <script src="../js/jquery.maskedinput.min.js"></script>
 
-		<script type="text/javascript" src="../js/validaciones.js"></script>
-		<script type="text/javascript" src="../js/validacion.js"></script>
-	</head>
-	<body>
-		<header class="col-lg-12">
-            <div class="row">
-			    <img src="../imagenes/encabezado.png" width="100%" height="70" alt=""/>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 pull-right">
-                <form name="form_intranet" style="margin:0;" action="../control/c_acceso.php" method="POST">
-                    <table class="table table-striped table-hover table-bordered bootstrap-datatable datatable dataTable" style="margin:0;">
-                        <tr>
-                            <th>Rol:</th>
-                            <td><?php echo $_SESSION['nombrerol'];?></td>
-                            <th>Usuario:</th>
-                            <td><?php echo $_SESSION['nombreusuario'];?></td>
-                            <th >
-                                <button type="submit" name="salir"  class="btn btn-danger" value="Salir"><i class="fa fa-sign-out"></i> Cerrar Sesión</button>
-                            </th>
-                        </tr>
-                    </table>
-                </form>
+        <script type="text/javascript" src="../js/validaciones.js"></script>
+        <script type="text/javascript" src="../js/validacion.js"></script>
+    </head>
+    <body class="sticky-header">
+        <div class="left-side sticky-left-side" style="/* overflow: hidden; */ /* outline: none; */">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="../estilo/bootstrap-3/images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="../estilo/bootstrap-3/images/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="../estilo/bootstrap-3/images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#"><?php echo $_SESSION['nombreusuario'];?></a></h4>
+                        <span><?php echo $_SESSION['nombrerol'];?></span>
+                    </div>
                 </div>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                  <li><a href="../control/c_acceso.php?salir='1'"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
             </div>
-		</header>
-		<section class="span12">
-			<aside style="margin-top:2px;" class="col-sm-3 col-md-2 sidebar">
-				<nav>
-					<ul class="nav nav-sidebar">
-			            <?php echo $menu;?>
-			            <li> 
-			            	
-		                </li>
-		          	</ul>
-				</nav>
-			</aside>
-			<section style="margin-top:2px;" class="col-sm-9 col-md-10 main">
-				<?php
-		            if(file_exists($vista.'.php')) //verifica el contenido de la variable vista.
-		            {
-		                    include($vista.'.php');// y si exite el archivo que trae este incluirá el cintenido
-		            }   
-		            else
-		            {
-		                include_once('inicio.php');// Si no exite o no tiene nada la variable vista entonces trae por defecto la vista panel_inicio.php
-		            }		                
-            	?> 
-			</section>
-		</section>
-  		<footer style="margin-top:0">&copy Derechos reservados <?php print(date('Y')); ?></footer>
-	</body>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <!--<li class="active"><a href=""><i class="fa fa-home"></i> <span>INICIO</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>link2</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href=""> link</a></li>
+                        <li><a href=""> link</a></li>
+                    </ul>
+                </li>-->
+                <?php echo $menu;?>
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+        <section class="main-content">
+
+            <header class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                
+                <!--search end-->
+
+                <div class="menu-right">
+                    <ul class="notification-menu">
+                        <li class="">
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                
+                                <?php echo $_SESSION['nombreusuario'];?> | <i class="text-primary fa fa-user"></i> <?php echo $_SESSION['nombrerol'];?>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="../control/c_acceso.php?salir='1'"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </header>
+
+
+            <section style="margin-top:2px;" class="main">
+                <?php
+                    if(file_exists($vista.'.php')) //verifica el contenido de la variable vista.
+                    {
+                            include($vista.'.php');// y si exite el archivo que trae este incluirá el cintenido
+                    }   
+                    else
+                    {
+                        include_once('inicio.php');// Si no exite o no tiene nada la variable vista entonces trae por defecto la vista panel_inicio.php
+                    }                       
+                ?> 
+            </section>
+        </section>
+        <footer style="margin-top:0">&copy Derechos reservados <?php print(date('Y')); ?></footer>
+    </body>
     <script src="../estilo/bootstrap-3/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
         $('#filtro').dataTable();
     } );
@@ -140,10 +182,16 @@
             $("[data-toggle='popover']").popover();
         });
         <?php
-        	if(($msj) && (!empty($msj)))
-        		print('alert("'.$msj.'");');
+            if(($msj) && (!empty($msj)))
+                print('alert("'.$msj.'");');
 
-        	unset($_SESSION['msj']);
+            unset($_SESSION['msj']);
         ?>
     </script>
+    <script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="../js/jquery.nicescroll.js"></script>
+    <!--common scripts for all pages-->
+    <script src="../js/scripts.js"></script>
+
+
 </html>

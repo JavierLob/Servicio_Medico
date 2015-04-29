@@ -62,7 +62,7 @@ if($registrar)
     <input type="hidden"  name="idmodulo" id="cam_idmodulo"/>
     <table class="table table-striped table-hover table-bordered bootstrap-datatable datatable dataTable" id="filtro">
         <thead>
-            <th>Codigo</th><th>Nombre</th><?php if($consultar || $eliminar)
+            <th>Codigo</th><th>Nombre</th><th>Icono</th><?php if($consultar || $eliminar)
                     { echo '<th>Operación</th>';}?>
         </thead>
         <tbody>
@@ -75,6 +75,7 @@ if($registrar)
                     echo '<tr>';
                     echo '<td>'.$laModulos[$i][0].'</td>';
                     echo '<td>'.$laModulos[$i][1].'</td>';
+                    echo '<td align="center"><i class="'.$laModulos[$i][2].' fa-2x"></i></td>';
                     if($consultar || $eliminar)
                     {
                         echo '<td>';

@@ -14,6 +14,7 @@
 
 	$lobjModulo->set_Modulo($_POST['idmodulo']);
 	$lobjModulo->set_Nombre($_POST['nombremod']);
+	$lobjModulo->set_Icono($_POST['iconomod']);
 	$operacion=$_POST['operacion'];
 
 	switch ($operacion) 

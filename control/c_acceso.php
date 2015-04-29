@@ -38,20 +38,20 @@
 		{
 			
 			$_SESSION['msj']='El usuario y/o clave que ingresó son incorrectos.'; //Se guarda un mensaje, que posterior mente será borrado.
-			header('location: ../index.php');//Y se redirecciona al archivo index.php
+			header('location: ../');//Y se redirecciona al archivo index.php
 		}
 	}
-	elseif($_POST['salir'])// Si el usuario ingresó aquí a traves de la intranet por medio del botón SALIR, entonces entrará en esta condicion.
+	elseif($_GET['salir'])// Si el usuario ingresó aquí a traves de la intranet por medio del botón SALIR, entonces entrará en esta condicion.
 	{
 			session_destroy();//Desctruye los datos de la sessión que guardamos cuando ENTRÓ en el sistema.
 			session_start();//Se crea una session solo para que pueda ser guardado el mensaje de despedida.
 			$_SESSION['msj']='Hasta pronto! Su sesión ha sido cerrada.';//Se guarda un mensaje, que posterior mente será borrado.
-			header('location: ../index.php');//Y se redirecciona al archivo index.php
+			header('location: ../');//Y se redirecciona al archivo index.php
 	}
 	else //Si no entro por ningun botón o hubo un error entonces lo va a sacar.
 	{ 
 			$_SESSION['msj']='Disculpe ha habido un error.';//Se guarda un mensaje, que posterior mente será borrado.
-			header('location: ../index.php');//Y se redirecciona al archivo index.php
+			header('location: ../');//Y se redirecciona al archivo index.php
 	}
 
 	

@@ -34,9 +34,9 @@
         $modulo=strtolower($lobjUtil->quitar_acentos($laModulos[$i][1]));        
         $activo=($modulo==$carpeta[0])?'active':'';
 
-        $menu.='<li class="menu-list '.$activo.'" >'; 
-        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="'.$laModulos[$i][2].'"></i> '.$laModulos[$i][1].'</a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
-        $menu.='<ul class="sub-menu-list">';
+        $menu.='<li class="dropdown '.$activo.'" >'; 
+        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$laModulos[$i][1].'<span class="caret"></span></a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
+        $menu.='<ul class="dropdown-menu" role="menu">';
         $laServicios=$lobjRol->consultar_servicios($laModulos[$i][0]); // aquí se consultan y guardan en la variable $laServicios los servicios que tiene registrado este módulo.
         for ($j=0; $j <count($laServicios) ; $j++) //Se recorre un ciclo para poder extraer los datos de cada uno de los servicios que tiene asignado el modulo para poder constuir el menú
         { 
@@ -72,8 +72,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Intranet - Servicio Medico</title>
 	    <link href="../estilo/bootstrap-3/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../estilo/bootstrap-3/css/style-intranet.css" rel="stylesheet">
-	    <link href="../estilo/bootstrap-3/css/style-responsive.css" rel="stylesheet">
+	    <link href="../estilo/bootstrap-3/css/style-intranet.css" rel="stylesheet">
         <link href="../estilo/bootstrap-3/DataTables-1.10.2/media/css/jquery.dataTables.css" rel="stylesheet">
 	    <link href="../estilo/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	    <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>        
@@ -82,84 +81,41 @@
 		<script type="text/javascript" src="../js/validaciones.js"></script>
 		<script type="text/javascript" src="../js/validacion.js"></script>
 	</head>
-	<body class="sticky-header">
-		<div class="left-side sticky-left-side" style="/* overflow: hidden; */ /* outline: none; */">
-
-        <!--logo and iconic logo start-->
-        <div class="logo">
-            <a href="index.html"><img src="../estilo/bootstrap-3/images/logo.png" alt=""></a>
-        </div>
-
-        <div class="logo-icon text-center">
-            <a href="index.html"><img src="../estilo/bootstrap-3/images/logo_icon.png" alt=""></a>
-        </div>
-        <!--logo and iconic logo end-->
-
-        <div class="left-side-inner">
-
-            <!-- visible to small devices only -->
-            <div class="visible-xs hidden-sm hidden-md hidden-lg">
-                <div class="media logged-user">
-                    <img alt="" src="../estilo/bootstrap-3/images/photos/user-avatar.png" class="media-object">
-                    <div class="media-body">
-                        <h4><a href="#">José Vargas</a></h4>
-                        <span>ADMINISTRADOR</span>
-                    </div>
-                </div>
-                <ul class="nav nav-pills nav-stacked custom-nav">
-                  <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-                  <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
-                </ul>
+	<body>
+		<header class="col-lg-12">
+            <div class="row">
+			    <img src="../imagenes/encabezado.png" width="100%" height="70" alt=""/>
             </div>
-
-            <!--sidebar nav start-->
-            <ul class="nav nav-pills nav-stacked custom-nav">
-                <!--<li class="active"><a href=""><i class="fa fa-home"></i> <span>INICIO</span></a></li>
-                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>link2</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href=""> link</a></li>
-                        <li><a href=""> link</a></li>
-                    </ul>
-                </li>-->
-                <?php echo $menu;?>
-            </ul>
-            <!--sidebar nav end-->
-
-        </div>
-    </div>
-		<section class="main-content">
-
-            <header class="header-section">
-
-                <!--toggle button start-->
-                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
-                <!--toggle button end-->
-
-                <!--search start-->
-                
-                <!--search end-->
-
-                <div class="menu-right">
-                    <ul class="notification-menu">
-                        <li class="">
-                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="../estilo/bootstrap-3/images/photos/user-avatar.png" alt="">
-                                José Vargas | <i class="text-primary fa fa-user"></i> Administrador
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                                <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+            <div class="row">
+                <div class="col-lg-6 pull-right">
+                <form name="form_intranet" style="margin:0;" action="../control/c_acceso.php" method="POST">
+                    <table class="table table-striped table-hover table-bordered bootstrap-datatable datatable dataTable" style="margin:0;">
+                        <tr>
+                            <th>Rol:</th>
+                            <td><?php echo $_SESSION['nombrerol'];?></td>
+                            <th>Usuario:</th>
+                            <td><?php echo $_SESSION['nombreusuario'];?></td>
+                            <th >
+                                <button type="submit" name="salir"  class="btn btn-danger" value="Salir"><i class="fa fa-sign-out"></i> Cerrar Sesión</button>
+                            </th>
+                        </tr>
+                    </table>
+                </form>
                 </div>
-                <!--notification menu end -->
-
-            </header>
-
-
-			<section style="margin-top:2px;" class="main">
+            </div>
+		</header>
+		<section class="span12">
+			<aside style="margin-top:2px;" class="col-sm-3 col-md-2 sidebar">
+				<nav>
+					<ul class="nav nav-sidebar">
+			            <?php echo $menu;?>
+			            <li> 
+			            	
+		                </li>
+		          	</ul>
+				</nav>
+			</aside>
+			<section style="margin-top:2px;" class="col-sm-9 col-md-10 main">
 				<?php
 		            if(file_exists($vista.'.php')) //verifica el contenido de la variable vista.
 		            {
@@ -190,10 +146,4 @@
         	unset($_SESSION['msj']);
         ?>
     </script>
-    <script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script src="../js/jquery.nicescroll.js"></script>
-    <!--common scripts for all pages-->
-    <script src="../js/scripts.js"></script>
-
-
 </html>

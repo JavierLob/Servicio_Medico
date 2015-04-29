@@ -24,6 +24,12 @@
                 <input class="form-control" type="text" name="nombremod" id="cam_nombremod" required/>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cam_iconomod">Icono <span class="label label-warning" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="right" data-content="Icono del módulo."><i class="fa fa-question" ></i></span></label>
+                <input class="form-control" type="text" name="iconomod" id="cam_iconomod" required/>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">

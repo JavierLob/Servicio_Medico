@@ -16,6 +16,7 @@
 	$lobjRol->set_Nombre($_POST['nombrerol']);
 	$lobjRol->set_Modulo($_POST['idmodulo']);
 	$lobjRol->set_Servicio($_POST['idservicio']);
+	$lobjRol->set_Posicion($_POST['posicion']);
 	$operacion=$_POST['operacion'];
 
 	switch ($operacion) 

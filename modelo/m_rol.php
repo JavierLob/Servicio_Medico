@@ -15,6 +15,7 @@
 		private $lcNombre;
 		private $lcModulo;
 		private $lcServicio;
+		private $lcPosicion;
 
 		function set_Rol($pcIdRol)
 		{
@@ -34,6 +35,11 @@
 		function set_Servicio($pcServicio)
 		{
 			$this->lcServicio=$pcServicio;
+		}
+
+		function set_Posicion($pcPosicion)
+		{
+			$this->lcPosicion=$pcPosicion;
 		}
 
 		function consultar_roles()
@@ -70,12 +76,14 @@
 		{
 			$this->conectar();
 			$cont=0;
-			$sql="SELECT idtmodulo,nombremod FROM tmodulo,trol_has_tmodulo WHERE trol_idtrol='$this->lcIdRol' AND tmodulo_idtmodulo=idtmodulo";
+			$sql="SELECT idtmodulo,nombremod,iconomod,posicion FROM tmodulo,trol_has_tmodulo WHERE trol_idtrol='$this->lcIdRol' AND tmodulo_idtmodulo=idtmodulo ORDER BY posicion ASC";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{
 				$Fila[$cont][0]=$laRow['idtmodulo'];
 				$Fila[$cont][1]=$laRow['nombremod'];
+				$Fila[$cont][2]=$laRow['iconomod'];
+				$Fila[$cont][3]=$laRow['posicion'];
 				$cont++;
 			}
 			$this->desconectar();
@@ -150,9 +158,9 @@
 			$this->begin();
 			$sql="DELETE FROM trol_has_tmodulo WHERE trol_idtrol='$this->lcIdRol' ";
 			$this->ejecutar($sql);
-			foreach ($this->lcModulo as $idModulo) 
+			for($i=0;$i<count($this->lcModulo);$i++)
 			{
-				$sql="INSERT INTO trol_has_tmodulo (trol_idtrol,tmodulo_idtmodulo)VALUES('$this->lcIdRol','$idModulo')";
+				$sql="INSERT INTO trol_has_tmodulo (trol_idtrol,tmodulo_idtmodulo,posicion)VALUES('$this->lcIdRol','".$this->lcModulo[$i]."','".$this->lcPosicion[$i]."')";
 				$lnHecho=$this->ejecutar($sql);
 				if(!$lnHecho)
 				{
