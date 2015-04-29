@@ -12,8 +12,9 @@
     <strong><i class="fa fa-info-circle"></i></strong> Aquí podrá ver los datos de su perfil y modificar algunos sí lo desea.
   </div>
 <form role="form" class="form" action="../control/c_personal.php" method="POST" name="form_personal">
-    <input type="hidden" value="editar_personal" name="operacion" />
+    <input type="hidden" value="editar_perfil" name="operacion" />
     <input type="hidden"  name="idpersonal" id="cam_idpersonal" value="<?php print($lapersonal['idpersonal']); ?>"/>
+    <input type="hidden"  name="usuario" id="cam_usuario" value="<?php print($lapersonal['usuario']); ?>"/>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -99,6 +100,45 @@
               <label for="cam_idttipopersonal">Rol <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Rol de la persona en el sistema."></i></strong></label>
               <input type="hidden" name="idrol" value="<?php echo $lapersonal['trol_idrol'];?>">
               <input type="text" value="<?php print($lapersonal['nombrerol']); ?>" class="form-control" disabled>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_pregunta_uno">Pregunta de Seguridad Uno <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pregunta de Seguridad Uno."></i></strong></label>
+              <input type="text" name="pregunta_uno" value="<?php print($lapersonal['pregunta_uno']); ?>" class="form-control" maxlength="255">         
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_respuesta_uno">Respuesta de Seguridad Uno <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Respuesta de Seguridad Uno."></i></strong></label>
+              <input type="password" name="respuesta_uno" value="<?php print($lapersonal['respuesta_uno']); ?>" class="form-control" maxlength="255">   
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_pregunta_dos">Pregunta de Seguridad Dos <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pregunta de Seguridad Dos."></i></strong></label>
+              <input type="text" name="pregunta_dos" value="<?php print($lapersonal['pregunta_dos']); ?>" class="form-control" maxlength="255">         
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_respuesta_dos">Respuesta de Seguridad Dos <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Respuesta de Seguridad Dos."></i></strong></label>
+              <input type="password" name="respuesta_dos" value="<?php print($lapersonal['respuesta_dos']); ?>" class="form-control" maxlength="255">   
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_pregunta_tres">Pregunta de Seguridad Tres <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pregunta de Seguridad Tres."></i></strong></label>
+              <input type="text" name="pregunta_tres" value="<?php print($lapersonal['pregunta_tres']); ?>" class="form-control" maxlength="255">         
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_respuesta_tres">Respuesta de Seguridad Tres <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Respuesta de Seguridad Tres."></i></strong></label>
+              <input type="password" name="respuesta_tres" value="<?php print($lapersonal['respuesta_tres']); ?>" class="form-control" maxlength="255">   
             </div>
         </div>
     </div>

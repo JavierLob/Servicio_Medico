@@ -17,6 +17,12 @@
 		private $lcClaveNueva;
 		private $lnIdRol;
 		private $lnIdPersona;
+		private $lcPregunta_uno;
+		private $lcPregunta_dos;
+		private $lcPregunta_tres;
+		private $lcRespuesta_uno;
+		private $lcRespuesta_dos;
+		private $lcRespuesta_tres;
 
 
 		function set_Usuario($pcUsuario)
@@ -42,6 +48,20 @@
 		function set_Persona($pnIdPersona)
 		{
 			$this->lnIdPersona=$pnIdPersona;
+		}
+
+		function set_Pregunta($pregunta_uno, $pregunta_dos, $pregunta_tres)
+		{
+			$this->lcPregunta_uno = $pregunta_uno;
+			$this->lcPregunta_dos = $pregunta_dos;
+			$this->lcPregunta_tres = $pregunta_tres;
+		}
+
+		function set_Respuesta($respuesta_uno, $respuesta_dos, $respuesta_tres)
+		{
+			$this->lcRespuesta_uno = $respuesta_uno;
+			$this->lcRespuesta_dos = $respuesta_dos;
+			$this->lcRespuesta_tres = $respuesta_tres;
 		}
 
 		function consultar()
@@ -84,6 +104,18 @@
 		{
 			$this->conectar();
 			$sql="UPDATE tusuario SET clave=md5('$this->lcClaveNueva') WHERE usuario='$this->lcUsuario' AND clave=md5('$this->lcClave')";
+			$resultado=$this->ejecutar($sql);
+			$this->desconectar();
+			return $resultado;
+		}
+
+		function modificar_preguntas()
+		{
+			$this->conectar();
+			$sql="UPDATE tusuario SET pregunta_uno = '$this->lcPregunta_uno', pregunta_dos = '$this->lcPregunta_dos', pregunta_tres = '$this->lcPregunta_tres'
+				, respuesta_uno = '$this->lcRespuesta_uno', respuesta_dos = '$this->lcRespuesta_dos', respuesta_tres = '$this->lcRespuesta_tres'
+				 WHERE usuario='$this->lcUsuario'";
+				 echo $sql;
 			$resultado=$this->ejecutar($sql);
 			$this->desconectar();
 			return $resultado;

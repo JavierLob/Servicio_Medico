@@ -11,6 +11,9 @@
 	$lobjUsuario->set_Clave($_POST['clave_actual']);
 	$lobjUsuario->set_Usuario($_POST['usuario']);
 
+	$lobjUsuario->set_Pregunta($_POST['pregunta_uno'], $_POST['pregunta_dos'], $_POST['pregunta_tres']);
+	$lobjUsuario->set_Respuesta($_POST['respuesta_uno'], $_POST['respuesta_dos'], $_POST['respuesta_tres']);
+
 	$operacion=$_POST['operacion'];
 
 	switch ($operacion) 
@@ -48,7 +51,8 @@
 		break;
 		case 'editar_perfil':
 			$hecho=$lobjpersonal->modificar();
-			if($hecho)
+			$hecho_dos = $lobjUsuario->modificar_preguntas();
+			if(($hecho) || ($hecho_dos))
 			{
 				$_SESSION['msj']='Se ha modificado exitosamente';
 			}
