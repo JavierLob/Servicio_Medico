@@ -93,18 +93,6 @@
               <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar" required></textarea>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="form-group">
-              <label for="cam_alergia">Alergias <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="alergia" maxlength="1000" class="form-control letras_numeros" id="cam_alergia" required></textarea>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-              <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion" required></textarea>
-            </div>
-        </div>
         <div class="col-md-6">
             <div class="form-group">
               <label>Estado <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
@@ -401,6 +389,12 @@
           </tbody>
         </table>
         <input type="hidden" id="cam_contador_enfermedad" value="0">
+      </div>
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+            <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion" required></textarea>
+          </div>
       </div>
     </div>
     <div class="row">

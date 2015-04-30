@@ -276,6 +276,22 @@
 			return $Filas;
 		}
 
+		public function consultas_paciente()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT * FROM tconsulta,tpaciente WHERE tpaciente_idpaciente='$this->idconsulta' AND tpaciente_idpaciente=idpaciente;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
+
 		public function cambiar_estatus()
 		{
 			$respuesta = false;
