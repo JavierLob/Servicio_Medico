@@ -27,7 +27,7 @@
     if($carpeta[0]=='')
         $activo='active';
     // se arma en la variable $menu todo el menu que se le mostrará al usuario
-    $menu.='<li class="'.$activo.'"><a href="intranet.php">Inicio</a></li>';    
+    $menu.='<li class="'.$activo.'"><a href="intranet.php"><i class="fa fa-home"></i> <span>Inicio</span></a></li>';    
     for($i=0;$i<count($laModulos);$i++) //Se recorre un ciclo para poder extraer los datos de cada uno de los módulos que tiene asignado el rol
     {
         
@@ -35,7 +35,7 @@
         $activo=($modulo==$carpeta[0])?'active':'';
 
         $menu.='<li class="menu-list '.$activo.'" >'; 
-        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="'.$laModulos[$i][2].'"></i> '.$laModulos[$i][1].'</a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
+        $menu.='<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="'.$laModulos[$i][2].'"></i> <span>'.$laModulos[$i][1].'</span></a>';//Aquí se guar el nombre del módulo y los servicios de este modulo se van a ir anidando a partir de aquí.
         $menu.='<ul class="sub-menu-list">';
         $laServicios=$lobjRol->consultar_servicios($laModulos[$i][0]); // aquí se consultan y guardan en la variable $laServicios los servicios que tiene registrado este módulo.
         for ($j=0; $j <count($laServicios) ; $j++) //Se recorre un ciclo para poder extraer los datos de cada uno de los servicios que tiene asignado el modulo para poder constuir el menú
@@ -100,14 +100,13 @@
             <!-- visible to small devices only -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
-                    <img alt="" src="../estilo/bootstrap-3/images/photos/user-avatar.png" class="media-object">
                     <div class="media-body">
                         <h4><a href="#"><?php echo $_SESSION['nombreusuario'];?></a></h4>
                         <span><?php echo $_SESSION['nombrerol'];?></span>
                     </div>
                 </div>
                 <ul class="nav nav-pills nav-stacked custom-nav">
-                  <li><a href="../control/c_acceso.php?salir='1'"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                  <li><a href="../control/c_acceso.php?salir='1'"><i class="fa fa-sign-out"></i> <span>Cerrar sesión</span></a></li>
                 </ul>
             </div>
 
