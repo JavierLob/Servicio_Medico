@@ -99,6 +99,19 @@
 			}
 			header('location: ../vista/intranet.php?vista=personal/personal');
 		break;
+		case 'cambiar_clave_ext':
+			$hecho=$lobjUsuario->cambiar_clave_ext();
+			if($hecho)
+			{
+				$_SESSION['msj']='Se ha cambiado de clave exitosamente';
+				$_SESSION['clave']=$_POST['clave_nueva'];
+			}
+			else
+			{	
+				$_SESSION['msj']='Error al cambiar la clave';
+			}
+		header('location: ../vista/cambiar_contrasena.php');
+		break;
 		default:
 			header('location: ../vista/intranet.php?vista=personal/personal');
 		break;

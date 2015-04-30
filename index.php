@@ -90,7 +90,7 @@
 				                        </div>
 										<input type="text" name="usuario" id="fname" class="fname" placeholder="USUARIO">
 										<input type="password" class="e-mail" placeholder="CONTRASEÑA" name="clave" id="address">
-										<p clas="text-danger"><a href="vista/recuperar_clave"><i class="fa fa-key"></i> Recuperar Contraseña</a></p>
+										<p clas="text-danger"><a href="vista/recuperar_c.php"><i class="fa fa-key"></i> Recuperar Contraseña</a></p>
 										<div class="clearfix"></div>
 										<div class="space40"></div>
 										<button type="submit" class="btn-main btn-center" name="entrar" value="1">ACCEDER</button>

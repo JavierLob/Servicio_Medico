@@ -120,5 +120,28 @@
 			$this->desconectar();
 			return $resultado;
 		}
+
+		function validar_respuestas()
+		{
+			$validar = false;
+			$this->conectar();
+			$sql="SELECT * FROM tusuario WHERE usuario='$this->lcUsuario' AND UPPER(respuesta_uno) = UPPER('$this->lcRespuesta_uno') AND UPPER(respuesta_dos) = UPPER('$this->lcRespuesta_dos') AND UPPER(respuesta_tres) = UPPER('$this->lcRespuesta_tres');";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$validar = true;
+			}
+			$this->desconectar();
+			return $validar;
+		}
+
+		function cambiar_clave_ext()
+		{
+			$this->conectar();
+			$sql="UPDATE tusuario SET clave=md5('$this->lcClaveNueva') WHERE usuario='$this->lcUsuario'";
+			$resultado=$this->ejecutar($sql);
+			$this->desconectar();
+			return $resultado;
+		}
 	}
 ?>

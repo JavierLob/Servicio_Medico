@@ -119,5 +119,25 @@
 			$this->desconectar();
 			return $respuesta;
 		}
+
+		public function consultar_cedula()
+		{
+			$Fila = array();
+			$this->conectar();
+			$sql="SELECT `idpersonal`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, 
+					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
+					`telefono`, `celular`, `observacion`, tpersonal.estatuspersonal,`ttipopersonal_idtipo_personal`,`trol_idrol`,nombrerol,tipopersonal, tusuario.*
+					FROM `tpersonal`, ttipopersonal,trol, tusuario
+					WHERE cedulaopasaporte = '$this->cedulaopasaporte' AND trol_idrol = idtrol
+					AND ttipopersonal_idtipo_personal = idtipopersonal
+					AND tusuario.usuario = tpersonal.cedulaopasaporte";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$Fila=$laRow;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
 	}
 ?>
