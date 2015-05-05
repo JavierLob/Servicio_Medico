@@ -28,6 +28,19 @@
 
 			header('location: ../vista/intranet.php?vista=consulta/'.$vista);
 		break;
+		case 'nuevo_semestre':
+			$hecho=$lobjConsulta->nuevo_semestre();
+			if($hecho)
+			{
+				$_SESSION['msj']='Se ha comenzado un nuevo semestre de forma exitosa';
+			}
+			else
+			{	
+				$_SESSION['msj']='Error al comenzar un nuevo semestre';
+			}
+
+			header('location: ../vista/intranet.php?vista=consulta/nuevo_semestre');
+		break;
 		case 'editar_consulta':
 			$hecho=$lobjConsulta->modificar();
 			if($hecho)

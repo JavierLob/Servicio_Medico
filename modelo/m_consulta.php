@@ -248,7 +248,7 @@
 			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id)as referencias,
 			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='1')as referencias_pendiente,
 			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='2')as referencias_cumplido,
-			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='3')as referencias_incumplido FROM tconsulta";
+			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='3')as referencias_incumplido FROM tconsulta WHERE estatusconsulta='1'";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{
@@ -297,7 +297,7 @@
 
 				if($estatus=='3')
 				{
-					$sql="UPDATE tpaciente SET estatuspaciente='0' WHERE idpaciente='".$laRow['idpaciente']."'";
+					$sql="UPDATE tpaciente SET estatuspaciente='2' WHERE idpaciente='".$laRow['idpaciente']."'";
 				$this->ejecutar($sql);
 				}
 	
@@ -315,6 +315,18 @@
 				$resultado=true;
 				$this->cambiar_estatus_consulta();
 			}
+			$this->desconectar();
+			return $resultado;
+		}
+
+
+		public function nuevo_semestre()
+		{
+			$this->conectar();
+			$resultado=false;
+			$sql="UPDATE tpaciente SET cantidad_examen='0',cantidad_referencia='0',estatuspaciente='1' WHERE ((estatuspaciente='2')OR(estatuspaciente='1')) ";
+			$resultado=$this->ejecutar($sql);
+			
 			$this->desconectar();
 			return $resultado;
 		}
