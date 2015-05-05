@@ -61,7 +61,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_segundonombre">Segundo Nombre <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Segundo nombre del paciente."></i></strong></label>
-              <input type="text" name="segundonombre" maxlength="45" value="<?php print($laPaciente['segundonombre']); ?>" class="form-control letras_latinas" id="cam_segundonombre" required>
+              <input type="text" name="segundonombre" maxlength="45" value="<?php print($laPaciente['segundonombre']); ?>" class="form-control letras_latinas" id="cam_segundonombre" >
             </div>
         </div>
         <div class="col-md-6">
@@ -73,13 +73,13 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_segundoapellido">Segundo Apellido <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Segundo apellido del paciente."></i></strong></label>
-              <input type="text" name="segundoapellido" maxlength="45" value="<?php print($laPaciente['segundoapellido']); ?>" class="form-control letras_latinas" id="cam_segundoapellido" required>
+              <input type="text" name="segundoapellido" maxlength="45" value="<?php print($laPaciente['segundoapellido']); ?>" class="form-control letras_latinas" id="cam_segundoapellido" >
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
               <label for="cam_direccion">Dirección <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Dirección del paciente."></i></strong></label>
-              <textarea name="direccion" maxlength="1000" class="form-control letras_numeros" id="cam_direccion" required><?php print($laPaciente['direccion']); ?></textarea>
+              <textarea name="direccion" maxlength="1000" class="form-control letras_numeros" id="cam_direccion" ><?php print($laPaciente['direccion']); ?></textarea>
             </div>
         </div>
         <div class="col-md-4">
@@ -94,13 +94,13 @@
         <div class="col-md-4">
             <div class="form-group">
               <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono fijo del paciente."></i></strong></label>
-              <input type="text" name="telefono" maxlength="15" value="<?php print($laPaciente['telefono']); ?>" class="form-control solo-numeros" id="cam_telefono" required>
+              <input type="text" name="telefono" maxlength="15" value="<?php print($laPaciente['telefono']); ?>" class="form-control solo-numeros" id="cam_telefono" >
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
               <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono movil del paciente."></i></strong></label>
-              <input type="text" name="celular" maxlength="15" value="<?php print($laPaciente['celular']); ?>" class="form-control solo-numeros" id="cam_celular" required>
+              <input type="text" name="celular" maxlength="15" value="<?php print($laPaciente['celular']); ?>" class="form-control solo-numeros" id="cam_celular" >
             </div>
         </div>
         <div class="col-md-12">
@@ -459,7 +459,32 @@
 </form>
 
 <script>
-    
+$("#cam_cedulaopasaporte").change(function(){
+    var valor = $(this).val();
+    if((valor.length < 7) || (valor.length > 8))
+    {
+        $("#btn_enviar").attr('disabled', true);
+        $(this).focus();
+        alert("La Cédula o pasaporte debe ser mayor a 7 digitos y menor o igual a 8");
+    }
+    else
+    {
+        $("#btn_enviar").attr('disabled', false);
+    }
+});
+$("#cam_cedulaopasaporte").keypress(function(){
+    if(!$(this).val().match(numeros))
+    {
+        var valor = (this.value + '').replace(numeros, '');
+        $(this).val(valor);
+        alert('Debe ingresar solo números');
+        $(".btn-success").attr('disabled', true);
+    }
+    else
+    {
+        $(".btn-success").attr('disabled', false);
+    }
+});    
 $("#cam_alergico").change(function(){
     valor=$("#cam_alergico").val();
     if(valor=='1')
