@@ -41,7 +41,7 @@
               <label for="cam_consulta">Pulso <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-              <input type="text" name="pulso" class="form-control" id="cam_pulso" value="" required>
+              <input type="text" name="pulso" class="form-control" id="cam_pulso" minlength="2" maxlength="3" value="" >
               </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
               <label for="cam_consulta">Peso <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
 
-                <input type="text" name="peso" class="form-control" id="cam_peso" value="" required>
+                <input type="text" name="peso" class="form-control" id="cam_peso" minlength="2" maxlength="3" value="" >
                 <span class="input-group-addon">Kg</span>
 
               </div>
@@ -62,8 +62,8 @@
             <div class="form-group">
               <label for="cam_consulta">Fc <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fc del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-stethoscope  "></i></span>
-              <input type="text" name="fc" class="form-control" id="cam_fc" value="" required>
+                <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
+                <input type="text" name="fc" class="form-control" id="cam_fc" minlength="2" maxlength="3" value="" >
               </div>
             </div>
         </div>
@@ -71,9 +71,8 @@
             <div class="form-group">
               <label for="cam_consulta">Fr <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fr del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
-
-                <input type="text" name="fr" class="form-control" id="cam_fr" value="" required>
-                <span class="input-group-addon">Kg</span>
+                  <span class="input-group-addon"><i class="fa fa-stethoscope  "></i></span>
+                <input type="text" name="fr" class="form-control" id="cam_fr" minlength="2" maxlength="3" value="" >
 
               </div>
             </div>
@@ -85,7 +84,7 @@
               <label for="cam_consulta">Ta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="TA del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-              <input type="text" name="ta" class="form-control" id="cam_ta" value="" required>
+              <input type="text" name="ta" class="form-control" id="cam_ta" minlength="2" maxlength="3" value="">
               </div>
             </div>
         </div>
@@ -93,8 +92,8 @@
             <div class="form-group">
               <label for="cam_consulta">Temperatura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Temperatura del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-              <input type="text" name="temperatura" class="form-control" id="cam_temperatura" value="" required>
+              <span class="input-group-addon"><i class="fa fa-magic"></i></span>
+              <input type="text" name="temperatura" class="form-control"minlength="2" maxlength="2" id="cam_temperatura" value="">
               </div>
             </div>
         </div>
@@ -106,7 +105,7 @@
               <div class="input-group">
 
               <span class="input-group-addon"><i class="fa fa-arrows-h"></i></span>
-                <input type="text" name="talla" class="form-control" id="cam_talla" value="" required>
+                <input type="text" name="talla" class="form-control" id="cam_talla" minlength="2" maxlength="2" value="" >
 
               </div>
             </div>
@@ -117,7 +116,7 @@
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-arrows-v"></i></span>
-                <input type="text" name="altura" class="form-control" id="cam_altura" value="" required>
+                <input type="text" name="altura" class="form-control" id="cam_altura" minlength="3" maxlength="3" value="" >
 
               </div>
             </div>
@@ -127,7 +126,7 @@
       <div class="col-md-12">
             <div class="form-group">
               <label for="cam_consulta">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Observación de la consulta."></i></strong></label>
-              <textarea name="observacionconsulta" class="form-control" id="cam_observacionconsulta" value=""></textarea>
+              <textarea name="observacionconsulta" class="form-control" minlength="3" maxlength="300" id="cam_observacionconsulta" value=""></textarea>
             </div>
         </div>
     </div>
@@ -135,7 +134,7 @@
       <div class="col-md-12">
             <div class="form-group">
               <label for="cam_consulta">Motivo de la consulta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Motivo de la consulta."></i></strong></label>
-              <textarea name="motivocon" class="form-control" id="cam_motivocon" value=""></textarea>
+              <textarea name="motivocon" class="form-control" id="cam_motivocon" minlength="5" maxlength="500" value="" required></textarea>
             </div>
         </div>
     </div>
@@ -206,9 +205,6 @@
 </form>
 <script type="text/javascript"  src="../js/validacion.js"></script>
 <script>
-  $("#cam_pulso").mask("999");
-  $("#cam_peso").mask("999");
-
   $("#cam_examen").change(function(){
     valor=$("#cam_examen").val();
     if(valor=='1')

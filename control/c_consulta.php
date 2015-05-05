@@ -11,6 +11,7 @@
 	$lobjConsulta->set_Examen($_POST['examen'],$_POST['idttipoexamen'],$_POST['idtlaboratorio']);
 	$lobjConsulta->set_Referir($_POST['referira'],$_POST['idtiporeferencia'],$_POST['idtcentroasistencial']);
 	$operacion=$_POST['operacion'];
+	$vista=($_SESSION['iddoctor'])?'mis_consultas':'consulta';
 
 	switch ($operacion) 
 	{
@@ -24,7 +25,8 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
-			header('location: ../vista/intranet.php?vista=consulta/consulta');
+
+			header('location: ../vista/intranet.php?vista=consulta/'.$vista);
 		break;
 		case 'editar_consulta':
 			$hecho=$lobjConsulta->modificar();
@@ -36,7 +38,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
-			header('location: ../vista/intranet.php?vista=consulta/consulta');
+			header('location: ../vista/intranet.php?vista=consulta/'.$vista);
 		break;
 		case 'cambiar_estatus_examen':
 			$hecho=$lobjConsulta->cambiar_estatus_examen();
@@ -47,7 +49,7 @@
 
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha cambiado el estatus del examen a '.$operacion.' exitosamente';
+				$_SESSION['msj']='Se ha cambiado el estatus del examen a '.$operacion.' de forma exitosa';
 			}
 			else
 			{	
@@ -63,7 +65,7 @@
 				$operacion='Incumplido';
 			if($hecho)
 			{
-				$_SESSION['msj']='Se ha cambiado el estatus de la referencia a '.$operacion.' exitosamente';
+				$_SESSION['msj']='Se ha cambiado el estatus de la referencia a '.$operacion.' de forma exitosa';
 			}
 			else
 			{	
@@ -81,7 +83,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
-			header('location: ../vista/intranet.php?vista=consulta/consulta');
+			header('location: ../vista/intranet.php?vista=consulta/'.$vista);
 		break;
 		case 'activar_consulta':
 			$hecho=$lobjConsulta->cambiar_estatus();
@@ -93,7 +95,7 @@
 			{	
 				$_SESSION['msj']='Error al activar';
 			}
-			header('location: ../vista/intranet.php?vista=consulta/consulta');
+			header('location: ../vista/intranet.php?vista=consulta/'.$vista);
 		break;
 		case 'validar_examen':
 			$cantidad_examen=$lobjConsulta->validar_examen();

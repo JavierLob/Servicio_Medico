@@ -241,7 +241,7 @@
 		public function cambiar_estatus_consulta()
 		{
 			$this->conectar();
-			$sql="SELECT idconsulta as id,(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id) as examenes,
+			$sql="SELECT idconsulta as id,tpaciente_idpaciente as idpaciente,(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id) as examenes,
 			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='1')as examenes_pendiente,
 			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='2')as examenes_cumplido,
 			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='3')as examenes_incumplido,
@@ -294,6 +294,12 @@
 
 				$sql="UPDATE tconsulta SET estatusconsulta='$estatus' WHERE idconsulta='".$laRow['id']."'";
 				$this->ejecutar($sql);
+
+				if($estatus=='3')
+				{
+					$sql="UPDATE tpaciente SET estatuspaciente='0' WHERE idpaciente='".$laRow['idpaciente']."'";
+				$this->ejecutar($sql);
+				}
 	
 			}
 			$this->desconectar();
@@ -422,6 +428,22 @@
 			$cont = 0;
 			$this->conectar();
 			$sql="SELECT * FROM tconsulta,tpaciente WHERE tpaciente_idpaciente=idpaciente;";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
+
+		public function listar_doctor($iddoctor)
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT * FROM tconsulta,tpaciente WHERE idtdoctor='$iddoctor' AND tpaciente_idpaciente=idpaciente;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{

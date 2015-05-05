@@ -146,7 +146,7 @@
 					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado , documento,embarazada
 					, numeromodalidadpac, modalidadpac
 					FROM `tpaciente` , tparroquia, tmunicipio, testado
-					WHERE tparroquia.idparroquia = tpaciente.idparroquia
+					WHERE estatuspaciente='1' AND tparroquia.idparroquia = tpaciente.idparroquia
 					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio
 					AND testado.idestado = tmunicipio.idestado";
 			$pcsql=$this->filtro($sql);
