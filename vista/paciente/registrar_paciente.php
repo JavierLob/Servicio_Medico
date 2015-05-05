@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-              <label for="cam_nacionalidad">Nacionalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_nacionalidad">Nacionalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nacionalidad del paciente."></i></strong></label>
               <select name="nacionalidad" id="cam_nacionalidad" class="form-control">
                 <option value="V">Venezolano</option>
                 <option value="E">Extranjero</option>
@@ -26,43 +26,43 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_cedulaopasaporte">Cédula / Pasaporte <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_cedulaopasaporte">Cédula / Pasaporte <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cédula o Pasaporte del paciente."></i></strong></label>
               <input type="text" name="cedulaopasaporte" maxlength="9" class="form-control solo-numeros" id="cam_cedulaopasaporte" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_primernombre">Primer Nombre <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_primernombre">Primer Nombre <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Primer nombre del paciente."></i></strong></label>
               <input type="text" name="primernombre" maxlength="455" class="form-control letras_latinas" id="cam_primernombre" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_segundonombre">Segundo Nombre <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_segundonombre">Segundo Nombre <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Segundo nombre del paciente."></i></strong></label>
               <input type="text" name="segundonombre" maxlength="45" class="form-control letras_latinas" id="cam_segundonombre" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_primerapellido">Primer Apellido <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_primerapellido">Primer Apellido <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Primer apellido del paciente."></i></strong></label>
               <input type="text" name="primerapellido" maxlength="45" class="form-control letras_latinas" id="cam_primerapellido" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_segundoapellido">Segundo Apellido <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_segundoapellido">Segundo Apellido <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Segundo apellido del paciente."></i></strong></label>
               <input type="text" name="segundoapellido" maxlength="45" class="form-control letras_latinas" id="cam_segundoapellido" required>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-              <label for="cam_direccion">Dirección <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_direccion">Dirección <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Dirección del paciente."></i></strong></label>
               <textarea name="direccion" maxlength="1000" class="form-control letras_numeros" id="cam_direccion" required></textarea>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-              <label for="cam_sexo">Sexo <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_sexo">Sexo <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Sexo del paciente."></i></strong></label>
               <select name="sexo" id="cam_sexo" class="form-control" onchange="activar_emabarazada(this);">
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
@@ -80,31 +80,31 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-              <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono fijo del paciente."></i></strong></label>
               <input type="text" name="telefono" maxlength="11" class="form-control solo-numeros" id="cam_telefono" required>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-              <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono movil del paciente."></i></strong></label>
               <input type="text" name="celular" maxlength="11" class="form-control solo-numeros" id="cam_celular" required>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-              <label for="cam_antecedentepersonal">Antecedentes Personales <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_antecedentepersonal">Antecedentes Personales <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indique los antecedentes personales del paciente."></i></strong></label>
               <textarea name="antecedentepersonal" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentepersonal" ></textarea>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-              <label for="cam_antecedentefamiliar">Antecedentes Familiares <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+              <label for="cam_antecedentefamiliar">Antecedentes Familiares <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indique los antecedentes familiares del paciente."></i></strong></label>
               <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar" ></textarea>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label>Estado <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label>Estado <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Estado al cual pertenece el paciente."></i></strong></label>
               <select name="estado" id="cam_estado" class="form-control">
                   <option value="">-</option>
                   <?php
@@ -122,7 +122,7 @@
       </div>
       <div class="col-lg-6">
             <div class="form-group">
-              <label>Municipio <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label>Municipio <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece el paciente."></i></strong></label>
               <select name="municipio" id="cam_municipio" class="form-control">
                   <option value="">-</option>
                   <?php
@@ -140,7 +140,7 @@
       </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_idparroquia">Parroquia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label for="cam_idparroquia">Parroquia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Parroquia al cual pertenece el paciente."></i></strong></label>
               <select name="idparroquia" class="form-control" id="cam_idparroquia" required>
                   <option value="">-</option>
                   <?php
@@ -156,7 +156,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_idtsede">Sede <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label for="cam_idtsede">Sede <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Sede al cual pertenece el paciente."></i></strong></label>
               <select name="idtsede" class="form-control" id="cam_idtsede" required>
                   <option value="">-</option>
                   <?php
@@ -172,7 +172,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_idtetnia">Etnia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label for="cam_idtetnia">Etnia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indique la etnia a la cual pertenece el paciente."></i></strong></label>
               <select name="idtetnia" class="form-control" id="cam_idtetnia" required>
                   <option value="">-</option>
                   <?php
@@ -188,7 +188,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label for="cam_idttipopaciente">Tipo Paciente <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+              <label for="cam_idttipopaciente">Tipo Paciente <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione Tipo de paciente."></i></strong></label>
               <select name="idttipopaciente" class="form-control" id="cam_idttipopaciente" onchange="activar_tipo_paciente(this)" required>
                   <option value="">-</option>
                   <?php
@@ -206,7 +206,7 @@
         <div class="row">
           <div class="col-md-6" id="carrera"  style="display:none">
               <div class="form-group">
-                <label for="cam_tcarrera_idtcarrera">Carrera <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+                <label for="cam_tcarrera_idtcarrera">Carrera <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Carrera al cual pertenece el paciente."></i></strong></label>
                 <select name="tcarrera_idtcarrera" class="form-control" id="cam_tcarrera_idtcarrera">
                     <option value="">-</option>
                     <?php
@@ -222,7 +222,7 @@
           </div>
           <div class="col-md-6" id="departamento" style="display:none">
               <div class="form-group">
-                <label for="cam_tdepartamento_iddepartamento">Departamento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+                <label for="cam_tdepartamento_iddepartamento">Departamento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Departamento al cual pertenece el paciente."></i></strong></label>
                 <select name="tdepartamento_iddepartamento" class="form-control" id="cam_tdepartamento_iddepartamento" >
                     <option value="">-</option>
                     <?php
@@ -240,7 +240,7 @@
         <div class="row">
         <div class="col-md-6" id="modalidad" style="display:none">
             <div class="form-group">
-              <label for="cam_modalidadpac">Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
+              <label for="cam_modalidadpac">Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia el paciente."></i></strong></label>
               <select name="modalidadpac" class="form-control" id="cam_modalidadpac">
                   <option value="">-</option>
                   <option value="TRIMESTRE">TRIMESTRE</option>
@@ -250,7 +250,7 @@
         </div>
         <div class="col-md-6" id="nro_modalidad" style="display:none">
             <div class="form-group">
-              <label for="cam_numeromodalidadpac">Nro. Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
+              <label for="cam_numeromodalidadpac">Nro. Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Número de la Modalidad que estudia el paciente."></i></strong></label>
               <select name="numeromodalidadpac" class="form-control" id="cam_numeromodalidadpac">
                   <option value="">-</option>
                   <option  value="1" data-padre="TRIMESTRE">1</option>
@@ -401,7 +401,7 @@
       </div>
       <div class="col-md-12">
           <div class="form-group">
-            <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
+            <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indique una observación en el caso de que sea necesaria."></i></strong></label>
             <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion"></textarea>
           </div>
       </div>
