@@ -76,6 +76,8 @@
         <link href="../estilo/bootstrap-3/css/style-responsive.css" rel="stylesheet">
         <link href="../estilo/bootstrap-3/DataTables-1.10.2/media/css/jquery.dataTables.css" rel="stylesheet">
         <link href="../estilo/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../libreria/bootstrap-datepicker-master/css/datepicker.css" rel="stylesheet">
+
         <script src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.js"></script>        
         <script src="../js/jquery.maskedinput.min.js"></script>
 
@@ -173,6 +175,7 @@
     </body>
     <script src="../estilo/bootstrap-3/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="../estilo/bootstrap-3/DataTables-1.10.2/media/js/jquery.dataTables.js"></script>
+    <script src="../libreria/bootstrap-datepicker-master/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
         $('#filtro').dataTable();

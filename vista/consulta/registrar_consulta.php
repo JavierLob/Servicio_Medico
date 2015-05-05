@@ -1,3 +1,4 @@
+
 <h1 class="page-header">Registrar Consulta</h1>
   <div class="alert alert-info" role="alert">
     <strong><i class="fa fa-info-circle"></i></strong> Aquí podras registrar las consultas en el sistema.
@@ -31,8 +32,11 @@
         <div class="col-md-6">
           <div class="form-group">
               <label for="cam_consulta">Fecha <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de la consulta."></i></strong></label>
-              <input type="text" name="fecha_consulta" class="form-control" id="cam_fecha_consulta" value="<?php echo date('d-m-Y');?>" required>
-            </div>
+              <div class="input-group" id="cam_fecha">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type="text" name="fecha_consulta" class="form-control datepicker" id="cam_fecha_consulta" value="<?php echo date('d-m-Y');?>" required>
+              </div>
+          </div>
         </div>
     </div>
     <div class="row">
@@ -205,6 +209,13 @@
 </form>
 <script type="text/javascript"  src="../js/validacion.js"></script>
 <script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      format:'mm-dd-yyyy',
+      endDate: <?php echo "'".date('d-m-Y')."'";?>
+    });
+  });
+
   $("#cam_examen").change(function(){
     valor=$("#cam_examen").val();
     if(valor=='1')
