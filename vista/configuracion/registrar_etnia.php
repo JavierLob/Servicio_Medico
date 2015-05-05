@@ -26,7 +26,8 @@
   function validar()
   {
     var valor = $("#cam_etnia").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_etnia.php",  
@@ -44,5 +45,11 @@
                
             }
         });
+      }
+      else
+    {
+      $("#cam_etnia").focus();
+      alert("Por favor ingrese una etnia.");
+    }
    }
 </script>

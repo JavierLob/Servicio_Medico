@@ -26,7 +26,8 @@
   function validar()
   {
     var valor = $("#cam_tipoexamen").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_tipoexamen.php",  
@@ -44,5 +45,11 @@
                
             }
         });
+        }
+      else
+    {
+      $("#cam_tipoexamen").focus();
+      alert("Por favor ingrese un tipo de examen.");
+    }
    }
 </script>

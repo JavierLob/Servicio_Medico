@@ -26,7 +26,8 @@
   function validar()
   {
     var valor = $("#cam_laboratorio").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_laboratorio.php",  
@@ -44,5 +45,11 @@
                
             }
         });
+       }
+      else
+    {
+      $("#cam_laboratorio").focus();
+      alert("Por favor ingrese un laboratorio.");
+    }
    }
 </script>

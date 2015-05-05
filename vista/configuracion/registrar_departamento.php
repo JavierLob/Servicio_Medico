@@ -15,7 +15,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/sede';"><i class="fa fa-chevron-left"></i> Regresar</button>
+        <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=configuracion/departamento';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
         <button type="button" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar" onclick="return validar();"><i class="fa fa-check" ></i> Aceptar</button>
@@ -26,11 +26,12 @@
 <script>
   function validar()
   {
-    var valor = $("#cam_nombreale").val();
-   
+    var valor = $("#cam_departamento").val();
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
-            url: "../control/c_carrera.php",  
+            url: "../control/c_departamento.php",  
             data: {departamento:valor,operacion:"validar"},  
             success: function(msg){
                     if(msg=='1')
@@ -40,10 +41,16 @@
                     }
                     else
                     {
-                      document.form_carrera.submit();
+                      document.form_departamento.submit();
                     }
                
             }
         });
+    }
+      else
+    {
+      $("#cam_departamento").focus();
+      alert("Por favor ingrese un departamento.");
+    }
    }
 </script>

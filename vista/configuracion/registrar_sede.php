@@ -33,7 +33,8 @@
   function validar()
   {
     var valor = $("#cam_sede").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_sede.php",  
@@ -51,5 +52,11 @@
                
             }
         });
+      }
+      else
+    {
+      $("#cam_sede").focus();
+      alert("Por favor ingrese una sede.");
+    }
    }
 </script>

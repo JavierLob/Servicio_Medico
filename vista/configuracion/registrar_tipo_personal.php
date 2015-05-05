@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_tipopersonal").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_tipo_personal.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+        }
+      else
+    {
+      $("#cam_tipopersonal").focus();
+      alert("Por favor ingrese un tipo de personal.");
+    }
    }
 </script>

@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_carrera").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_carrera.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+     }
+    else
+    {
+      $("#cam_carrera").focus();
+      alert("Por favor ingrese una carrera.");
+    }
    }
 </script>

@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_nombreale").val();
-   
+    if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_alergia.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+    }
+    else
+    {
+      $("#cam_nombreale").focus();
+      alert("Por favor ingrese una alergia.");
+    }
    }
 </script>

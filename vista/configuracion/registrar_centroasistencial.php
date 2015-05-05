@@ -26,7 +26,8 @@
   function validar()
   {
     var valor = $("#cam_centroasistencial").val();
-   
+    if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_centroasistencial.php",  
@@ -44,5 +45,11 @@
                
             }
         });
+       }
+    else
+    {
+      $("#cam_centroasistencial").focus();
+      alert("Por favor ingrese un centro asistencial.");
+    }
    }
 </script>

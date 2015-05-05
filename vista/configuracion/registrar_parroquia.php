@@ -43,23 +43,42 @@
   {
     var valor = $("#cam_parroquia").val();
     var idtmunicipio = $("#cam_idtmunicipio").val();
-   
+   if(valor!='' && idtmunicipio!='')
+    {
         $.ajax({  
             type: "POST",  
-            url: "../control/c_municipio.php",  
+            url: "../control/c_parroquia.php",  
             data: {parroquia:valor,idtmunicipio:idtmunicipio,operacion:"validar"},  
             success: function(msg){
                     if(msg=='1')
                     {
-                        $("#cam_idtmunicipio").val('');
-                        alert('Ya existe un municipio con ese nombre para el estado seleccionado.');                              
+                        $("#cam_parroquia").val('');
+                        alert('Ya existe una parroquia con ese nombre para el municipio seleccionado.');                              
                     }
                     else
                     {
-                      document.form_municipio.submit();
+                      document.form_parroquia.submit();
                     }
                
             }
         });
+       }
+      else
+    {
+      if(valor=='')
+      {
+        $("#cam_parroquia").focus();
+        alert("Por favor ingrese una parroquia.");
+        return false;
+      }
+
+      if(idtmunicipio=='')
+      {
+        $("#cam_idtmunicipio").focus();
+        alert("Por favor seleccione un municipio.");
+        return false;
+        
+      }
+    }
    }
 </script>

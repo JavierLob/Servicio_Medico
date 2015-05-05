@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_discapacidad").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_discapacidad.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+      }
+      else
+    {
+      $("#cam_discapacidad").focus();
+      alert("Por favor ingrese una discapacidad.");
+    }
    }
 </script>

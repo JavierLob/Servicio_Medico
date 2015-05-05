@@ -43,7 +43,8 @@
   {
     var valor = $("#cam_municipio").val();
     var estado = $("#cam_idestado").val();
-   
+   if((valor!='')&&(estado!=''))
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_municipio.php",  
@@ -51,7 +52,7 @@
             success: function(msg){
                     if(msg=='1')
                     {
-                        $("#cam_idestado").val('');
+                        $("#cam_municipio").val('');
                         alert('Ya existe un municipio con ese nombre para el estado seleccionado.');                              
                     }
                     else
@@ -61,5 +62,22 @@
                
             }
         });
+      }
+      else
+    {
+      if(valor=='')
+      {
+        $("#cam_municipio").focus();
+        alert("Por favor ingrese un municipio.");
+        return false;
+      }
+
+      if(estado=='')
+      {
+        $("#cam_idestado").focus();
+        alert("Por favor seleccione un estado.");
+        return false;
+      }
+    }
    }
 </script>

@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_enfermedadcronica").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_enfermedadescronicas.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+      }
+      else
+    {
+      $("#cam_enfermedadcronica").focus();
+      alert("Por favor ingrese una enfermedad.");
+    }
    }
 </script>

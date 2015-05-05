@@ -27,7 +27,8 @@
   function validar()
   {
     var valor = $("#cam_tipopaciente").val();
-   
+   if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_tipo_paciente.php",  
@@ -45,5 +46,11 @@
                
             }
         });
+      }
+      else
+    {
+      $("#cam_tipopaciente").focus();
+      alert("Por favor ingrese un tipo de paciente.");
+    }
    }
 </script>

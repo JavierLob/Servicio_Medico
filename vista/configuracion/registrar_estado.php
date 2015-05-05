@@ -26,7 +26,8 @@
   function validar()
   {
     var valor = $("#cam_estado").val();
-   
+    if(valor!='')
+    {
         $.ajax({  
             type: "POST",  
             url: "../control/c_estado.php",  
@@ -44,5 +45,11 @@
                
             }
         });
+       }
+      else
+    {
+      $("#cam_estado").focus();
+      alert("Por favor ingrese un estado.");
+    }
    }
 </script>
