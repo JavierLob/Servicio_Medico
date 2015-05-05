@@ -430,6 +430,19 @@ $("#cam_cedulaopasaporte").change(function(){
     {
         $("#btn_enviar").attr('disabled', false);
     }
+   
+    $.ajax({  
+        type: "POST",  
+        url: "../control/c_paciente.php",  
+        data: {cedulaopasaporte:valor, nacionalidad: $("#cam_nacionalidad").val(),operacion:"validar"},  
+        success: function(msg){
+            if(msg=='1')
+            {
+                $("#cam_cedulaopasaporte").val('');
+                alert('Ya existe un paciente con esa cédula');                              
+            }
+        }
+    });
 });
 $("#cam_cedulaopasaporte").keypress(function(){
     if(!$(this).val().match(numeros))

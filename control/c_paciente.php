@@ -40,6 +40,14 @@
 			{	
 				$_SESSION['msj']='Error en el registro';
 			}
+			header('location: ../vista/intranet.php?vista=paciente/paciente');
+		break;
+		case 'validar':
+			if($lobjPaciente->validar())
+				echo '1';
+			else
+				echo '0';
+				
 		break;
 		case 'editar_paciente':
 			$hecho=$lobjPaciente->modificar();
@@ -73,6 +81,7 @@
 			{	
 				$_SESSION['msj']='Error al modificar';
 			}
+			header('location: ../vista/intranet.php?vista=paciente/paciente');
 		break;
 		case 'eliminar_paciente':
 			$hecho=$lobjPaciente->cambiar_estatus();
@@ -84,6 +93,7 @@
 			{	
 				$_SESSION['msj']='Error al eliminar';
 			}
+			header('location: ../vista/intranet.php?vista=paciente/paciente');
 		break;
 		case 'activar_paciente':
 			$hecho=$lobjPaciente->cambiar_estatus();
@@ -101,5 +111,4 @@
 		break;
 	}
 
-	header('location: ../vista/intranet.php?vista=paciente/paciente');
 ?>

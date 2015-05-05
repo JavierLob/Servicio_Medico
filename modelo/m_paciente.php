@@ -309,5 +309,19 @@
 			$this->desconectar();
 			return $Filas;
 		}
+
+		public function validar()
+		{
+			$repetido = false;
+			$this->conectar();
+			$sql="SELECT * FROM tpaciente WHERE trim(cedulaopasaporte)=trim('$this->cedulaopasaporte') AND nacionalidad = '$this->nacionalidad';";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$repetido = true;
+			}
+			$this->desconectar();
+			return $repetido;
+		}
 	}
 ?>
