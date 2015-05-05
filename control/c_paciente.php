@@ -20,17 +20,18 @@
 				$idtenfermedadescronicas = $_POST['idtenfermedadescronicas'];
 				if(is_array($idalergias)){				
 					foreach ($idalergias as $value) {
-						$lobjPaciente->registrar_alergia($value);
+
+						$hecho = ($value!='') ? $lobjPaciente->registrar_alergia($value) : '';
 					}
 				}
 				if(is_array($idtdiscapacidad)){				
 					foreach ($idtdiscapacidad as $value) {
-						$lobjPaciente->registrar_discapacidad($value);
+					$hecho = ($value!='') ?	$lobjPaciente->registrar_discapacidad($value): '';
 					}
 				}
 				if(is_array($idtenfermedadescronicas)){				
 					foreach ($idtenfermedadescronicas as $value) {
-						$lobjPaciente->registrar_enfermedad($value);
+						$hecho = ($value!='') ? $lobjPaciente->registrar_enfermedad($value): '';
 					}
 				}
 				$_SESSION['msj']='Registro exitoso';
@@ -50,17 +51,17 @@
 			$lobjPaciente->eliminar_enfermedad();
 			if(is_array($idalergias)){				
 				foreach ($idalergias as $value) {
-				$hecho2 =	$lobjPaciente->registrar_alergia($value);
+				$hecho2 =	($value!='') ? $lobjPaciente->registrar_alergia($value): '';
 				}
 			}
 			if(is_array($idtdiscapacidad)){				
 				foreach ($idtdiscapacidad as $value) {
-				$hecho3 =	$lobjPaciente->registrar_discapacidad($value);
+				$hecho3 =	($value!='') ? $lobjPaciente->registrar_discapacidad($value): '';
 				}
 			}
 			if(is_array($idtenfermedadescronicas)){				
 				foreach ($idtenfermedadescronicas as $value) {
-				$hecho4 =	$lobjPaciente->registrar_enfermedad($value);
+				$hecho4 =	($value!='') ? $lobjPaciente->registrar_enfermedad($value): '';
 				}
 			}
 			if(($hecho) || ($hecho2) || ($hecho3) || ($hecho4))

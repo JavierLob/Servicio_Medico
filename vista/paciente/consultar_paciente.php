@@ -106,13 +106,13 @@
         <div class="col-md-12">
             <div class="form-group">
               <label for="cam_antecedentepersonal">Antecedentes Personales <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="antecedentepersonal" maxlength="1000"  class="form-control letras_numeros" id="cam_antecedentepersonal" required><?php print($laPaciente['antecedentepersonal']); ?></textarea>
+              <textarea name="antecedentepersonal" maxlength="1000"  class="form-control letras_numeros" id="cam_antecedentepersonal"><?php print($laPaciente['antecedentepersonal']); ?></textarea>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
               <label for="cam_antecedentefamiliar">Antecedentes Familiares <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar" required><?php print($laPaciente['antecedentefamiliar']); ?></textarea>
+              <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar"><?php print($laPaciente['antecedentefamiliar']); ?></textarea>
             </div>
         </div>
         <div class="col-md-6">
@@ -444,7 +444,7 @@
       <div class="col-md-12">
             <div class="form-group">
               <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion" required><?php print($laPaciente['observacion']); ?></textarea>
+              <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion"><?php print($laPaciente['observacion']); ?></textarea>
             </div>
       </div>
     </div>
