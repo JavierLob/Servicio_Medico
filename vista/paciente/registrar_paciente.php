@@ -27,7 +27,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_cedulaopasaporte">Cédula / Pasaporte <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <input type="text" name="cedulaopasaporte" maxlength="11" class="form-control solo-numeros" id="cam_cedulaopasaporte" required>
+              <input type="text" name="cedulaopasaporte" maxlength="9" class="form-control solo-numeros" id="cam_cedulaopasaporte" required>
             </div>
         </div>
         <div class="col-md-6">
@@ -60,37 +60,46 @@
               <textarea name="direccion" maxlength="1000" class="form-control letras_numeros" id="cam_direccion" required></textarea>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_sexo">Sexo <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <select name="sexo" id="cam_sexo" class="form-control">
+              <select name="sexo" id="cam_sexo" class="form-control" onchange="activar_emabarazada(this);">
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-2" id="embarazada" style="display:none">
+            <div class="form-group">
+              <label for="cam_sexo">Embarazada <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indica sí la paciente está embarazada."></i></strong></label>
+              <select name="embarazada" id="cam_embarazada" class="form-control">
+                <option value="0">No</option>
+                <option value="1">Si</option>
               </select>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
               <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <input type="text" name="telefono" maxlength="15" class="form-control solo-numeros" id="cam_telefono" required>
+              <input type="text" name="telefono" maxlength="11" class="form-control solo-numeros" id="cam_telefono" required>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
               <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <input type="text" name="celular" maxlength="15" class="form-control solo-numeros" id="cam_celular" required>
+              <input type="text" name="celular" maxlength="11" class="form-control solo-numeros" id="cam_celular" required>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
               <label for="cam_antecedentepersonal">Antecedentes Personales <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="antecedentepersonal" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentepersonal" required></textarea>
+              <textarea name="antecedentepersonal" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentepersonal" ></textarea>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
               <label for="cam_antecedentefamiliar">Antecedentes Familiares <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-              <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar" required></textarea>
+              <textarea name="antecedentefamiliar" maxlength="1000" class="form-control letras_numeros" id="cam_antecedentefamiliar" ></textarea>
             </div>
         </div>
         <div class="col-md-6">
@@ -180,7 +189,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_idttipopaciente">Tipo Paciente <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
-              <select name="idttipopaciente" class="form-control" id="cam_idttipopaciente" required>
+              <select name="idttipopaciente" class="form-control" id="cam_idttipopaciente" onchange="activar_tipo_paciente(this)" required>
                   <option value="">-</option>
                   <?php
                     require_once('../modelo/m_tipo_paciente.php');
@@ -193,52 +202,56 @@
               </select>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-              <label for="cam_tcarrera_idtcarrera">Carrera <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
-              <select name="tcarrera_idtcarrera" class="form-control" id="cam_tcarrera_idtcarrera" required>
-                  <option value="">-</option>
-                  <?php
-                    require_once('../modelo/m_carrera.php');
-                    $lobjCarrera= new claseCarrera;
-                    $laCarrera=$lobjCarrera->listar();
-                    for ($i=0; $i <count($laCarrera) ; $i++) { 
-                      echo '<option value="'.$laCarrera[$i]['idtcarrera'].'">'.$laCarrera[$i]['carrera'].'</option>';                    
-                    }
-                  ?>
-              </select>
-            </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-              <label for="cam_tdepartamento_iddepartamento">Departamento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
-              <select name="tdepartamento_iddepartamento" class="form-control" id="cam_tdepartamento_iddepartamento" required>
-                  <option value="">-</option>
-                  <?php
-                    require_once('../modelo/m_departamento.php');
-                    $lobjDepartamento= new claseDepartamento;
-                    $laDepartamento=$lobjDepartamento->listar();
-                    for ($i=0; $i <count($laDepartamento) ; $i++) { 
-                      echo '<option value="'.$laDepartamento[$i]['iddepartamento'].'">'.$laDepartamento[$i]['departamento'].'</option>';                    
-                    }
-                  ?>
-              </select>
-            </div>
+        <div class="row">
+          <div class="col-md-6" id="carrera"  style="display:none">
+              <div class="form-group">
+                <label for="cam_tcarrera_idtcarrera">Carrera <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+                <select name="tcarrera_idtcarrera" class="form-control" id="cam_tcarrera_idtcarrera">
+                    <option value="">-</option>
+                    <?php
+                      require_once('../modelo/m_carrera.php');
+                      $lobjCarrera= new claseCarrera;
+                      $laCarrera=$lobjCarrera->listar();
+                      for ($i=0; $i <count($laCarrera) ; $i++) { 
+                        echo '<option value="'.$laCarrera[$i]['idtcarrera'].'">'.$laCarrera[$i]['carrera'].'</option>';                    
+                      }
+                    ?>
+                </select>
+              </div>
+          </div>
+          <div class="col-md-6" id="departamento" style="display:none">
+              <div class="form-group">
+                <label for="cam_tdepartamento_iddepartamento">Departamento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece la paciente."></i></strong></label>
+                <select name="tdepartamento_iddepartamento" class="form-control" id="cam_tdepartamento_iddepartamento" >
+                    <option value="">-</option>
+                    <?php
+                      require_once('../modelo/m_departamento.php');
+                      $lobjDepartamento= new claseDepartamento;
+                      $laDepartamento=$lobjDepartamento->listar();
+                      for ($i=0; $i <count($laDepartamento) ; $i++) { 
+                        echo '<option value="'.$laDepartamento[$i]['iddepartamento'].'">'.$laDepartamento[$i]['departamento'].'</option>';                    
+                      }
+                    ?>
+                </select>
+              </div>
+          </div>
         </div>
-        <div class="col-md-6">
+        <div class="row">
+        <div class="col-md-6" id="modalidad" style="display:none">
             <div class="form-group">
               <label for="cam_modalidadpac">Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
-              <select name="modalidadpac" class="form-control" id="cam_modalidadpac" required>
+              <select name="modalidadpac" class="form-control" id="cam_modalidadpac">
                   <option value="">-</option>
                   <option value="TRIMESTRE">TRIMESTRE</option>
                   <option value="SEMESTRE">SEMESTRE</option>
               </select>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" id="nro_modalidad" style="display:none">
             <div class="form-group">
               <label for="cam_numeromodalidadpac">Nro. Modalidad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Modalidad que estudia la paciente."></i></strong></label>
-              <select name="numeromodalidadpac" class="form-control" id="cam_numeromodalidadpac" required>
+              <select name="numeromodalidadpac" class="form-control" id="cam_numeromodalidadpac">
                   <option value="">-</option>
                   <option  value="1" data-padre="TRIMESTRE">1</option>
                   <option  value="2" data-padre="TRIMESTRE">2</option>
@@ -277,23 +290,19 @@
       </div>
       <div class="col-md-4">
          <label for="cam_consulta">¿Discapacidades? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione si padece de alguna discapacidad."></i></strong></label>
-
             <select class="form-control" id="cam_discapacidades">
               <option value=""></option>
               <option value="0">No</option>
               <option value="1">Si</option>
             </select>
-
       </div>
       <div class="col-md-4">
          <label for="cam_consulta">¿Enfermedad Crónica? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Seleccione si padece de alguna enfermedad cronica."></i></strong></label>
-
             <select class="form-control" id="cam_cronico">
               <option value=""></option>
               <option value="0">No</option>
               <option value="1">Si</option>
             </select>
-
       </div>
     </div>
     <div class="row">
@@ -393,7 +402,7 @@
       <div class="col-md-12">
           <div class="form-group">
             <label for="cam_observacion">Observación <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Nombre de la paciente."></i></strong></label>
-            <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion" required></textarea>
+            <textarea name="observacion" maxlength="1000" class="form-control letras_numeros" id="cam_observacion"></textarea>
           </div>
       </div>
     </div>
@@ -661,4 +670,42 @@ function validar_repetido_enfermedad(e)
 
   }
 }
+
+function activar_emabarazada(e)
+{
+  embarazada=document.getElementById("embarazada");
+  if(e.value=='F')
+  {
+    embarazada.style.display="block";
+  }
+  else if(e.value=='M')
+  {
+    embarazada.style.display="none";
+
+  }
+}
+function activar_tipo_paciente(e)
+{
+  carrera=document.getElementById("carrera");
+  departamento=document.getElementById("departamento");
+  modalidad=document.getElementById("modalidad");
+  nro_modalidad=document.getElementById("nro_modalidad");
+
+  if(e.value=='1')
+  {
+    carrera.style.display="block";
+    modalidad.style.display="block";
+    nro_modalidad.style.display="block";
+    departamento.style.display="none";
+  }
+  else if(e.value=='2')
+  {
+    departamento.style.display="block";
+    carrera.style.display="none";
+    modalidad.style.display="none";
+    nro_modalidad.style.display="none";
+
+  }
+}
+
 </script>

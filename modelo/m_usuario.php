@@ -84,7 +84,7 @@
 		{
 			$this->conectar();
 			$Fila[0]=0;
-			$sql="SELECT idtusuario,nombrerol,rol,usuario,primernombre,primerapellido,idpersonal FROM tusuario,trol,tpersonal WHERE usuario='$this->lcUsuario'AND clave=md5('$this->lcClave') AND rol=idtrol AND cedulaopasaporte=usuario ";
+			$sql="SELECT idtusuario,nombrerol,rol,usuario,primernombre,primerapellido,idpersonal,cedulaopasaporte as cedula,(SELECT idtdoctor FROM tdoctor WHERE cedula=cedulaopasaporte)as iddoctor FROM tusuario,trol,tpersonal WHERE usuario='$this->lcUsuario'AND clave=md5('$this->lcClave') AND rol=idtrol AND cedulaopasaporte=usuario ";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
@@ -95,6 +95,7 @@
 				$Fila[4]=$laRow['estatus'];
 				$Fila[5]=$laRow['primernombre'].' '.$laRow['primerapellido'];
 				$Fila[6]=$laRow['idpersonal'];
+				$Fila[7]=$laRow['iddoctor'];
 			}
 			$this->desconectar();
 			return $Fila;

@@ -13,16 +13,6 @@
         }
     }
 
-    function activar(id)
-    {
-        if(confirm("¿Desea activar la consulta seleccionada?"))
-        {
-            document.getElementById("cam_idtconsulta").value=id;
-            document.getElementById("cam_estatusconsulta").value='1';
-            document.getElementById("cam_operacion").value='activar_consulta';
-            document.form_consulta.submit();
-        }
-    }
 </script>    
 <h1 class="page-header">Consulta</h1>
 <div class="alert alert-info" role="alert">
@@ -45,26 +35,33 @@
                 $laconsulta=$lobjConsulta->listar();
                 for($i=0;$i<count($laconsulta);$i++)
                 {
-                    $estatus=($laconsulta[$i]['estatusconsulta']==1)?'Activo':'Inactivo';
+
+                    if($laconsulta[$i]['estatusconsulta']=='1')
+                    {
+                      $estatus='Pendiente';
+                      $estatus_color='warning';
+                    }
+                    elseif($laconsulta[$i]['estatusconsulta']=='2')
+                    {
+                      $estatus='Cumplido';
+                      $estatus_color='success';
+
+                    }
+                    elseif($laconsulta[$i]['estatusconsulta']=='3')
+                    {
+                      $estatus_color='danger';
+                      $estatus='Incumplido';
+                    }
                     echo '<tr>';
                     echo '<td>'.$laconsulta[$i]['idconsulta'].'</td>';
                     echo '<td>'.$laconsulta[$i]['primerapellido'].' '.$laconsulta[$i]['primernombre'].'</td>';
                     echo '<td>'.$laconsulta[$i]['nacionalidad'].' '.$laconsulta[$i]['cedulaopasaporte'].'</td>';
                     echo '<td>'.$laconsulta[$i]['fecha_consulta'].'</td>';
-                    echo '<td>'.$estatus.'</td>';
+                    echo '<td><label class="label label-'.$estatus_color.'">'.$estatus.'</label></td>';
                     echo '<td>';
                         echo '<a class="btn-sm btn-info" href="#" onclick="buscar('.$laconsulta[$i]['idconsulta'].')"><i class="fa fa-search icon-white"></i></a>';
                         echo ' <a class="btn-sm btn-success" target="_blank" href="../reporte/consulta.php?id='.$laconsulta[$i]['idconsulta'].'"  ><i class="fa fa-file-text-o"></i></a>';
                         
-                        if($laconsulta[$i]['estatusconsulta']=='1')
-                        {
-                            echo ' <a class="btn-sm btn-danger" href="#" onclick="desactivar('.$laconsulta[$i]['idconsulta'].')" ><i class="fa fa-remove icon-white"></i></a>';
-
-                        }
-                        elseif (($laconsulta[$i]['estatusconsulta']=='0') OR ($laconsulta[$i]['estatusconsulta']==0) )
-                        {
-                            echo ' <a class="btn-sm btn-warning" title="Restaurar" href="#" onclick="activar('.$laconsulta[$i]['idconsulta'].')" ><i class="fa fa-refresh fa-white"></i></a>';
-                        }
                     echo "</td>";
                     echo '</tr>';
                 }

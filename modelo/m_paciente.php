@@ -1,33 +1,10 @@
 <?php
 	require_once('m_mysql.php');
-/*`idpaciente` int(11) NOT NULL AUTO_INCREMENT,
-  `cedulaopasaporte` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `nacionalidad` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `primernombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `segundonombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `primerapellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `segundoapellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
-  `sexo` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  `celular` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `numerohistoria` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  `antecedentepersonal` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `antecedentefamiliar` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `alergia` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `observacion` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `estatuspaciente` int(11) NOT NULL,
-  `idtsede` int(11) NOT NULL,
-  `idparroquia` int(11) NOT NULL,
-  `idtetnia` int(11) NOT NULL,
-  `idttipopaciente` int(11) NOT NULL,
-  `tcarrera_idtcarrera` int(11) NOT NULL,
-  `tdepartamento_iddepartamento` int(11) NOT NULL,*/
 	class clasePaciente extends bd_my
 	{
 		public $idpaciente, $cedulaopasaporte, $nacionalidad, $primernombre, $segundonombre, $primerapellido, $segundoapellido,
 		$direccion, $sexo, $telefono, $celular, $numerohistoria, $antecedentepersonal, $antecedentefamiliar, $alergia, $observacion, $estatuspaciente, $idtsede, $idparroquia, $idtetnia, $idttipopaciente, $tcarrera_idtcarrera, $tdepartamento_iddepartamento, $modalidadpac, $numeromodalidadpac, 
-			$documento;
+			$documento,$embarazada;
 
 		function __CONSTRUCT()
 		{
@@ -57,9 +34,10 @@
 			$this->modalidadpac = '';
 			$this->numeromodalidadpac = '';
 			$this->documento = '';
+			$this->embarazada = '';
 		}
 
-		public function set_datos($idpaciente = '', $cedulaopasaporte = '', $nacionalidad = '', $primernombre = '', $segundonombre = '', $primerapellido = '', $segundoapellido = '', $direccion = '', $sexo = '', $telefono = '', $celular = '', $numerohistoria = '', $antecedentepersonal = '', $antecedentefamiliar = '', $alergia = '', $observacion = '', $estatuspaciente = '', $idtsede = '', $idparroquia = '', $idtetnia = '', $idttipopaciente = '', $tcarrera_idtcarrera = '', $tdepartamento_iddepartamento = '', $modalidadpac = '', $numeromodalidadpac = '', $documento = '')
+		public function set_datos($idpaciente = '', $cedulaopasaporte = '', $nacionalidad = '', $primernombre = '', $segundonombre = '', $primerapellido = '', $segundoapellido = '', $direccion = '', $sexo = '', $telefono = '', $celular = '', $numerohistoria = '', $antecedentepersonal = '', $antecedentefamiliar = '', $alergia = '', $observacion = '', $estatuspaciente = '', $idtsede = '', $idparroquia = '', $idtetnia = '', $idttipopaciente = '', $tcarrera_idtcarrera = '', $tdepartamento_iddepartamento = '', $modalidadpac = '', $numeromodalidadpac = '', $documento = '', $embarazada = '')
 		{
 			$this->idpaciente = $idpaciente;
 			$this->cedulaopasaporte = $cedulaopasaporte;
@@ -87,12 +65,13 @@
 			$this->modalidadpac = $modalidadpac;
 			$this->numeromodalidadpac = $numeromodalidadpac;
 			$this->documento = $documento;
+			$this->embarazada = $embarazada;
 		}
 
 		public function incluir()
 		{
 			$respuesta = false;
-			$SQL = "INSERT INTO `tpaciente`(`cedulaopasaporte`, `nacionalidad`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, `telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, `alergia`, `observacion`, `estatuspaciente`, `idtsede`, `idparroquia`, `idtetnia`, `idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, modalidadpac, numeromodalidadpac, documento) VALUES ('$this->cedulaopasaporte','$this->nacionalidad',UPPER('$this->primernombre'),UPPER('$this->segundonombre'),UPPER('$this->primerapellido'),UPPER('$this->segundoapellido'),UPPER('$this->direccion'),'$this->sexo','$this->telefono','$this->celular','$this->numerohistoria',UPPER('$this->antecedentepersonal'),UPPER('$this->antecedentefamiliar'),UPPER('$this->alergia'),UPPER('$this->observacion'),'1','$this->idtsede','$this->idparroquia','$this->idtetnia','$this->idttipopaciente','$this->tcarrera_idtcarrera','$this->tdepartamento_iddepartamento', '$this->modalidadpac', '$this->numeromodalidadpac', '$this->documento');";
+			$SQL = "INSERT INTO `tpaciente`(`cedulaopasaporte`, `nacionalidad`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, `telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, `alergia`, `observacion`, `estatuspaciente`, `idtsede`, `idparroquia`, `idtetnia`, `idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, modalidadpac, numeromodalidadpac, documento, embarazada) VALUES ('$this->cedulaopasaporte','$this->nacionalidad',UPPER('$this->primernombre'),UPPER('$this->segundonombre'),UPPER('$this->primerapellido'),UPPER('$this->segundoapellido'),UPPER('$this->direccion'),'$this->sexo','$this->telefono','$this->celular','$this->numerohistoria',UPPER('$this->antecedentepersonal'),UPPER('$this->antecedentefamiliar'),UPPER('$this->alergia'),UPPER('$this->observacion'),'1','$this->idtsede','$this->idparroquia','$this->idtetnia','$this->idttipopaciente','$this->tcarrera_idtcarrera','$this->tdepartamento_iddepartamento', '$this->modalidadpac', '$this->numeromodalidadpac', '$this->documento', '$this->embarazada');";
 			$this->conectar();
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();
@@ -102,7 +81,7 @@
 		public function modificar()
 		{
 			$respuesta = false;
-			$SQL = "UPDATE `tpaciente` SET `cedulaopasaporte`='$this->cedulaopasaporte',`nacionalidad`='$this->nacionalidad',`primernombre`=UPPER('$this->primernombre'),`segundonombre`=UPPER('$this->segundonombre'),`primerapellido`=UPPER('$this->primerapellido'),`segundoapellido`=UPPER('$this->segundoapellido'),`direccion`=UPPER('$this->direccion'),`sexo`=UPPER('$this->sexo'),`telefono`='$this->telefono',`celular`='$this->celular',`numerohistoria`='$this->numerohistoria',`antecedentepersonal`=UPPER('$this->antecedentepersonal'),`antecedentefamiliar`=('$this->antecedentefamiliar'),`alergia`=UPPER('$this->alergia'),`observacion`=UPPER('$this->observacion'),`idtsede`='$this->idtsede',`idparroquia`='$this->idparroquia',`idtetnia`='$this->idtetnia',`idttipopaciente`='$this->idttipopaciente',`tcarrera_idtcarrera`='$this->tcarrera_idtcarrera',`tdepartamento_iddepartamento`='$this->tdepartamento_iddepartamento', modalidadpac='$this->modalidadpac', numeromodalidadpac = '$this->numeromodalidadpac', documento='$this->documento' WHERE idpaciente = '$this->idpaciente';";
+			$SQL = "UPDATE `tpaciente` SET `cedulaopasaporte`='$this->cedulaopasaporte',`nacionalidad`='$this->nacionalidad',`primernombre`=UPPER('$this->primernombre'),`segundonombre`=UPPER('$this->segundonombre'),`primerapellido`=UPPER('$this->primerapellido'),`segundoapellido`=UPPER('$this->segundoapellido'),`direccion`=UPPER('$this->direccion'),`sexo`=UPPER('$this->sexo'),`telefono`='$this->telefono',`celular`='$this->celular',`numerohistoria`='$this->numerohistoria',`antecedentepersonal`=UPPER('$this->antecedentepersonal'),`antecedentefamiliar`=('$this->antecedentefamiliar'),`alergia`=UPPER('$this->alergia'),`observacion`=UPPER('$this->observacion'),`idtsede`='$this->idtsede',`idparroquia`='$this->idparroquia',`idtetnia`='$this->idtetnia',`idttipopaciente`='$this->idttipopaciente',`tcarrera_idtcarrera`='$this->tcarrera_idtcarrera',`tdepartamento_iddepartamento`='$this->tdepartamento_iddepartamento', modalidadpac='$this->modalidadpac', numeromodalidadpac = '$this->numeromodalidadpac', documento='$this->documento', embarazada='$this->embarazada' WHERE idpaciente = '$this->idpaciente';";
 			$this->conectar();
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();
@@ -117,7 +96,7 @@
 					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
 					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
 					`alergia`, `observacion`, `estatuspaciente`, `idtsede`, tpaciente.idparroquia, `idtetnia`, 
-					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento` , tmunicipio.idtmunicipio, testado.idestado, numeromodalidadpac, modalidadpac, documento
+					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento` , tmunicipio.idtmunicipio, testado.idestado, numeromodalidadpac, modalidadpac, documento, embarazada
 					FROM `tpaciente`, tparroquia, tmunicipio, testado
 					WHERE idpaciente = '$this->idpaciente'
 					AND tparroquia.idparroquia = tpaciente.idparroquia
@@ -140,7 +119,7 @@
 					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
 					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
 					`alergia`, `observacion`, `estatuspaciente`, `idtsede`, tpaciente.idparroquia, `idtetnia`, 
-					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento` , tmunicipio.idtmunicipio, testado.idestado, numeromodalidadpac, modalidadpac, documento
+					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento` , tmunicipio.idtmunicipio, testado.idestado, numeromodalidadpac, modalidadpac, documento,embarazada
 					FROM `tpaciente`, tparroquia, tmunicipio, testado
 					WHERE cedulaopasaporte = '$this->cedulaopasaporte'
 					AND tparroquia.idparroquia = tpaciente.idparroquia
@@ -164,7 +143,7 @@
 					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
 					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
 					`alergia`, `observacion`, `estatuspaciente`, `idtsede`, tpaciente.idparroquia, `idtetnia`, 
-					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado , documento
+					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado , documento,embarazada
 					, numeromodalidadpac, modalidadpac
 					FROM `tpaciente` , tparroquia, tmunicipio, testado
 					WHERE tparroquia.idparroquia = tpaciente.idparroquia
@@ -200,7 +179,7 @@
 					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
 					`alergia`, `observacion`, `estatuspaciente`, `idtsede`, tpaciente.idparroquia, `idtetnia`, 
 					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado 
-					, numeromodalidadpac, modalidadpac, motivocon, carrera
+					, numeromodalidadpac, modalidadpac, motivocon, carrera,embarazada
 					FROM `tpaciente` , tparroquia, tmunicipio, testado, tconsulta, tcarrera
 					WHERE tparroquia.idparroquia = tpaciente.idparroquia
 					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio

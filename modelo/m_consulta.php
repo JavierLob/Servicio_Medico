@@ -3,7 +3,7 @@
 
 	class claseConsulta extends bd_my
 	{
-		public $idconsulta, $estatusconsulta, $fecha_consulta, $pulso, $peso, $fc, $fr, $ta, $talla, $temperatura, $altura, $observacionconsulta, $idtdoctor, $tpaciente_idpaciente,$examen,$idtipoexamen,$idlaboratorio,$referira,$idtiporeferencia,$idcentroasistencial,$motivocon;
+		public $idconsulta, $estatusconsulta, $fecha_consulta, $pulso, $peso, $fc, $fr, $ta, $talla, $temperatura, $altura, $observacionconsulta, $idtdoctor, $tpaciente_idpaciente,$examen,$idtipoexamen,$idlaboratorio,$referira,$idtiporeferencia,$idcentroasistencial,$motivocon,$IdExamen,$IdReferencia,$Estatus;
 
 		function __CONSTRUCT()
 		{
@@ -22,6 +22,9 @@
 			$this->idtdoctor = '';
 			$this->tpaciente_idpaciente = '';
 			$this->motivocon = '';
+			$this->IdExamen = '';
+			$this->IdReferencia = '';
+			$this->Estatus = '';
 		}
 
 		public function set_datos($estatusconsulta= '', $fecha_consulta= '', $pulso= '', $peso= '', $fc= '', $fr= '', $ta= '', $talla= '', $temperatura= '', $altura= '', $observacionconsulta= '', $idtdoctor= '', $tpaciente_idpaciente= '', $motivocon= '')
@@ -45,6 +48,24 @@
 		public function set_Consulta($idconsulta)
 		{
 			$this->idconsulta = $idconsulta;
+
+		}
+
+		public function set_IdExamen($IdExamen)
+		{
+			$this->IdExamen = $IdExamen;
+
+		}
+
+		public function set_IdReferencia($IdReferencia)
+		{
+			$this->IdReferencia = $IdReferencia;
+
+		}
+
+		public function set_Estatus($Estatus)
+		{
+			$this->Estatus = $Estatus;
 
 		}
 
@@ -82,7 +103,16 @@
 						for ($i=0; $i <count($this->examen) ; $i++) 
 						{ 
 							$sql="INSERT INTO texamen (`examen`, `idconsulta`, `idttipoexamen`, `idtlaboratorio`, `estatusexamen`)VALUES(UPPER('".$this->examen[$i]."'),'$idconsulta','".$this->idtipoexamen[$i]."','".$this->idlaboratorio[$i]."','1');";
-							echo $sql;
+							if(!$respuesta = $this->ejecutar($sql))
+							{
+								$this->rollback();
+								break;
+							}
+						}
+
+						if($respuesta)
+						{
+							$sql="UPDATE tpaciente SET cantidad_examen=cantidad_examen+".count($this->examen)." WHERE idpaciente='$this->tpaciente_idpaciente'";
 							if(!$respuesta = $this->ejecutar($sql))
 							{
 								$this->rollback();
@@ -96,6 +126,16 @@
 						for ($i=0; $i <count($this->referira) ; $i++) 
 						{ 
 							$sql="INSERT INTO treferencia (`referidoa`, `idconsulta`, `tcentroasistencial_idtcentroasistencial`, `ttiporeferencia_idtiporeferencia`, `estatusreferencia`)VALUES(UPPER('".$this->referira[$i]."'),'$idconsulta','".$this->idcentroasistencial[$i]."','".$this->idtiporeferencia[$i]."','1');";
+							if(!$respuesta = $this->ejecutar($sql))
+							{
+								$this->rollback();
+								break;
+							}
+						}
+
+						if($respuesta)
+						{
+							$sql="UPDATE tpaciente SET cantidad_referencia=cantidad_referencia+".count($this->referira)." WHERE idpaciente='$this->tpaciente_idpaciente'";
 							if(!$respuesta = $this->ejecutar($sql))
 							{
 								$this->rollback();
@@ -160,7 +200,7 @@
 			$Fila = array();
 			$this->conectar();
 			$cont=0;
-			$sql="SELECT examen,laboratorio,tipoexamen FROM texamen,tlaboratorio,ttipoexamen WHERE idconsulta='$this->idconsulta' AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio;";
+			$sql="SELECT examen,laboratorio,tipoexamen,estatusexamen,texamen.idtexamen FROM texamen,tlaboratorio,ttipoexamen WHERE idconsulta='$this->idconsulta' AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{
@@ -169,6 +209,108 @@
 			}
 			$this->desconectar();
 			return $Fila;
+		}
+
+		public function validar_examen()
+		{
+			$this->conectar();
+			$sql="SELECT cantidad_examen FROM tpaciente WHERE idpaciente='$this->tpaciente_idpaciente'";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$cantidad_examen=$laRow['cantidad_examen'];
+			}
+			$this->desconectar();
+			return $cantidad_examen;
+		}
+
+		public function cambiar_estatus_referencia()
+		{
+			$this->conectar();
+			$resultado=false;
+			$sql="UPDATE treferencia SET estatusreferencia='$this->Estatus' WHERE idreferencia='$this->IdReferencia'";
+			if($resultado=$this->ejecutar($sql))
+			{
+				$resultado=true;
+				$this->cambiar_estatus_consulta();
+			}
+			$this->desconectar();
+			return $resultado;
+		}
+
+		public function cambiar_estatus_consulta()
+		{
+			$this->conectar();
+			$sql="SELECT idconsulta as id,(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id) as examenes,
+			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='1')as examenes_pendiente,
+			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='2')as examenes_cumplido,
+			(SELECT COUNT(idtexamen) FROM texamen WHERE idconsulta=id AND estatusexamen='3')as examenes_incumplido,
+			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id)as referencias,
+			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='1')as referencias_pendiente,
+			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='2')as referencias_cumplido,
+			(SELECT COUNT(idreferencia) FROM treferencia WHERE idconsulta=id AND estatusreferencia='3')as referencias_incumplido FROM tconsulta";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$referencia=$examen=$estatus='';
+				if($laRow['examenes']==$laRow['examenes_cumplido'])
+					$examen='2';
+				elseif($laRow['examenes']==$laRow['examenes_pendiente'])
+					$examen='1';
+				elseif($laRow['examenes']==$laRow['examenes_incumplido'])
+					$examen='3';
+				elseif(($laRow['examenes_pendiente']<$laRow['examenes'])&&($laRow['examenes_pendiente']>0))
+					$examen='1';
+				elseif($laRow['examenes']!='')
+					$examen='2';
+
+				if($laRow['referencias']==$laRow['referencias_cumplido'])
+					$referencia='2';
+				elseif($laRow['referencias']==$laRow['referencias_pendiente'])
+					$referencia='1';
+				elseif($laRow['referencias']==$laRow['referencias_incumplido'])
+					$referencia='3';
+				elseif(($laRow['referencias_pendiente']<$laRow['referencias'])&&($laRow['referencias_pendiente']>0))
+					$referencia='1';
+				elseif($laRow['referencias']!='')
+					$referencia='2';
+
+
+
+				if(($examen=='2')||($referencia=='2'))
+					$estatus='1';
+				
+				if(($examen=='1')||($referencia=='1'))
+					$estatus='1';
+				
+				if(($examen=='3')||($referencia=='3'))
+					$estatus='3';
+				
+				if(($examen=='2')&&($referencia=='2'))
+					$estatus=2;
+				
+				if(($examen=='3')&&($referencia=='3'))
+					$estatus='3';
+
+				$sql="UPDATE tconsulta SET estatusconsulta='$estatus' WHERE idconsulta='".$laRow['id']."'";
+				$this->ejecutar($sql);
+	
+			}
+			$this->desconectar();
+		}
+
+		public function cambiar_estatus_examen()
+		{
+			$this->conectar();
+			$resultado=false;
+			$sql="UPDATE texamen SET estatusexamen='$this->Estatus' WHERE idtexamen='$this->IdExamen'";
+			if($resultado=$this->ejecutar($sql))
+			{
+				$resultado=true;
+				$this->cambiar_estatus_consulta();
+			}
+			$this->desconectar();
+			return $resultado;
 		}
 
 		public function consultar_examen_reporte($id)
@@ -213,7 +355,7 @@
 			$Fila = array();
 			$this->conectar();
 			$cont=0;
-			$sql="SELECT nombrecentroasistencial,tiporeferencia,referidoa FROM treferencia,ttiporeferencia,tcentroasistencial WHERE idconsulta='$this->idconsulta' AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia;";
+			$sql="SELECT nombrecentroasistencial,tiporeferencia,referidoa,treferencia.estatusreferencia,treferencia.idreferencia FROM treferencia,ttiporeferencia,tcentroasistencial WHERE idconsulta='$this->idconsulta' AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{
@@ -222,6 +364,20 @@
 			}
 			$this->desconectar();
 			return $Fila;
+		}
+
+		public function validar_referencia()
+		{
+			$this->conectar();
+			$cont=0;
+			$sql="SELECT cantidad_referencia FROM tpaciente WHERE idpaciente='$this->tpaciente_idpaciente' ";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$cantidad_referencia=$laRow['cantidad_referencia'];
+			}
+			$this->desconectar();
+			return $cantidad_referencia;
 		}
 
 		public function consultar_referir_reporte($id)

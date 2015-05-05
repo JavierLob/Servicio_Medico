@@ -31,6 +31,7 @@
 			$_SESSION['clave']=$clave;//Se guarda la clave del usuario.
 			$_SESSION['nombreusuario']=$datosUsuario[5];//Se guarda el nombre del usuario.
 			$_SESSION['idpersonal']=$datosUsuario[6];//Se guarda el id de personal del usuario.
+			$_SESSION['iddoctor']=$datosUsuario[7];//Se guarda el id de personal del usuario.
 			$_SESSION['msj']='Bienvedido al sistema '.$_SESSION['nombreusuario'].'.';//Se guarda un mensaje, que posterior mente será borrado.
 			header('location: ../vista/intranet.php');//Y se redirecciona al archivo intranet.php
 		}

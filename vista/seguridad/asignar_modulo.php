@@ -45,12 +45,6 @@
               </select>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cam_iconomod">Posición <span class="label label-warning" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="right" data-content="Posición del módulo en el menú."><i class="fa fa-question" ></i></span></label>
-                
-            </div>
-        </div>
     </div>
     <h3>Módulos</h3>
     <div class="row">
@@ -86,7 +80,7 @@
                     </div>';                        
                     echo '<div class="col-md-3">
                             <div class="form-group">
-                                <input class="form-control" type="number" min="1" max="'.count($laModulos).'" name="posicion[]" id="cam_posicion" value="'.$posicion.'" required/>
+                                <input class="form-control" type="number" min="1" max="'.count($laModulos).'" name="posicion[]" id="cam_posicion" value="'.$posicion.'"/>
                             </div>
                         </div>
                     </div>';
@@ -106,10 +100,12 @@
 <script>
     function validar()
     {
+
+        idmodulo=document.getElementsByName("idmodulo[]");
         posicion=document.getElementsByName("posicion[]");
         for(i=0;i<posicion.length;i++)
         {
-             if(posicion[i].value=='')
+             if((idmodulo[i].checked==true) && (posicion[i].value==''))
             {
                 posicion[i].focus();
                 alert("Por favor seleccione una posición para el módulo.");

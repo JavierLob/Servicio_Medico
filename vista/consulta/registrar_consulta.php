@@ -5,7 +5,7 @@
 <form role="form" class="form" action="../control/c_consulta.php" method="POST" name="form_consulta">
     <input type="hidden" value="registrar_consulta" name="operacion" />
     <input type="hidden"  name="idconsulta" id="cam_idconsulta"/>
-    <input type="hidden"  name="idtdoctor" id="cam_idtdoctor" value="1"/>
+    <input type="hidden"  name="idtdoctor" id="cam_idtdoctor" value="<?php echo $_SESSION['iddoctor'];?>"/>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -20,7 +20,7 @@
                     $lapacientes=$lobjPaciente->listar();
                     for($i=0;$i<count($lapacientes);$i++)
                     {
-                      echo '<option value="'.$lapacientes[$i]['idpaciente'].'">'.$lapacientes[$i]['nacionalidad'].'-'.$lapacientes[$i]['cedulaopasaporte'].' / '.$lapacientes[$i]['primerapellido'].' '.$lapacientes[$i]['primernombre'].'</option>';
+                      echo '<option id="'.$lapacientes[$i]['embarazada'].'" value="'.$lapacientes[$i]['idpaciente'].'">'.$lapacientes[$i]['nacionalidad'].'-'.$lapacientes[$i]['cedulaopasaporte'].' / '.$lapacientes[$i]['primerapellido'].' '.$lapacientes[$i]['primernombre'].'</option>';
                     }
                   ?>
                 </select>
@@ -172,40 +172,7 @@
             <th><button class="btn btn-success" type="button" onclick="agregar_examen()"><i class="fa fa-plus"></i></button></th>
           </thead>
           <tbody id="filas_examen">
-            <tr>
-              <td><input type="text" name="examen[]" id="cam_examen0"  class="form-control" /></td>
-              <td>
-                <select class="form-control" name="idttipoexamen[]" onchange="validar_repetido_examen(this)" id="cam_idttipoexamen0">
-                  <option value=""></option>
-                  <?php
-                    require_once('../modelo/m_tipoexamen.php');
-                    $lobjTipoExamen=new claseTipoExamen;
-                    $latipoexamenes=$lobjTipoExamen->listar();
-                    for ($i=0;$i<count($latipoexamenes);$i++) 
-                    { 
-                      echo '<option value="'.$latipoexamenes[$i]['idttipoexamen'].'">'.$latipoexamenes[$i]['tipoexamen'].'</option>';
-                    }
-                  ?>
-                </select>
-              </td>
-              <td>
-                <select class="form-control" name="idtlaboratorio[]" id="cam_idtlaboratorio0">
-                  <option value=""></option>
-                  <?php
-                    require_once('../modelo/m_laboratorio.php');
-                    $lobjLaboratorio=new claseLaboratorio;
-                    $lalaboratorios=$lobjLaboratorio->listar();
-                    for ($i=0;$i<count($lalaboratorios);$i++) 
-                    { 
-                      echo '<option value="'.$lalaboratorios[$i]['idtlaboratorio'].'">'.$lalaboratorios[$i]['laboratorio'].'</option>';
-                    }
-                  ?>
-                </select>
-              </td>
-              <td>
-                <button class="btn btn-danger" type="button" onclick="quitar_examen(this)"><i class="fa fa-minus"></i></button>
-              </td>
-            </tr>
+            
           </tbody>
         </table>
         <input type="hidden" id="cam_contador_examen" value="0">
@@ -222,40 +189,7 @@
             <th><button class="btn btn-success" type="button" onclick="agregar_referir()"><i class="fa fa-plus"></i></button></th>
           </thead>
           <tbody id="filas_referir">
-            <tr>
-              <td><input type="text" name="referira[]" id="cam_referira0" class="form-control" /></td>
-              <td>
-                <select class="form-control" name="idtiporeferencia[]" onchange="validar_repetido_referencia(this)" id="cam_idtiporeferencia0">
-                  <option value=""></option>
-                  <?php
-                    require_once('../modelo/m_tiporeferencia.php');
-                    $lobjTipoReferencia=new claseTipoReferencia;
-                    $latiporeferencias=$lobjTipoReferencia->listar();
-                    for ($i=0;$i<count($latiporeferencias);$i++) 
-                    { 
-                      echo '<option value="'.$latiporeferencias[$i]['idtiporeferencia'].'">'.$latiporeferencias[$i]['tiporeferencia'].'</option>';
-                    }
-                  ?>
-                </select>
-              </td>
-              <td>
-                <select class="form-control" name="idtcentroasistencial[]" id="cam_idtcentroasistencial0">
-                  <option value=""></option>
-                  <?php
-                    require_once('../modelo/m_centroasistencial.php');
-                    $lobjCentroAsistencial=new claseCentroAsistencial;
-                    $lacentroasistencialess=$lobjCentroAsistencial->listar();
-                    for ($i=0;$i<count($lacentroasistencialess);$i++) 
-                    { 
-                      echo '<option value="'.$lacentroasistencialess[$i]['idtcentroasistencial'].'">'.$lacentroasistencialess[$i]['nombrecentroasistencial'].'</option>';
-                    }
-                  ?>
-                </select>
-              </td>
-              <td>
-                <button class="btn btn-danger" type="button" onclick="quitar_referir(this)"><i class="fa fa-minus"></i></button>
-              </td>
-            </tr>
+            
           </tbody>
         </table>
         <input type="hidden" id="cam_contador_referir" value="0">
@@ -266,7 +200,7 @@
         <button type="button" class="btn btn-danger center-block" name="btn_regresar" id="btn_regresar" onclick="window.location.href='?vista=consulta/consulta';"><i class="fa fa-chevron-left"></i> Regresar</button>
       </div>
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success center-block" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
+        <button type="submit" class="btn btn-success center-block" onclick="return validar();" name="btn_enviar" id="btn_enviar"><i class="fa fa-check" ></i> Aceptar</button>
       </div>
     </div>
 </form>
@@ -461,5 +395,85 @@ function validar_repetido_referencia(e)
     }
 
   }
+}
+
+function validar()
+{
+  var url="../control/c_consulta.php";
+  examen=document.getElementsByName("examen[]");
+  tpaciente_idpaciente=document.getElementById("cam_tpaciente_idpaciente");
+  paciente=tpaciente_idpaciente.value;
+  referira=document.getElementsByName("referira[]");
+  cantidad_examen=examen.length;
+  cantidad_referencia=referira.length;
+  x=tpaciente_idpaciente.selectedIndex;
+  embarazada = tpaciente_idpaciente.options[x].id;
+
+   if(paciente!='')
+    {
+      if(embarazada=='0')
+      {
+        if(cantidad_examen>0)
+        {
+         $.ajax({   
+              type: "POST",
+              url:url,
+              data:{tpaciente_idpaciente:paciente,operacion:'validar_examen'},
+              success: function(datos){
+                posibles_examenes=(3-datos);
+                  if(datos==3)
+                  {
+                    alert("Este paciente ya cumplió con el limite de 3 examenes semestrales, no puede realizar otro.");
+                    return false;
+                  } 
+                  else if(cantidad_examen>posibles_examenes)
+                  {
+                    alert("Este paciente puede realizar :"+posibles_examenes+" examenes.");
+                    return false;
+                  } 
+                  else if(cantidad_examen<=posibles_examenes)
+                  {
+                    return true;
+                  }
+               }
+          });
+        }
+        if(cantidad_referencia>0)
+        {
+         $.ajax({   
+              type: "POST",
+              url:url,
+              data:{tpaciente_idpaciente:paciente,operacion:'validar_referencia'},
+              success: function(datos){
+                   posibles_referencias=(3-datos);
+                  if(datos==3)
+                  {
+                    alert("Este paciente ya cumplió con el limite de 3 examenes semestrales, no puede realizar otro.");
+                    return false;
+                  } 
+                  else if(cantidad_referencia>posibles_referencias)
+                  {
+                    alert("Este paciente puede realizar :"+posibles_referencias+" referencias.");
+                    return false;
+                  } 
+                  else if(cantidad_referencia<=posibles_referencias)
+                  {
+                    return true;
+                  }
+               }
+          });
+        }
+      }
+      else
+      {
+        return true;
+      }
+    }
+    else
+    {
+      alert("Por favor seleccione un paciente.");
+      tpaciente_idpaciente.focus();
+
+    }
 }
 </script>

@@ -55,6 +55,14 @@
 				$sql="INSERT INTO tusuario (`usuario`, `clave`, `rol`, `estatus`, tpersonal_idpersonal)VALUES('$this->cedulaopasaporte',md5('$this->cedulaopasaporte'),'$this->idrol','1','$this->ttipopersonal_idtipo_personal')";
 				if(!$respuesta = $this->ejecutar($sql))
 					$this->rollback();
+
+				if(($respuesta)&&($this->idrol=='2'))
+				{
+					$sql="INSERT INTO `tdoctor`(`nombredoctor`, `estadodoctor`,cedulaopasaporte) VALUES (UPPER('".$this->primernombre." ".$this->segundonombre." ".$this->primerapellido." ".$this->segundoapellido."'),'1','$this->cedulaopasaporte')";
+					if(!$respuesta = $this->ejecutar($sql))
+						$this->rollback();
+
+				}
 			}
 			if($respuesta)
 				$this->commit();
