@@ -78,16 +78,28 @@
               </select>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono fijo del paciente."></i></strong></label>
               <input type="text" name="telefono" maxlength="11" class="form-control solo-numeros" id="cam_telefono" >
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono movil del paciente."></i></strong></label>
               <input type="text" name="celular" maxlength="11" class="form-control solo-numeros" id="cam_celular" >
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+              <label for="cam_celular">Fecha nacimiento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de nacimiento del paciente."></i></strong></label>
+              <input type="text" name="fechanacimiento" class="form-control datepicker" id="cam_fechanacimiento" >
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+              <label for="cam_celular">Edad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Edad del paciente."></i></strong></label>
+              <input type="text" name="edad" class="form-control" id="cam_edad" >
             </div>
         </div>
         <div class="col-md-12">
@@ -417,105 +429,126 @@
 </form>
 
 <script>
-
-$("#cam_cedulaopasaporte").change(function(){
-    var valor = $(this).val();
-    if((valor.length < 7) || (valor.length > 8))
-    {
-        $("#btn_enviar").attr('disabled', true);
-        $(this).focus();
-        alert("La Cédula o pasaporte debe ser mayor a 7 digitos y menor o igual a 8");
-    }
-    else
-    {
-        $("#btn_enviar").attr('disabled', false);
-    }
-   
-    $.ajax({  
-        type: "POST",  
-        url: "../control/c_paciente.php",  
-        data: {cedulaopasaporte:valor, nacionalidad: $("#cam_nacionalidad").val(),operacion:"validar"},  
-        success: function(msg){
-            if(msg=='1')
-            {
-                $("#cam_cedulaopasaporte").val('');
-                alert('Ya existe un paciente con esa cédula');                              
-            }
-        }
+<?php
+$fecha = date('d-m-Y');
+$nuevafecha = strtotime ( '-15 year' , strtotime ( $fecha ) ) ;
+$nuevafecha_ini = strtotime ( '-80 year' , strtotime ( $fecha ) ) ;
+$nuevafecha = date ( 'd-m-Y' , $nuevafecha );
+$fecha_inicio = date ( 'd-m-Y' , $nuevafecha_ini );
+?>
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        format:'dd-mm-yyyy',
+        startDate: "<?php echo $fecha_inicio;?>",
+        endDate: "<?php echo $nuevafecha;?>  "        
     });
-});
-$("#cam_cedulaopasaporte").keypress(function(){
-    if(!$(this).val().match(numeros))
-    {
-        var valor = (this.value + '').replace(numeros, '');
-        $(this).val(valor);
-        alert('Debe ingresar solo números');
-        $(".btn-success").attr('disabled', true);
-    }
-    else
-    {
-        $(".btn-success").attr('disabled', false);
-    }
-});
-$("#cam_alergico").change(function(){
-    valor=$("#cam_alergico").val();
-    if(valor=='1')
-      $("#alergia").animate({ height: 'show', opacity: 'show' }, 'slow');
-    if(valor=='0')
-      $("#alergia").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-});
-$("#cam_discapacidades").change(function(){
-    valor=$("#cam_discapacidades").val();
-    if(valor=='1')
-      $("#discapacidad").animate({ height: 'show', opacity: 'show' }, 'slow');
-    if(valor=='0')
-      $("#discapacidad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-});
-$("#cam_cronico").change(function(){
-    valor=$("#cam_cronico").val();
-    if(valor=='1')
-      $("#enfermedad").animate({ height: 'show', opacity: 'show' }, 'slow');
-    if(valor=='0')
-      $("#enfermedad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-});
-$("#cam_estado").change(function() { 
-
-    var valor = $("#cam_estado").val();
-
-    $.ajax({  
-        type: "POST",  
-        url: "../control/c_municipio.php",  
-        data: {idestado:valor,operacion:"consultar_municipios"},  
-        success: function(msg){
-            $("#cam_municipio").html(msg);                       
-        }
+    $("#cam_fechanacimiento").change(function(){
+        var fecha = $(this).val();
+        var dividir = fecha.split('-');
+        var fecha = dividir[2]+'-'+dividir[1]+'-'+dividir[0];
+        var anos = calcularEdad(fecha);
+        $("#cam_edad").val(anos+' Años');
     });
-});
 
-$("#cam_modalidadpac").change(function(){
-    var modalidad = $(this).val();
-    $("#cam_numeromodalidadpac").val('');
-    $("#cam_numeromodalidadpac option").each(function(indice, elemento){
-        if($(elemento).attr('data-padre') == modalidad)
-            $(elemento).show();
+    $("#cam_cedulaopasaporte").change(function(){
+        var valor = $(this).val();
+        if((valor.length < 7) || (valor.length > 8))
+        {
+            $("#btn_enviar").attr('disabled', true);
+            $(this).focus();
+            alert("La Cédula o pasaporte debe ser mayor a 7 digitos y menor o igual a 8");
+        }
         else
-            $(elemento).hide();
-    });
-});
-
-$("#cam_municipio").change(function() { 
-
-    var valor = $("#cam_municipio").val();
-
-    $.ajax({  
-        type: "POST",  
-        url: "../control/c_parroquia.php",  
-        data: {idtmunicipio:valor,operacion:"consultar_parroquias"},  
-        success: function(msg){
-                    $("#status_mun").hide();
-                    //$("#btn_enviar").prop( "disabled", false );
-                    $("#cam_idparroquia").html(msg);                       
+        {
+            $("#btn_enviar").attr('disabled', false);
         }
+       
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_paciente.php",  
+            data: {cedulaopasaporte:valor, nacionalidad: $("#cam_nacionalidad").val(),operacion:"validar"},  
+            success: function(msg){
+                if(msg=='1')
+                {
+                    $("#cam_cedulaopasaporte").val('');
+                    alert('Ya existe un paciente con esa cédula');                              
+                }
+            }
+        });
+    });
+    $("#cam_cedulaopasaporte").keypress(function(){
+        if(!$(this).val().match(numeros))
+        {
+            var valor = (this.value + '').replace(numeros, '');
+            $(this).val(valor);
+            alert('Debe ingresar solo números');
+            $(".btn-success").attr('disabled', true);
+        }
+        else
+        {
+            $(".btn-success").attr('disabled', false);
+        }
+    });
+    $("#cam_alergico").change(function(){
+        valor=$("#cam_alergico").val();
+        if(valor=='1')
+          $("#alergia").animate({ height: 'show', opacity: 'show' }, 'slow');
+        if(valor=='0')
+          $("#alergia").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    });
+    $("#cam_discapacidades").change(function(){
+        valor=$("#cam_discapacidades").val();
+        if(valor=='1')
+          $("#discapacidad").animate({ height: 'show', opacity: 'show' }, 'slow');
+        if(valor=='0')
+          $("#discapacidad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    });
+    $("#cam_cronico").change(function(){
+        valor=$("#cam_cronico").val();
+        if(valor=='1')
+          $("#enfermedad").animate({ height: 'show', opacity: 'show' }, 'slow');
+        if(valor=='0')
+          $("#enfermedad").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    });
+    $("#cam_estado").change(function() { 
+
+        var valor = $("#cam_estado").val();
+
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_municipio.php",  
+            data: {idestado:valor,operacion:"consultar_municipios"},  
+            success: function(msg){
+                $("#cam_municipio").html(msg);                       
+            }
+        });
+    });
+
+    $("#cam_modalidadpac").change(function(){
+        var modalidad = $(this).val();
+        $("#cam_numeromodalidadpac").val('');
+        $("#cam_numeromodalidadpac option").each(function(indice, elemento){
+            if($(elemento).attr('data-padre') == modalidad)
+                $(elemento).show();
+            else
+                $(elemento).hide();
+        });
+    });
+
+    $("#cam_municipio").change(function() { 
+
+        var valor = $("#cam_municipio").val();
+
+        $.ajax({  
+            type: "POST",  
+            url: "../control/c_parroquia.php",  
+            data: {idtmunicipio:valor,operacion:"consultar_parroquias"},  
+            success: function(msg){
+                        $("#status_mun").hide();
+                        //$("#btn_enviar").prop( "disabled", false );
+                        $("#cam_idparroquia").html(msg);                       
+            }
+        });
     });
 });
 
@@ -748,4 +781,56 @@ function activar_tipo_paciente(e)
   }
 }
 
+
+function calcularEdad(fecha_user)
+{
+    var fecha = fecha_user;
+    // Si la fecha es correcta, calculamos la edad
+    var values=fecha.split("-");
+    var dia = values[2];
+    var mes = values[1];
+    var ano = values[0];
+
+    // cogemos los valores actuales
+    var fecha_hoy = new Date();
+    var ahora_ano = fecha_hoy.getYear();
+    var ahora_mes = fecha_hoy.getMonth()+1;
+    var ahora_dia = fecha_hoy.getDate();
+
+    // realizamos el calculo
+    var edad = (ahora_ano + 1900) - ano;
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if ((mes == ahora_mes) && (ahora_dia < dia))
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+
+    // calculamos los meses
+    var meses=0;
+    if(ahora_mes>mes)
+        meses=ahora_mes-mes;
+    if(ahora_mes<mes)
+        meses=12-(mes-ahora_mes);
+    if(ahora_mes==mes && dia>ahora_dia)
+        meses=11;
+
+    // calculamos los dias
+    var dias=0;
+    if(ahora_dia>dia)
+        dias=ahora_dia-dia;
+    if(ahora_dia<dia)
+    {
+        ultimoDiaMes=new Date(ahora_ano, ahora_mes, 0);
+        dias=ultimoDiaMes.getDate()-(dia-ahora_dia);
+    }
+ 
+    return edad;
+}
 </script>

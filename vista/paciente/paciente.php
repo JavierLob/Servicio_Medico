@@ -48,7 +48,7 @@
                 {
                     $estatus=($lapaciente[$i]['estatuspaciente']==1)?'Activo':'Inactivo';
                     echo '<tr>';
-                    echo '<td>'.$lapaciente[$i]['idpaciente'].'</td>';
+                    echo '<td>'.$lapaciente[$i]['inicial'].$lapaciente[$i]['idpaciente'].'</td>';
                     echo '<td>'.$lapaciente[$i]['cedulaopasaporte'].'</td>';
                     echo '<td>'.$lapaciente[$i]['primernombre'].' '.$lapaciente[$i]['segundonombre'].' '.$lapaciente[$i]['primerapellido'].' '.$lapaciente[$i]['segundoapellido'].'</td>';
                     echo '<td>'.$lapaciente[$i]['sexo'].'</td>';

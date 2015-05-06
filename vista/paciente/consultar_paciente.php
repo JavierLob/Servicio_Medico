@@ -25,7 +25,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_numerohistoria">Nro. Historia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Número de historia del paciente."></i></strong></label>
-              <input readOnly value="00-000<?php print($laPaciente['idpaciente']); ?>" type="text" name="numerohistoria" maxlength="11" class="form-control solo-numeros" id="cam_numerohistoria" required>
+              <input readOnly value="<?php print($laPaciente['inicial'].$laPaciente['idpaciente']); ?>" type="text" name="numerohistoria" maxlength="11" class="form-control solo-numeros" id="cam_numerohistoria" required>
             </div>
         </div>
         <div class="col-md-6">
@@ -82,7 +82,7 @@
               <textarea name="direccion" maxlength="1000" class="form-control letras_numeros" id="cam_direccion" ><?php print($laPaciente['direccion']); ?></textarea>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_sexo">Sexo <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Sexo del paciente."></i></strong></label>
               <select name="sexo" id="cam_sexo" class="form-control">
@@ -91,16 +91,28 @@
               </select>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_telefono">Teléfono Fijo<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono fijo del paciente."></i></strong></label>
               <input type="text" name="telefono" maxlength="15" value="<?php print($laPaciente['telefono']); ?>" class="form-control solo-numeros" id="cam_telefono" >
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_celular">Teléfono Movil <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Teléfono movil del paciente."></i></strong></label>
               <input type="text" name="celular" maxlength="15" value="<?php print($laPaciente['celular']); ?>" class="form-control solo-numeros" id="cam_celular" >
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+              <label for="cam_celular">Fecha nacimiento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de nacimiento del paciente."></i></strong></label>
+              <input type="text" name="fechanacimiento" class="form-control datepicker" id="cam_fechanacimiento" value="<?php print($laPaciente['fechanacimiento']);?>" >
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+              <label for="cam_celular">Edad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Edad del paciente."></i></strong></label>
+              <input type="text" name="edad" class="form-control" id="cam_edad" >
             </div>
         </div>
         <div class="col-md-12">
@@ -459,6 +471,26 @@
 </form>
 
 <script>
+<?php
+$fecha = date('d-m-Y');
+$nuevafecha = strtotime ( '-15 year' , strtotime ( $fecha ) ) ;
+$nuevafecha_ini = strtotime ( '-80 year' , strtotime ( $fecha ) ) ;
+$nuevafecha = date ( 'd-m-Y' , $nuevafecha );
+$fecha_inicio = date ( 'd-m-Y' , $nuevafecha_ini );
+?>
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        format:'dd-mm-yyyy',
+        startDate: "<?php echo $fecha_inicio;?>",
+        endDate: "<?php echo $nuevafecha;?>  "        
+    });
+    $("#cam_fechanacimiento").change(function(){
+        var fecha = $(this).val();
+        var dividir = fecha.split('-');
+        var fecha = dividir[2]+'-'+dividir[1]+'-'+dividir[0];
+        var anos = calcularEdad(fecha);
+        $("#cam_edad").val(anos+' Años');
+    });
 $("#cam_cedulaopasaporte").change(function(){
     var valor = $(this).val();
     if((valor.length < 7) || (valor.length > 8))
@@ -544,6 +576,11 @@ $("#cam_municipio").change(function() {
         }
     });
 });
+var fecha = $("#cam_fechanacimiento").val();
+var dividir = fecha.split('-');
+var fecha = dividir[2]+'-'+dividir[1]+'-'+dividir[0];
+var anos = calcularEdad(fecha);
+$("#cam_edad").val(anos+' Años');
 
 seleccionar = function()
 {
@@ -560,6 +597,9 @@ seleccionar = function()
 }
 
 seleccionar();
+});
+
+
 
 
 function agregar_alergia()
@@ -752,5 +792,57 @@ function validar_repetido_enfermedad(e)
     }
 
   }
+}
+
+function calcularEdad(fecha_user)
+{
+    var fecha = fecha_user;
+    // Si la fecha es correcta, calculamos la edad
+    var values=fecha.split("-");
+    var dia = values[2];
+    var mes = values[1];
+    var ano = values[0];
+
+    // cogemos los valores actuales
+    var fecha_hoy = new Date();
+    var ahora_ano = fecha_hoy.getYear();
+    var ahora_mes = fecha_hoy.getMonth()+1;
+    var ahora_dia = fecha_hoy.getDate();
+
+    // realizamos el calculo
+    var edad = (ahora_ano + 1900) - ano;
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if ((mes == ahora_mes) && (ahora_dia < dia))
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+
+    // calculamos los meses
+    var meses=0;
+    if(ahora_mes>mes)
+        meses=ahora_mes-mes;
+    if(ahora_mes<mes)
+        meses=12-(mes-ahora_mes);
+    if(ahora_mes==mes && dia>ahora_dia)
+        meses=11;
+
+    // calculamos los dias
+    var dias=0;
+    if(ahora_dia>dia)
+        dias=ahora_dia-dia;
+    if(ahora_dia<dia)
+    {
+        ultimoDiaMes=new Date(ahora_ano, ahora_mes, 0);
+        dias=ultimoDiaMes.getDate()-(dia-ahora_dia);
+    }
+ 
+    return edad;
 }
 </script>
