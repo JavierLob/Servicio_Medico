@@ -90,16 +90,16 @@
               <input type="text" name="celular" maxlength="11" class="form-control solo-numeros" id="cam_celular" >
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
-              <label for="cam_celular">Fecha nacimiento <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de nacimiento del paciente."></i></strong></label>
-              <input type="text" name="fechanacimiento" class="form-control datepicker" id="cam_fechanacimiento" >
+                <label for="cam_celular">Fecha nacimiento<strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de nacimiento del paciente."></i></strong></label>
+                <input type="text" name="fechanacimiento" class="form-control datepicker" id="cam_fechanacimiento" >
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             <div class="form-group">
               <label for="cam_celular">Edad <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Edad del paciente."></i></strong></label>
-              <input type="text" name="edad" class="form-control" id="cam_edad" >
+                <input type="text" name="edad" class="form-control" id="cam_edad" >
             </div>
         </div>
         <div class="col-md-12">
@@ -438,6 +438,7 @@ $fecha_inicio = date ( 'd-m-Y' , $nuevafecha_ini );
 ?>
 $(document).ready(function(){
     $('.datepicker').datepicker({
+        startView:2,
         format:'dd-mm-yyyy',
         startDate: "<?php echo $fecha_inicio;?>",
         endDate: "<?php echo $nuevafecha;?>  "        
