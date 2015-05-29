@@ -153,7 +153,7 @@
             </select>
 
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" id="referir1">
          <label for="cam_consulta">¿Referir? <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
 
             <select class="form-control" id="cam_referir">
@@ -478,11 +478,29 @@ function validar_referencia_realizada(valor,e)
 
 function validar_paciente(e)
 {
+
    x=e.selectedIndex;
   embarazada = e.options[x].id;
+  valor=$(e).val();
+  var url="../control/c_paciente.php";
+  $.ajax({   
+          type: "POST",
+          url:url,
+          data:{idpaciente:valor,operacion:'consultar_tipo_paciente'},
+          success: function(datos){
+              if(datos!=1)
+              {
+                document.getElementById("referir1").style.display='none';
+              }
+              else
+              {
+                document.getElementById("referir1").style.display='block';
+
+              }
+           }
+        });
   if(embarazada!='1')
   {
-  valor=$(e).val();
 
     var url="../control/c_consulta.php";
     $.ajax({   

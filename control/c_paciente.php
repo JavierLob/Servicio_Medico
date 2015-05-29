@@ -49,6 +49,10 @@
 				echo '0';
 				
 		break;
+		case 'consultar_tipo_paciente':
+			echo $lobjPaciente->consultar_tipo_paciente();
+				
+		break;
 		case 'editar_paciente':
 			$hecho=$lobjPaciente->modificar();
 			$idalergias = $_POST['idalergia'];

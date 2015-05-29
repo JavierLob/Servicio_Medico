@@ -115,6 +115,22 @@
 			return $Fila;
 		}
 
+		public function consultar_tipo_paciente()
+		{
+			$Fila = array();
+			$this->conectar();
+			$sql="SELECT `idttipopaciente`
+					FROM `tpaciente`
+					WHERE idpaciente = '$this->idpaciente'";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$Fila=$laRow['idttipopaciente'];
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
 		public function consultar_cedula()
 		{
 			$Fila = array();
@@ -179,7 +195,7 @@
 					tpaciente.idttipopaciente, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado , documento,embarazada
 					, numeromodalidadpac, modalidadpac, date_format(fechanacimiento,'%d-%m-%Y') as fechanacimiento
 					FROM `tpaciente` , tparroquia, tmunicipio, testado, ttipopaciente
-					WHERE tpaciente.idttipopaciente='1' AND tpaciente.estatuspaciente='1' AND tparroquia.idparroquia = tpaciente.idparroquia
+					WHERE tpaciente.estatuspaciente='1' AND tparroquia.idparroquia = tpaciente.idparroquia
 					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio
 					AND testado.idestado = tmunicipio.idestado
 					AND ttipopaciente.idttipopaciente = tpaciente.idttipopaciente AND NOT EXISTS(SELECT tpaciente_idpaciente FROM tconsulta WHERE tpaciente.idpaciente=tpaciente_idpaciente AND fecha_consulta=DATE(NOW()))";
