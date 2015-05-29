@@ -122,6 +122,13 @@
 			echo $cantidad_referencia;
 
 		break;
+		case 'validar_referencia_realizada':
+			echo $lobjConsulta->validar_referencia_realizada();
+		break;
+		case 'validar_consulta_paciente':
+			echo $lobjConsulta->validar_consulta_paciente();
+		break;
+				
 		default:
 			header('location: ../vista/intranet.php?vista=consulta/consulta');
 		break;

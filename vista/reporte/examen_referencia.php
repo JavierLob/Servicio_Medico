@@ -50,7 +50,7 @@
         <div class="col-md-3">
           <div class="form-group">
               <label for="cam_consulta">Fecha <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de la consulta."></i></strong></label>
-              <input type="date" name="fecha_consulta" value="<?php echo $fecha_consulta;?>" class="form-control" id="cam_fecha_consulta" >
+              <input type="text" name="fecha_consulta" value="<?php echo $fecha_consulta;?>" class="form-control datepicker" id="cam_fecha_consulta" >
             </div>
         </div>
         <div class="col-md-3">
@@ -108,3 +108,11 @@
         </div>
     </div>
 </form>
+<script>
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        format:'dd-mm-yyyy',
+        endDate: "<?php echo date('d-m-Y');?>  "        
+    });
+});
+</script>

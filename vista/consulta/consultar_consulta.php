@@ -1,7 +1,6 @@
  <?php
     require_once('../modelo/m_consulta.php');
     $lobjConsulta=new claseConsulta;
-    $lobjConsulta->consultar();
     $id=(isset($_GET['id']))?$_GET['id']:'';
     $lobjConsulta->set_Consulta($id);
     $laconsulta=$lobjConsulta->consultar();
@@ -173,7 +172,9 @@
             {
               $estatus='Pendiente';
               $estatus_color='warning';
-              $operacion='<button class="btn btn-sm btn-success" onclick="cumplido_examen('.$laexamen[$i]['idtexamen'].')"><i class="fa fa-check"></i></button> <button class="btn btn-sm btn-danger" onclick="incumplido_examen('.$laexamen[$i]['idtexamen'].')"><i class="fa fa-times"></i></button>';
+              $operacion='<button class="btn btn-sm btn-success" onclick="return cumplido_examen('.$laexamen[$i]['idtexamen'].')"><i class="fa fa-check"></i></button> <button class="btn btn-sm btn-danger" onclick="return incumplido_examen('.$laexamen[$i]['idtexamen'].')"><i class="fa fa-times"></i></button>';
+                                    echo ' ';
+            
             }
             elseif($laexamen[$i]['estatusexamen']=='2')
             {
@@ -193,7 +194,7 @@
               <td><input type="text" name="tipoexamen" id="cam_tipoexamen<?php echo $i;?>"  class="form-control" value="<?php echo $laexamen[$i]['tipoexamen']?>" disabled/></td>
               <td><input type="text" name="laboratorio" id="cam_laboratorio<?php echo $i;?>"  class="form-control" value="<?php echo $laexamen[$i]['laboratorio']?>" disabled/></td>
               <td><label class="label label-<?php echo $estatus_color?>"><?php echo $estatus?></label></td>
-              <td><?php echo $operacion?></td>      
+              <td><a class="btn-sm btn-success" target="_blank" href="../reporte/examen.php?id=<?php echo $laexamen[$i]['idtexamen'];?>"  ><i class="fa fa-file-text-o"></i></a> <?php echo $operacion?></td>      
 
               
             </tr>
@@ -224,7 +225,7 @@
             {
               $estatus='Pendiente';
               $estatus_color='warning';
-              $operacion='<button class="btn btn-sm btn-success" onclick="cumplido_referencia('.$lareferencia[$i]['idreferencia'].')"><i class="fa fa-check"></i></button> <button class="btn btn-sm btn-danger" onclick="incumplido_referencia('.$lareferencia[$i]['idreferencia'].')"><i class="fa fa-times"></i></button>';
+              $operacion='<button class="btn btn-sm btn-success" onclick="return cumplido_referencia('.$lareferencia[$i]['idreferencia'].')"><i class="fa fa-check"></i></button> <button class="btn btn-sm btn-danger" onclick="return incumplido_referencia('.$lareferencia[$i]['idreferencia'].')"><i class="fa fa-times"></i></button>';
             }
             elseif($lareferencia[$i]['estatusreferencia']=='2')
             {
@@ -245,7 +246,7 @@
               <td><input type="text" name="tiporeferencia" id="cam_tiporeferencia<?php echo $i;?>" class="form-control" value="<?php echo $lareferencia[$i]['tiporeferencia']?>" disabled/></td>
               <td><input type="text" name="nombrecentroasistencial" id="cam_centroasistencia<?php echo $i;?>" class="form-control" value="<?php echo $lareferencia[$i]['nombrecentroasistencial']?>" disabled/></td>      
               <td><label class="label label-<?php echo $estatus_color?>"><?php echo $estatus?></label></td>      
-              <td><?php echo $operacion?></td>      
+              <td><a class="btn-sm btn-success" target="_blank" href="../reporte/referencia.php?id=<?php echo $lareferencia[$i]['idreferencia'];?>"  ><i class="fa fa-file-text-o"></i></a> <?php echo $operacion?></td>      
             </tr>
           <?php
           }
@@ -263,8 +264,6 @@
 </form>
 <script type="text/javascript"  src="../js/validacion.js"></script>
 <script>
-  $("#cam_pulso").mask("999");
-  $("#cam_peso").mask("999");
 
     function cumplido_examen(id)
     {

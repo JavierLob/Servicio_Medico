@@ -167,6 +167,33 @@
 			return $Filas;
 		}
 
+		public function listar_estudiantes()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT `idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, 
+					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
+					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 
+					`alergia`, `observacion`, tpaciente.estatuspaciente, `idtsede`, tpaciente.idparroquia, `idtetnia`, tipopaciente,
+					tpaciente.idttipopaciente, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado , documento,embarazada
+					, numeromodalidadpac, modalidadpac, date_format(fechanacimiento,'%d-%m-%Y') as fechanacimiento
+					FROM `tpaciente` , tparroquia, tmunicipio, testado, ttipopaciente
+					WHERE tpaciente.idttipopaciente='1' AND tpaciente.estatuspaciente='1' AND tparroquia.idparroquia = tpaciente.idparroquia
+					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio
+					AND testado.idestado = tmunicipio.idestado
+					AND ttipopaciente.idttipopaciente = tpaciente.idttipopaciente AND NOT EXISTS(SELECT tpaciente_idpaciente FROM tconsulta WHERE tpaciente.idpaciente=tpaciente_idpaciente AND fecha_consulta=DATE(NOW()))";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$Filas[$cont]['inicial'] = substr($laRow['tipopaciente'], 0 , 1);
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
+
 		public function cambiar_estatus()
 		{
 			$respuesta = false;
@@ -182,6 +209,8 @@
 			$Filas = array();
 			$cont = 0;
 			$this->conectar();
+			$fecha=$this->formato_fecha($fecha);
+			
 			$sql="SELECT `idpaciente`, `cedulaopasaporte`, `nacionalidad`, `primernombre`, 
 					`segundonombre`, `primerapellido`, `segundoapellido`, `direccion`, `sexo`, 
 					`telefono`, `celular`, `numerohistoria`, `antecedentepersonal`, `antecedentefamiliar`, 

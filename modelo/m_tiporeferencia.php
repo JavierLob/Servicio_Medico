@@ -3,7 +3,7 @@
 
 	class claseTiporeferencia extends bd_my
 	{
-		public $idtiporeferencia, $tiporeferencia, $estatusreferencia;
+		public $idtiporeferencia, $tiporeferencia, $estatusreferencia,$limitereferencia;
 
 		function __CONSTRUCT()
 		{
@@ -12,17 +12,18 @@
 			$this->estatusreferencia = '';
 		}
 
-		public function set_datos($idtiporeferencia = '', $tiporeferencia = '', $estatusreferencia = '')
+		public function set_datos($idtiporeferencia = '', $tiporeferencia = '', $limitereferencia = '', $estatusreferencia = '')
 		{
 			$this->idtiporeferencia = $idtiporeferencia;
 			$this->tiporeferencia = $tiporeferencia;
+			$this->limitereferencia = $limitereferencia;
 			$this->estatusreferencia = $estatusreferencia;
 		}
 
 		public function incluir()
 		{
 			$respuesta = false;
-			$SQL = "INSERT INTO ttiporeferencia (tiporeferencia, estatusreferencia) VALUES ('$this->tiporeferencia', '1');";
+			$SQL = "INSERT INTO ttiporeferencia (tiporeferencia,limitereferencia, estatusreferencia) VALUES ('$this->tiporeferencia','$this->limitereferencia', '1');";
 			$this->conectar();
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();
@@ -46,7 +47,7 @@
 		public function modificar()
 		{
 			$respuesta = false;
-			$SQL = "UPDATE ttiporeferencia SET tiporeferencia = '$this->tiporeferencia' WHERE idtiporeferencia='$this->idtiporeferencia';";
+			$SQL = "UPDATE ttiporeferencia SET tiporeferencia = '$this->tiporeferencia',limitereferencia = '$this->limitereferencia' WHERE idtiporeferencia='$this->idtiporeferencia';";
 			$this->conectar();
 			$respuesta = $this->ejecutar($SQL);
 			$this->desconectar();

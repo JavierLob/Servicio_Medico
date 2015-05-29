@@ -13,12 +13,12 @@
               <label for="cam_consulta">Paciente <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Paciente al cual se le realizará la consulta."></i></strong></label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <select name="tpaciente_idpaciente" class="form-control" id="cam_tpaciente_idpaciente" required>
+                <select name="tpaciente_idpaciente" class="form-control" id="cam_tpaciente_idpaciente" onchange="return validar_paciente(this);" required>
                   <option></option>
                   <?php
                     require_once('../modelo/m_paciente.php');
                     $lobjPaciente=new clasePaciente;
-                    $lapacientes=$lobjPaciente->listar();
+                    $lapacientes=$lobjPaciente->listar_estudiantes();
                     for($i=0;$i<count($lapacientes);$i++)
                     {
                       echo '<option id="'.$lapacientes[$i]['embarazada'].'" value="'.$lapacientes[$i]['idpaciente'].'">'.$lapacientes[$i]['nacionalidad'].'-'.$lapacientes[$i]['cedulaopasaporte'].' / '.$lapacientes[$i]['primerapellido'].' '.$lapacientes[$i]['primernombre'].'</option>';
@@ -45,7 +45,7 @@
               <label for="cam_consulta">Pulso <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Pulso del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-              <input type="text" name="pulso" class="form-control" id="cam_pulso" minlength="2" maxlength="3" value="" >
+              <input type="number" name="pulso" min="50" max="180" class="form-control" id="cam_pulso" minlength="2" maxlength="3" value="" >
               </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
               <label for="cam_consulta">Peso <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Peso del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
 
-                <input type="text" name="peso" class="form-control" id="cam_peso" minlength="2" maxlength="3" value="" >
+                <input type="number" min="20" max="200" name="peso" class="form-control" id="cam_peso" minlength="2" maxlength="3" value="" >
                 <span class="input-group-addon">Kg</span>
 
               </div>
@@ -67,7 +67,7 @@
               <label for="cam_consulta">Fc <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fc del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-                <input type="text" name="fc" class="form-control" id="cam_fc" minlength="2" maxlength="3" value="" >
+                <input type="number" name="fc" min="50" max="180" class="form-control" id="cam_fc" minlength="2" maxlength="3" value="" >
               </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
               <label for="cam_consulta">Fr <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fr del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-stethoscope  "></i></span>
-                <input type="text" name="fr" class="form-control" id="cam_fr" minlength="2" maxlength="3" value="" >
+                <input type="number" name="fr" min="50" max="180" class="form-control" id="cam_fr" minlength="2" maxlength="3" value="" >
 
               </div>
             </div>
@@ -88,7 +88,7 @@
               <label for="cam_consulta">Ta <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="TA del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-heartbeat"></i></span>
-              <input type="text" name="ta" class="form-control" id="cam_ta" minlength="2" maxlength="3" value="">
+              <input type="number" name="ta" min="50" max="180" class="form-control" id="cam_ta" minlength="2" maxlength="3" value="">
               </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
               <label for="cam_consulta">Temperatura <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Temperatura del paciente al momento de la consulta."></i></strong></label>
               <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-magic"></i></span>
-              <input type="text" name="temperatura" class="form-control"minlength="2" maxlength="2" id="cam_temperatura" value="">
+              <input type="number" name="temperatura" min="32" max="42" class="form-control"minlength="2" maxlength="2" id="cam_temperatura" value="">
               </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
               <div class="input-group">
 
               <span class="input-group-addon"><i class="fa fa-arrows-h"></i></span>
-                <input type="text" name="talla" class="form-control" id="cam_talla" minlength="2" maxlength="2" value="" >
+                <input type="number" name="talla" min="10" max="42" class="form-control" id="cam_talla" minlength="2" maxlength="2" value="" >
 
               </div>
             </div>
@@ -120,7 +120,7 @@
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-arrows-v"></i></span>
-                <input type="text" name="altura" class="form-control" id="cam_altura" minlength="3" maxlength="3" value="" >
+                <input type="number" name="altura" min="120" max="210" class="form-control" id="cam_altura" minlength="3" maxlength="3" value="" >
 
               </div>
             </div>
@@ -212,9 +212,22 @@
   $(document).ready(function(){
     $('.datepicker').datepicker({
       format:'mm-dd-yyyy',
-      endDate: <?php echo "'".date('d-m-Y')."'";?>
+      date: <?php echo "'".date('m-d-Y')."'";?>,
+      endDate: <?php echo "'".date('m-d-Y')."'";?>
     });
+
+validar_doctor();
+
   });
+function validar_doctor()
+    {
+      doctor=document.getElementById('cam_idtdoctor');
+      if(doctor.value=='')
+      {
+        alert("Disculpe, Debe ser un doctor para poder realizar una consulta.");
+        window.location.href="?vista=consulta/consulta";
+      }
+    }
 
   $("#cam_examen").change(function(){
     valor=$("#cam_examen").val();
@@ -240,7 +253,8 @@
     filas_examen=document.getElementById("filas_examen");
     contador=cam_contador.value;
     contador++;
-
+    if(contador<=3)
+    {
     tr=document.createElement('tr');
     col1=document.createElement('td');
     col2=document.createElement('td');
@@ -286,7 +300,11 @@
       tr.appendChild(col4);
       filas_examen.appendChild(tr);
       cam_contador.value=contador;
-
+       }
+      else
+      {
+        alert("Solo puede realizar tres examenes por consulta.");
+      }
   }
 
   function agregar_referir()
@@ -295,7 +313,8 @@
     filas_referir=document.getElementById("filas_referir");
     contador=cam_contador.value;
     contador++;
-
+    if(contador<=1)
+    {
     tr=document.createElement('tr');
     col1=document.createElement('td');
     col2=document.createElement('td');
@@ -304,7 +323,7 @@
     var select= document.createElement('select');
      var select2= document.createElement('select');
     select.setAttribute('class','form-control');
-    select.setAttribute('onchange','validar_repetido_referencia(this)');
+    select.setAttribute('onchange','validar_referencia_realizada(this.value,this)');
     select2.setAttribute('class','form-control');
     select.setAttribute('name','idtiporeferencia[]');
     select2.setAttribute('name','idtcentroasistencial[]');
@@ -341,15 +360,24 @@
       tr.appendChild(col4);
       filas_referir.appendChild(tr);
       cam_contador.value=contador;
-
+      }
+      else
+      {
+        alert("Solo puede realizar una referencia por consulta.");
+      }
   }
 function quitar_examen(e)
 {
 
-    var filas = document.getElementById("filas_examen");          
+    var filas = document.getElementById("filas_examen");   
+    cam_contador=document.getElementById("cam_contador_examen");
+    contador=cam_contador.value;
+    contador--;
     var td = e.parentNode;
     var tr = td.parentNode;
     filas.removeChild(tr);
+    cam_contador.value=contador;
+
 }
 
 
@@ -358,10 +386,15 @@ function quitar_examen(e)
 function quitar_referir(e)
 {
 
-    var filas = document.getElementById("filas_referir");          
+    var filas = document.getElementById("filas_referir");
+    cam_contador=document.getElementById("cam_contador_referir");
+    contador=cam_contador.value;
+    contador--;
     var td = e.parentNode;
     var tr = td.parentNode;
     filas.removeChild(tr);
+    cam_contador.value=contador;
+
 }
 
 function validar_repetido_examen(e)
@@ -384,8 +417,10 @@ function validar_repetido_examen(e)
   }
 }
 
-function validar_repetido_referencia(e)
+/*function validar_repetido_referencia(e)
 {
+  resultado=validar_referencia_realizada();
+
   tipo_referencia=document.getElementsByName('idtiporeferencia[]');
   repetido=0;
   for(i=0;i<tipo_referencia.length;i++)
@@ -402,6 +437,78 @@ function validar_repetido_referencia(e)
     }
 
   }
+}*/
+
+function validar_referencia_realizada(valor,e)
+{
+
+  x=e.selectedIndex;
+  limite = e.options[x].id;
+  tpaciente_idpaciente=document.getElementById("cam_tpaciente_idpaciente");
+  paciente=tpaciente_idpaciente.value;
+  if(limite==1)
+  {
+    var url="../control/c_consulta.php";
+    $.ajax({   
+              type: "POST",
+              url:url,
+              data:{idreferencia:valor,tpaciente_idpaciente:paciente,operacion:'validar_referencia_realizada'},
+              success: function(datos){
+
+                  if(datos==1)
+                  {
+                    alert("Este paciente ya ha sido referido a esta especialidad.");
+                    e.val('');
+                    e.focus();
+                    return false;
+                  }
+                  else if(datos==0) 
+                  {
+                    return true;
+                  }
+               }
+          });
+   }
+   else
+   {
+    return true;
+   }
+
+}
+
+function validar_paciente(e)
+{
+   x=e.selectedIndex;
+  embarazada = e.options[x].id;
+  if(embarazada!='1')
+  {
+  valor=$(e).val();
+
+    var url="../control/c_consulta.php";
+    $.ajax({   
+            type: "POST",
+            url:url,
+            data:{tpaciente_idpaciente:valor,operacion:'validar_consulta_paciente'},
+            success: function(datos){
+                if(datos>=3)
+                {
+                  alert("Este paciente ya ha cumplido con el limite de consultas por periodo.");
+                  $(e).val('');
+                  e.focus();
+                  return false;
+                }
+                else
+                {
+                  return true;
+                }
+             }
+          });
+
+    }
+    else
+      {
+        return true;
+      }
 }
 
 function validar()
@@ -418,7 +525,7 @@ function validar()
 
    if(paciente!='')
     {
-      if(embarazada=='0')
+      if(embarazada!='1')
       {
         if(cantidad_examen>0)
         {
@@ -430,7 +537,7 @@ function validar()
                 posibles_examenes=(3-datos);
                   if(datos==3)
                   {
-                    alert("Este paciente ya cumplió con el limite de 3 examenes semestrales, no puede realizar otro.");
+                    alert("Este paciente ya cumplió con el limite de 3 examenes por periodo, no puede realizar otro.");
                     return false;
                   } 
                   else if(cantidad_examen>posibles_examenes)
@@ -445,6 +552,11 @@ function validar()
                }
           });
         }
+      }
+      else
+      {
+        return true;
+      }
         if(cantidad_referencia>0)
         {
          $.ajax({   
@@ -455,7 +567,7 @@ function validar()
                    posibles_referencias=(3-datos);
                   if(datos==3)
                   {
-                    alert("Este paciente ya cumplió con el limite de 3 examenes semestrales, no puede realizar otro.");
+                    alert("Este paciente ya cumplió con el limite de 3 referencias por periodo, no puede realizar otra.");
                     return false;
                   } 
                   else if(cantidad_referencia>posibles_referencias)
@@ -470,11 +582,7 @@ function validar()
                }
           });
         }
-      }
-      else
-      {
-        return true;
-      }
+      
     }
     else
     {

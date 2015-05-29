@@ -85,9 +85,18 @@
         <div class="col-md-2">
             <div class="form-group">
               <label for="cam_sexo">Sexo <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Sexo del paciente."></i></strong></label>
-              <select name="sexo" id="cam_sexo" class="form-control">
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
+              <select name="sexo" id="cam_sexo" class="form-control" onchange="activar_emabarazada(this);">
+                <option value="M" <?php echo ($laPaciente['sexo']=='M')?'selected':''; ?>>Masculino</option>
+                <option value="F" <?php echo ($laPaciente['sexo']=='F')?'selected':''; ?>>Femenino</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-2" id="embarazada"  style="display:<?php echo ($laPaciente['embarazada']=='1')?'block':'none'; ?>">
+            <div class="form-group">
+              <label for="cam_sexo">Embarazada <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indica sí la paciente está embarazada."></i></strong></label>
+              <select name="embarazada" id="cam_embarazada" class="form-control">
+                <option value="0" <?php echo ($laPaciente['embarazada']=='0')?'selected':''; ?>>No</option>
+                <option value="1" <?php echo ($laPaciente['embarazada']=='1')?'selected':''; ?>>Si</option>
               </select>
             </div>
         </div>
@@ -793,7 +802,19 @@ function validar_repetido_enfermedad(e)
 
   }
 }
+function activar_emabarazada(e)
+{
+  embarazada=document.getElementById("embarazada");
+  if(e.value=='F')
+  {
+    embarazada.style.display="block";
+  }
+  else if(e.value=='M')
+  {
+    embarazada.style.display="none";
 
+  }
+}
 function calcularEdad(fecha_user)
 {
     var fecha = fecha_user;

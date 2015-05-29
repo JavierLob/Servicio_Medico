@@ -3,7 +3,7 @@
 	require_once("../modelo/m_tiporeferencia.php");
 	$lobjTiporeferencia=new claseTiporeferencia;
 
-	$lobjTiporeferencia->set_datos($_POST['idtiporeferencia'], $_POST['tiporeferencia'], $_POST['estatusreferencia']);
+	$lobjTiporeferencia->set_datos($_POST['idtiporeferencia'], $_POST['tiporeferencia'], $_POST['limitereferencia'], $_POST['estatusreferencia']);
 	$operacion=$_POST['operacion'];
 
 	switch ($operacion) 
@@ -33,7 +33,7 @@
 				$option='<option value=""></option>';
 				for($i=0;$i<count($lareferencias);$i++)
 				{
-					$option.='<option value="'.$lareferencias[$i]['idtiporeferencia'].'">'.$lareferencias[$i]['tiporeferencia'].'</option>';
+					$option.='<option id="'.$lareferencias[$i]['limitereferencia'].'" value="'.$lareferencias[$i]['idtiporeferencia'].'">'.$lareferencias[$i]['tiporeferencia'].'</option>';
 				}	
 			}
 			else

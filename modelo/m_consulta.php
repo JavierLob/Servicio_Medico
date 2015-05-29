@@ -93,11 +93,19 @@
 			$SQL = "INSERT INTO tconsulta (`fecha_consulta`, `pulso`, `peso`, `fc`, `fr`, `ta`, `talla`, `temperatura`, `altura`, `observacionconsulta`, `idtdoctor`, `tpaciente_idpaciente`,`estatusconsulta`,`motivocon`) VALUES ('$this->fecha_consulta','$this->pulso','$this->peso','$this->fc','$this->fr','$this->ta','$this->talla','$this->temperatura','$this->altura','$this->observacionconsulta','$this->idtdoctor','$this->tpaciente_idpaciente','1','$this->motivocon');";
 			if($respuesta=$this->ejecutar($SQL))
 			{
+
 				$sql="SELECT MAX(idconsulta)as idconsulta FROM tconsulta LIMIT 1";
 				$pcsql=$this->filtro($sql);
 				if($laRow=$this->proximo($pcsql))
 				{
+
 					$idconsulta=$laRow['idconsulta'];
+					$sql="UPDATE tpaciente SET cantidad_consulta=cantidad_consulta+1 WHERE idpaciente='$this->tpaciente_idpaciente'";
+					if(!$respuesta = $this->ejecutar($sql))
+					{
+						$this->rollback();
+						break;
+					}
 					if($this->examen[0]!='')
 					{
 						for ($i=0; $i <count($this->examen) ; $i++) 
@@ -184,7 +192,7 @@
 		{
 			$Fila = array();
 			$this->conectar();
-			$sql="SELECT *,idconsulta as id,(SELECT COUNT(idtexamen) FROM texamen WHERE texamen.idconsulta=id)as examen,(SELECT COUNT(idreferencia) FROM treferencia WHERE treferencia.idconsulta=id)as referir FROM tconsulta,tpaciente,tdoctor WHERE idconsulta='$this->idconsulta' AND tpaciente_idpaciente=idpaciente AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
+			$sql="SELECT *,idconsulta as id,tpaciente.cedulaopasaporte,(SELECT COUNT(idtexamen) FROM texamen WHERE texamen.idconsulta=id)as examen,(SELECT COUNT(idreferencia) FROM treferencia WHERE treferencia.idconsulta=id)as referir FROM tconsulta,tpaciente,tdoctor WHERE idconsulta='$this->idconsulta' AND tpaciente_idpaciente=idpaciente AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
@@ -335,7 +343,7 @@
 		{
 			$Fila = array();
 			$this->conectar();
-			$sql="SELECT examen,laboratorio,tipoexamen,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tpaciente,tconsulta,texamen,tlaboratorio,ttipoexamen,tcarrera,tdoctor WHERE idtexamen='$id' AND tconsulta.idconsulta=texamen.idconsulta AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera;";
+			$sql="SELECT examen,laboratorio,tipoexamen,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,tpaciente.cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tpaciente,tconsulta,texamen,tlaboratorio,ttipoexamen,tcarrera,tdoctor WHERE idtexamen='$id' AND tconsulta.idconsulta=texamen.idconsulta AND texamen.idttipoexamen=ttipoexamen.idttipoexamen AND texamen.idtlaboratorio=tlaboratorio.idtlaboratorio AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))
 			{
@@ -398,12 +406,43 @@
 			return $cantidad_referencia;
 		}
 
+		public function validar_referencia_realizada()
+		{
+			$resultado=0;
+			$limit=$this->validar_consulta_paciente();
+			$this->conectar();
+			if($limit>0)
+			{
+				$sql="SELECT idreferencia FROM treferencia,tconsulta WHERE tpaciente_idpaciente='$this->tpaciente_idpaciente' AND treferencia.idconsulta=tconsulta.idconsulta AND  ttiporeferencia_idtiporeferencia='$this->IdReferencia' LIMIT $limit";
+				$pcsql=$this->filtro($sql);
+				if($laRow=$this->proximo($pcsql))
+				{
+					$resultado=1;
+				}
+			}
+			$this->desconectar();
+			return $resultado;
+		}
+
+		public function validar_consulta_paciente()
+		{
+			$this->conectar();
+			$cont=0;
+			$sql="SELECT cantidad_consulta FROM tpaciente WHERE idpaciente='$this->tpaciente_idpaciente' ";
+			$pcsql=$this->filtro($sql);
+			if($laRow=$this->proximo($pcsql))
+			{
+				$cantidad_consulta=$laRow['cantidad_consulta'];
+			}
+			$this->desconectar();
+			return $cantidad_consulta;
+		}
+
 		public function consultar_referir_reporte($id)
 		{
 			$Fila = array();
 			$this->conectar();
-			$sql="SELECT nombrecentroasistencial,tiporeferencia,referidoa,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tconsulta,treferencia,ttiporeferencia,tcentroasistencial,tpaciente,tdoctor,tcarrera WHERE idreferencia='$id' AND treferencia.idconsulta=.tconsulta.idconsulta AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera;";
-			echo $sql;
+			$sql="SELECT nombrecentroasistencial,tiporeferencia,referidoa,date_format(fecha_consulta,'%d-%m-%Y')as fecha_consulta,primerapellido,primernombre,nombredoctor,nacionalidad,tpaciente.cedulaopasaporte,sexo,modalidadpac,numeromodalidadpac,motivocon,carrera,observacionconsulta FROM tconsulta,treferencia,ttiporeferencia,tcentroasistencial,tpaciente,tdoctor,tcarrera WHERE idreferencia='$id' AND treferencia.idconsulta=.tconsulta.idconsulta AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia AND tpaciente_idpaciente=idpaciente AND tcarrera_idtcarrera=idtcarrera AND tconsulta.idtdoctor=tdoctor.idtdoctor;";
 			$pcsql=$this->filtro($sql);
 			if($laRow=$this->proximo($pcsql))
 			{
@@ -418,6 +457,7 @@
 			$Fila = array();
 			$this->conectar();
 			$cont=0;
+			$fecha_consulta=$this->formato_fecha($fecha_consulta);
 			$sql="SELECT idreferencia,nombrecentroasistencial,tiporeferencia,referidoa,treferencia.idconsulta,primerapellido,primernombre,nacionalidad,cedulaopasaporte,fecha_consulta,date_format(fecha_consulta,'%d-%m-%Y')as fecha FROM tconsulta,treferencia,ttiporeferencia,tpaciente,tcentroasistencial WHERE tpaciente_idpaciente='$idpaciente' AND tconsulta.idconsulta=treferencia.idconsulta AND tcentroasistencial_idtcentroasistencial=idtcentroasistencial AND ttiporeferencia_idtiporeferencia=idtiporeferencia AND tpaciente_idpaciente=idpaciente HAVING fecha_consulta='$fecha_consulta';;";
 			$pcsql=$this->filtro($sql);
 			while($laRow=$this->proximo($pcsql))

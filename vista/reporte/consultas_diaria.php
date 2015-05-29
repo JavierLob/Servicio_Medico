@@ -8,8 +8,10 @@
     <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-              <label for="cam_consulta">Fecha <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de la consulta."></i></strong></label>
-              <input type="date" name="fecha" class="form-control" id="cam_fecha" required>
+                <label for="cam_consulta">Fecha <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Fecha de la consulta."></i></strong></label>
+                <div class="input-group-">
+                    <input type="text" name="fecha" class="form-control datepicker" id="cam_fecha" required>
+                </div>
             </div>
         </div>
     </div>
@@ -19,3 +21,11 @@
         </div>
     </div>
 </form>
+<script>
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        format:'dd-mm-yyyy',
+        endDate: "<?php echo date('d-m-Y');?>  "        
+    });
+});
+</script>

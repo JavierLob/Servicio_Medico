@@ -21,6 +21,12 @@
               <input type="text" name="tiporeferencia" class="form-control letras_latinas" id="cam_tiporeferencia" value="<?php echo $laTiporeferencia['tiporeferencia'];?>" required>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="cam_tiporeferencia">Limite <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Limite de referencias."></i></strong></label>
+              <input type="number" min="0" max="3" name="limitereferencia" class="form-control numeros" id="cam_limitereferencia" value="<?php echo $laTiporeferencia['limitereferencia'];?>" required>
+            </div>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-6">

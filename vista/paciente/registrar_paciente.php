@@ -117,7 +117,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label>Estado <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Estado al cual pertenece el paciente."></i></strong></label>
-              <select name="estado" id="cam_estado" class="form-control">
+              <select name="estado" id="cam_estado" class="form-control" required>
                   <option value="">-</option>
                   <?php
                   require_once('../modelo/m_estado.php');
@@ -135,7 +135,7 @@
       <div class="col-lg-6">
             <div class="form-group">
               <label>Municipio <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Municipio al cual pertenece el paciente."></i></strong></label>
-              <select name="municipio" id="cam_municipio" class="form-control">
+              <select name="municipio" id="cam_municipio" class="form-control" required>
                   <option value="">-</option>
                   <?php
                       require_once('../modelo/m_municipio.php');
@@ -185,7 +185,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="cam_idtetnia">Etnia <strong><i class="text-help fa fa-question-circle" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Indique la etnia a la cual pertenece el paciente."></i></strong></label>
-              <select name="idtetnia" class="form-control" id="cam_idtetnia" required>
+              <select name="idtetnia" class="form-control" id="cam_idtetnia" >
                   <option value="">-</option>
                   <?php
                     require_once('../modelo/m_etnia.php');

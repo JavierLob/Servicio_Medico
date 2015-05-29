@@ -1,5 +1,6 @@
 <?php 
     session_start(); //inicia la session, la cual permite trabajar con la variable $_SESSION
+    date_default_timezone_set('America/Caracas');
 
     $usuario=(isset($_SESSION['idusuario']))?$_SESSION['idusuario']:"";//toma el valor que se guarda en la variable vista que está en la variable $_SESSION
     $msj=(isset($_SESSION['msj']))?$_SESSION['msj']:"";//toma el valor que se guarda en la variable vista que está en la variable $_SESSION
