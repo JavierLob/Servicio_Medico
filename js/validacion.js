@@ -5,9 +5,9 @@ numeros = /^[0-9]+$/;
 letras = /^[a-zA-Z]+$/;
 
 //para caracteres latinos(acentos), espacios y guiones bajos. el espacio se indica con \s.
-letras_latinas = /^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]+$/;
+letras_latinas = /^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_.,\s]+$/;
 
-letras_latinas_numeros = /^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]+$/;
+letras_latinas_numeros = /^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_.,\s]+$/;
 
 //para emails, válidos pueden ser: miemail@gmail.com, mi.email@gmail.es, ...
 email = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;

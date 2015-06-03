@@ -83,6 +83,23 @@
 			return $Filas;
 		}
 
+		public function listar_no_estudiante()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT * FROM ttipopaciente WHERE UPPER(tipopaciente)<>'ESTUDIANTE';";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
+
+
 		public function cambiar_estatus()
 		{
 			$respuesta = false;

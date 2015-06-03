@@ -234,7 +234,7 @@
 					`idttipopaciente`, `tcarrera_idtcarrera`, `tdepartamento_iddepartamento`, tmunicipio.idtmunicipio, testado.idestado 
 					, numeromodalidadpac, modalidadpac, motivocon, carrera,embarazada
 					FROM `tpaciente` , tparroquia, tmunicipio, testado, tconsulta, tcarrera
-					WHERE tparroquia.idparroquia = tpaciente.idparroquia
+					WHERE idttipopaciente='1' AND tparroquia.idparroquia = tpaciente.idparroquia
 					AND tmunicipio.idtmunicipio = tparroquia.idtmunicipio
 					AND testado.idestado = tmunicipio.idestado
 					AND tpaciente.idpaciente = tconsulta.tpaciente_idpaciente

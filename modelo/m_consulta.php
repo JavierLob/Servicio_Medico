@@ -375,6 +375,27 @@
 			return $Fila;
 		}
 
+		public function listar_morbilidad($fecha,$idpersonal)
+		{
+			$Fila = array();
+			$this->conectar();
+			$cont=0;
+			$fecha=split('-',$fecha);
+			$mes=$fecha[0];
+			$ano=$fecha[1];
+			$sql="SELECT *,idconsulta as id,(SELECT ttiporeferencia_idtiporeferencia FROM treferencia WHERE idconsulta=id)as idtiporeferencia,(SELECT idtexamen FROM texamen WHERE idconsulta=id)as idexamen,(SELECT nombredoctor FROM tdoctor,tpersonal WHERE idpersonal='$idpersonal' AND tpersonal.cedulaopasaporte=tdoctor.cedulaopasaporte)as nombredoctor FROM tconsulta,tpaciente WHERE idtdoctor=(SELECT idtdoctor FROM tdoctor,tpersonal WHERE idpersonal='$idpersonal' AND tpersonal.cedulaopasaporte=tdoctor.cedulaopasaporte) AND YEAR(fecha_consulta)='$ano' AND MONTH(fecha_consulta)='$mes' AND tpaciente_idpaciente=idpaciente";
+			echo $sql;
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Fila[$cont]=$laRow;
+				$Fila['nombredoctor']=$laRow['nombredoctor'];
+				$cont++;
+			}
+			$this->desconectar();
+			return $Fila;
+		}
+
 
 		public function consultar_referir()
 		{

@@ -118,6 +118,23 @@
 			return $Filas;
 		}
 
+		public function listar_doctor()
+		{
+			$Filas = array();
+			$cont = 0;
+			$this->conectar();
+			$sql="SELECT *	FROM `tpersonal`
+					WHERE ttipopersonal_idtipo_personal = '1' AND trol_idrol = '2'";
+			$pcsql=$this->filtro($sql);
+			while($laRow=$this->proximo($pcsql))
+			{
+				$Filas[$cont] = $laRow;
+				$cont++;
+			}
+			$this->desconectar();
+			return $Filas;
+		}
+
 		public function cambiar_estatus()
 		{
 			$respuesta = false;
