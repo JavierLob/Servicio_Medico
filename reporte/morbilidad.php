@@ -187,9 +187,9 @@
 
    for($i=0;$i<count($latipopaciente);$i++)
    {
-      $cont_fem=$cont_mas=0;
       for($j=0;$j<4;$j++)
       {
+         $cont_fem=$cont_mas=0;
          
          if($j==0)
          {
@@ -217,9 +217,9 @@
 
             
             if($j==1)
-               $lobjPdf->Cell(30,6,utf8_decode($cont_fem),1,0,"C");
+               $lobjPdf->Cell(30,6,utf8_decode(($cont_fem)?$cont_fem:0),1,0,"C");
             elseif($j==2)
-               $lobjPdf->Cell(30,6,utf8_decode($cont_mas),1,0,"C");
+               $lobjPdf->Cell(30,6,utf8_decode(($cont_mas)?$cont_mas:0),1,0,"C");
             elseif($j==3)
                $lobjPdf->Cell(30,6,utf8_decode($cont_fem+$cont_mas),1,1,"C");
          }
@@ -229,16 +229,18 @@
       
 
    }
+   $lobjPdf->SetFont("arial","B",10);
    $lobjPdf->Cell(30,6,utf8_decode('TOTAL'),1,0,"C");
+   $lobjPdf->SetFont("arial","",10);
 
    for($j=0;$j<3;$j++)
    {
       if($j==0)
-      $lobjPdf->Cell(30,6,utf8_decode($cont_sex['cont_fem']),1,0,"C");
+      $lobjPdf->Cell(30,6,utf8_decode(($cont_sex['cont_fem'])?$cont_sex['cont_fem']:0),1,0,"C");
       if($j==1)
-      $lobjPdf->Cell(30,6,utf8_decode($cont_sex['cont_mas']),1,0,"C");
+      $lobjPdf->Cell(30,6,utf8_decode(($cont_sex['cont_mas'])?$cont_sex['cont_mas']:0),1,0,"C");
       if($j==2)
-      $lobjPdf->Cell(30,6,utf8_decode($cont_sex['cont_fem']+$cont_sex['cont_mas']),1,0,"C");
+      $lobjPdf->Cell(30,6,utf8_decode(($cont_sex['cont_fem']+$cont_sex['cont_mas'])?$cont_sex['cont_fem']+$cont_sex['cont_mas']:0),1,0,"C");
 
    }
    $lobjPdf->SetFont("arial","B",10);
